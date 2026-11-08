@@ -3,7 +3,7 @@
 <meta name="description" content="A teaching app on the reign of Christ and his body: timeline, mind maps, evidence, objections, powers and mission, Teach mode and a quiz.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Della+Respira&family=Figtree:wght@400;500;600;700&family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,600;1,7..72,400&family=JetBrains+Mono:wght@400;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,400;0,6..12,500;0,6..12,600;0,6..12,700;0,6..12,800;1,6..12,400;1,6..12,600&family=JetBrains+Mono:wght@400;600&display=swap">
 <style>
 /* Layout: a modern study app with an illuminated soul. Left rail + glass top bar (bottom tab bar on phones),
    a Home dashboard, ten views, a search palette, and a full-screen Teach mode. Gold leaf, lapis and river light
@@ -26,9 +26,9 @@
   --r: 16px;
   --shadow-sm: 0 1px 2px rgba(19, 21, 44, .05), 0 6px 18px -10px rgba(19, 21, 44, .14);
   --shadow: 0 2px 4px rgba(19, 21, 44, .04), 0 24px 60px -24px rgba(19, 21, 44, .28);
-  --display: "Della Respira", "Trajan Pro", "Palatino Linotype", Georgia, serif;
-  --body: "Figtree", "Segoe UI", system-ui, -apple-system, sans-serif;
-  --scripture: "Literata", "Iowan Old Style", Georgia, serif;
+  --display: "Avenir Next", "AvenirNext", "Avenir", "Nunito Sans", "Segoe UI", system-ui, sans-serif;
+  --body: "Avenir Next", "AvenirNext", "Avenir", "Nunito Sans", "Segoe UI", system-ui, sans-serif;
+  --scripture: "Avenir Next", "AvenirNext", "Avenir", "Nunito Sans", "Segoe UI", system-ui, sans-serif;
   --mono: "JetBrains Mono", ui-monospace, Menlo, monospace;
   --l-pm: #3a4fd6; --l-pp: #cf4626; --l-un: #0b6fb0; --l-li: #0a8576; --l-he: #a87508; --l-hu: #7450d6;
 }
@@ -579,6 +579,13 @@ footer { margin-top: auto; }
   .home-hero { box-shadow: none; border: 0; padding: 0; background: none; }
   body { background: #fff; }
 }
+
+/* Avenir Next type treatment */
+h1, h2, h3, h4, .brand, .topbar .crumb b, .tile h3, .pcard h3, .stat b, .counter b, .dpanel .dn, .era-h b, .pair b, .voice b, .crow .k, .wallinfo h3 { font-weight: 600; letter-spacing: -.015em; }
+.hero h1, .vhead h2, .slide h2 { font-weight: 700; letter-spacing: -.025em; }
+.stat b, .counter b, .dpanel .dn { font-weight: 700; }
+.mnode.br text, .mnode.ctr text { font-weight: 700; }
+.verse, .mem div, .voice q, .versebox q, blockquote { font-style: italic; }
 
 /* ---------- print: every view, on paper ---------- */
 @media print {
@@ -1679,7 +1686,7 @@ function buildWall() {
   let w = `<defs><radialGradient id="wg" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="var(--gold)" stop-opacity=".55"/><stop offset="1" stop-color="var(--gold)" stop-opacity="0"/></radialGradient></defs>`;
   w += `<text x="320" y="26" text-anchor="middle" font-family="var(--mono)" font-size="10.5" fill="var(--muted)" letter-spacing="1.5">PRINCIPALITIES AND POWERS IN HEAVENLY PLACES</text>`;
   for (let i = 0; i < 9; i++) { const x = 80 + i * 60, y = 62 + (i % 2) * 14; w += `<g class="wp" transform="translate(${x} ${y})"><path d="M0 -12 L9 0 L0 12 L-9 0 Z" fill="var(--surface)" stroke="var(--violet)" stroke-width="1.5"/><circle r="3" fill="var(--violet)"/></g>`; }
-  w += `<text id="wwis" x="320" y="112" text-anchor="middle" font-family="var(--display)" font-size="18" fill="var(--gold)" opacity="0">The manifold wisdom of God, made known</text>`;
+  w += `<text id="wwis" x="320" y="112" text-anchor="middle" style="font-family:var(--display);font-weight:600" font-size="18" fill="var(--gold)" opacity="0">The manifold wisdom of God, made known</text>`;
   w += `<g id="wrays" opacity="0" stroke="var(--gold)" stroke-width="1.5" stroke-dasharray="3 6">${[90, 200, 320, 440, 550].map(x => `<path class="flow" d="M320 230 L${x} 84"/>`).join('')}</g>`;
   w += `<circle id="wglow" cx="320" cy="268" r="120" fill="url(#wg)" opacity="0"/>`;
   w += `<path d="M0 370 Q320 350 640 370 V400 H0 Z" fill="color-mix(in srgb, var(--river) 12%, transparent)"/>`;
