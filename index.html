@@ -21,6 +21,7 @@
   --river: #0d7a70;     /* the reign now, river of life */
   --violet: #6a4cae;    /* fullness, restoration */
   --on-accent: #ffffff;
+  --gleam: #f0cf6e;
   --display: "Della Respira", "Trajan Pro", "Palatino Linotype", Georgia, serif;
   --body: "Literata", "Iowan Old Style", Georgia, serif;
   --mono: "JetBrains Mono", ui-monospace, Menlo, monospace;
@@ -28,12 +29,12 @@
 }
 @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
   --bg: #0c1226; --bg-2: #121a33; --surface: #172041; --ink: #ebe7dc; --muted: #a2a9c3; --line: #2a3561;
-  --lapis: #8fa8ff; --gold: #e2b653; --ember: #f08a6c; --river: #5fd0c2; --violet: #b9a0f5; --on-accent: #0c1226;
+  --lapis: #8fa8ff; --gold: #e2b653; --ember: #f08a6c; --river: #5fd0c2; --violet: #b9a0f5; --on-accent: #0c1226; --gleam: #fff4c9;
   --l-pm: #8fa8ff; --l-pp: #f08a6c; --l-un: #6cc0f5; --l-li: #5fd0c2; --l-he: #e2b653; --l-hu: #b9a0f5;
   color-scheme: dark; } }
 :root[data-theme="dark"] {
   --bg: #0c1226; --bg-2: #121a33; --surface: #172041; --ink: #ebe7dc; --muted: #a2a9c3; --line: #2a3561;
-  --lapis: #8fa8ff; --gold: #e2b653; --ember: #f08a6c; --river: #5fd0c2; --violet: #b9a0f5; --on-accent: #0c1226;
+  --lapis: #8fa8ff; --gold: #e2b653; --ember: #f08a6c; --river: #5fd0c2; --violet: #b9a0f5; --on-accent: #0c1226; --gleam: #fff4c9;
   --l-pm: #8fa8ff; --l-pp: #f08a6c; --l-un: #6cc0f5; --l-li: #5fd0c2; --l-he: #e2b653; --l-hu: #b9a0f5;
   color-scheme: dark; }
 
@@ -247,6 +248,110 @@ footer { border-top: 1px solid var(--line); padding-block: 26px 40px; color: var
 
 @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; } }
 
+
+/* ---------- illumination & motion ---------- */
+.hero { position: relative; }
+.hero > * { position: relative; z-index: 1; }
+#motes { position: absolute; inset: -20px -16px 0; width: calc(100% + 32px); height: calc(100% + 20px); z-index: 0; pointer-events: none; }
+.hero h1 em { background: linear-gradient(100deg, var(--gold) 0%, var(--gold) 38%, var(--gleam) 50%, var(--gold) 62%, var(--gold) 100%); background-size: 260% 100%; -webkit-background-clip: text; background-clip: text; color: transparent; animation: gild 6s ease-in-out infinite; }
+@keyframes gild { 0% { background-position: 100% 0; } 60%, 100% { background-position: 0 0; } }
+.vhead h2::first-letter { color: var(--gold); text-shadow: 0 0 18px color-mix(in srgb, var(--gold) 45%, transparent); }
+.vhead h2::before { content: ""; display: block; width: 120px; height: 12px; margin-bottom: 10px; background:
+  radial-gradient(circle at 50% 50%, var(--gold) 0 3.5px, transparent 4.5px),
+  linear-gradient(var(--gold), var(--gold)) left 50% / 48px 1px no-repeat,
+  linear-gradient(var(--gold), var(--gold)) right 50% / 48px 1px no-repeat; opacity: .85; }
+.stops::after { content: ""; position: absolute; left: 0; top: 29px; height: 5px; width: 140px; border-radius: 5px; background: linear-gradient(90deg, transparent, var(--ec), transparent); opacity: .9; animation: travel 5s linear infinite; }
+@keyframes travel { from { transform: translateX(-140px); } to { transform: translateX(calc(var(--w, 900px))); } }
+.dcard { animation: rise .45s cubic-bezier(.2,.7,.2,1) both; }
+@keyframes rise { from { transform: translateY(10px); opacity: .5; } }
+.reveal { transition: transform .8s cubic-bezier(.2,.7,.2,1), opacity .8s; }
+.reveal.pre { transform: translateY(16px); opacity: .55; }
+.related { display: flex; flex-wrap: wrap; gap: 6px; }
+.related span { font-family: var(--mono); font-size: .72rem; border: 1px solid color-mix(in srgb, var(--gold) 45%, var(--line)); color: var(--gold); border-radius: 999px; padding: 2px 9px; background: color-mix(in srgb, var(--gold) 7%, transparent); }
+.mapdraw .medge { stroke-dasharray: 900; stroke-dashoffset: 900; animation: drawl 1.6s ease forwards; }
+.mapdraw .xlink { animation-delay: .9s; }
+@keyframes drawl { to { stroke-dashoffset: 0; } }
+.mapdraw .xlink { stroke-dasharray: 900; }
+.mnode.ctr circle:first-child { animation: halo 3.5s ease-in-out infinite; transform-box: fill-box; transform-origin: center; }
+@keyframes halo { 50% { filter: drop-shadow(0 0 12px var(--gold)); } }
+.steps li { transition: opacity .5s; }
+
+/* ---------- evidence ---------- */
+.scene-wrap { display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); gap: 16px; align-items: start; }
+.scene { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; overflow: hidden; }
+.scene svg { display: block; width: 100%; height: auto; }
+.scene .army, .scene .fire, .scene .rubble, .scene .newt, .scene .glowcity { opacity: 0; transition: opacity 1s, transform 1.4s cubic-bezier(.3,.7,.2,1); }
+.scene .temple { transition: opacity 1.2s, transform 1.4s; transform-box: fill-box; transform-origin: 50% 100%; }
+.scene.on2 .army { opacity: 1; }
+.scene .armyring path { transform-box: fill-box; transform-origin: center; animation: march 1.2s ease-in-out infinite alternate; }
+@keyframes march { to { transform: translateY(-4px); } }
+.scene.on5 .rubble { opacity: .3; }
+.scene.on5 .rubble text { opacity: 0; }
+.scene.on3 .fire { opacity: 1; }
+.scene .flame { transform-box: fill-box; transform-origin: 50% 100%; animation: flick .5s ease-in-out infinite alternate; }
+.scene .flame:nth-child(2) { animation-duration: .65s; } .scene .flame:nth-child(3) { animation-duration: .42s; }
+@keyframes flick { to { transform: scaleY(1.25) scaleX(.9); } }
+.scene.on4 .temple { opacity: 0; transform: translateY(30px) scaleY(.4); }
+.scene.on4 .rubble { opacity: 1; }
+.scene.on4 .fire { opacity: .25; }
+.scene.on5 .army { opacity: 0; }
+.scene.on5 .fire { opacity: 0; }
+.scene.on5 .newt { opacity: 1; }
+.scene.on5 .glowcity { opacity: 1; transform: translateY(0); }
+.scene .glowcity { transform: translateY(-120px); }
+.scene .newt circle { animation: twinkle 2.4s ease-in-out infinite; }
+@keyframes twinkle { 50% { opacity: .45; } }
+.scene-ctl { display: flex; flex-wrap: wrap; gap: 6px; padding: 10px; border-top: 1px solid var(--line); }
+.scene-ctl button[aria-pressed="true"] { background: var(--ember); color: var(--on-accent); border-color: var(--ember); }
+.cap { background: var(--surface); border: 1px solid var(--line); border-left: 4px solid var(--ember); border-radius: 14px; padding: 18px; display: grid; gap: 10px; align-content: start; animation: rise .45s both; }
+.cap h3 { font-size: 1.5rem; }
+.cap .src { font-size: .88rem; color: var(--muted); border-top: 1px dashed var(--line); padding-top: 8px; }
+@media (max-width: 900px) { .scene-wrap { grid-template-columns: minmax(0, 1fr); } }
+.counter { display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; }
+.counter b { font-family: var(--display); font-weight: 400; font-size: 3.4rem; line-height: 1; color: var(--gold); font-variant-numeric: tabular-nums; }
+.wall { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 250px), 1fr)); gap: 8px; }
+.tw { border: 1px solid var(--line); background: var(--surface); border-radius: 10px; padding: 9px 12px; display: grid; gap: 2px; font-size: .9rem; opacity: .45; transition: opacity .5s, border-color .5s, box-shadow .5s; }
+.tw.lit { opacity: 1; border-color: color-mix(in srgb, var(--gold) 55%, var(--line)); box-shadow: 0 0 0 3px color-mix(in srgb, var(--gold) 10%, transparent); }
+.tw em { font-style: normal; font-weight: 600; color: var(--gold); }
+.pairs { display: grid; gap: 10px; }
+.pair { display: grid; grid-template-columns: minmax(0, 1fr) 34px minmax(0, 1.2fr); background: var(--surface); border: 1px solid var(--line); border-radius: 12px; overflow: hidden; }
+.pair > div { padding: 12px 14px; display: grid; gap: 4px; align-content: start; min-width: 0; font-size: .94rem; }
+.pair .said { background: color-mix(in srgb, var(--gold) 8%, transparent); }
+.pair .arrow { display: grid; place-items: center; color: var(--ember); font-size: 1.2rem; padding: 0; }
+.pair .src { font-family: var(--mono); font-size: .7rem; color: var(--ember); }
+.pair b { font-family: var(--display); font-weight: 400; font-size: 1.08rem; }
+@media (max-width: 700px) { .pair { grid-template-columns: minmax(0, 1fr); } .pair .arrow { transform: rotate(90deg); padding: 2px; } }
+.bars { display: grid; gap: 14px; background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 18px; }
+.barrow { display: grid; grid-template-columns: 170px minmax(0, 1fr); gap: 12px; align-items: center; }
+.barrow > span { font-weight: 600; font-size: .92rem; }
+.bartrack { display: grid; gap: 4px; }
+.bar1 { height: 14px; border-radius: 7px; background: var(--line); position: relative; overflow: hidden; }
+.bar1 i { position: absolute; inset: 0 auto 0 0; border-radius: 7px; width: var(--v); background: var(--bc); animation: grow 1.6s cubic-bezier(.2,.7,.2,1) both; }
+@keyframes grow { from { width: 0; } }
+.bartrack small { font-family: var(--mono); font-size: .7rem; color: var(--muted); font-variant-numeric: tabular-nums; }
+@media (max-width: 560px) { .barrow { grid-template-columns: minmax(0, 1fr); gap: 4px; } }
+.voices { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr)); gap: 12px; }
+.voice { border-left: 3px solid var(--gold); padding: 6px 0 6px 14px; display: grid; gap: 4px; }
+.voice b { font-family: var(--display); font-weight: 400; font-size: 1.12rem; }
+.voice q { font-style: italic; quotes: "“" "”"; }
+
+/* ---------- objections ---------- */
+.objbar { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-bottom: 12px; }
+.objbar input { flex: 1 1 240px; min-width: 0; border: 1px solid var(--line); background: var(--surface); color: var(--ink); border-radius: 999px; padding: 9px 16px; font: inherit; font-size: .95rem; }
+.objs { display: grid; gap: 10px; counter-reset: ob; }
+.obj { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; counter-increment: ob; }
+.obj summary { cursor: pointer; list-style: none; padding: 14px 44px 14px 54px; position: relative; display: grid; gap: 2px; }
+.obj summary::-webkit-details-marker { display: none; }
+.obj summary::before { content: counter(ob); position: absolute; left: 14px; top: 14px; width: 28px; height: 28px; border-radius: 50%; display: grid; place-items: center; font-family: var(--mono); font-size: .78rem; font-weight: 600; color: var(--on-accent); background: var(--oc); }
+.obj summary::after { content: "+"; position: absolute; right: 16px; top: 12px; font-family: var(--mono); font-size: 1.3rem; color: var(--gold); transition: transform .25s; }
+.obj[open] summary::after { transform: rotate(45deg); }
+.obj summary b { font-size: 1.05rem; }
+.obj summary small { color: var(--muted); font-size: .85rem; }
+.obj .ans { padding: 0 18px 16px 54px; display: grid; gap: 10px; animation: rise .35s both; }
+.obj .deb { font-size: .86rem; color: var(--muted); border-top: 1px dashed var(--line); padding-top: 8px; }
+.obj .deb b { color: var(--ink); }
+@media (max-width: 520px) { .obj .ans { padding-left: 18px; } }
+
 /* ---------- print: every view, on paper ---------- */
 @media print {
   :root, :root[data-theme="dark"] {
@@ -256,7 +361,7 @@ footer { border-top: 1px solid var(--line); padding-block: 26px 40px; color: var
     color-scheme: light;
   }
   body { font-size: 11pt; background: #fff; }
-  .top, .bar, .tl-ctl, .track-wrap, .detail, .glance, .panel, .hint, .hero-art { display: none !important; }
+  #motes, .scene-ctl, .objbar, #twPlay, .stops::after, .top, .bar, .tl-ctl, .track-wrap, .detail, .glance, .panel, .hint, .hero-art { display: none !important; }
   .view[hidden] { display: block !important; }
   .view { padding-block: 0; break-before: page; }
   #v-sheet { break-before: auto; }
@@ -278,16 +383,17 @@ footer { border-top: 1px solid var(--line); padding-block: 26px 40px; color: var
 <header class="top"><div class="wrap">
   <a class="brand" href="#timeline"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M6 15h20l-2-8-4 4-4-6-4 6-4-4z" fill="none" stroke="var(--gold)" stroke-width="2" stroke-linejoin="round"/><path d="M16 17v6c0 3-3 4-6 4M16 23c0 3 3 4 6 4" fill="none" stroke="var(--river)" stroke-width="2" stroke-linecap="round"/></svg>Seated Together</a>
   <nav class="tabs" aria-label="Views">
-    <a href="#timeline">Timeline</a><a href="#maps">Mind maps</a><a href="#fulfilled">Already fulfilled</a><a href="#reign">Reigning now</a><a href="#lenses">Six lenses</a><a href="#sheet">Teaching sheet</a>
+    <a href="#timeline">Timeline</a><a href="#maps">Mind maps</a><a href="#fulfilled">Already fulfilled</a><a href="#evidence">Evidence</a><a href="#objections">Objections</a><a href="#reign">Reigning now</a><a href="#lenses">Six lenses</a><a href="#sheet">Teaching sheet</a>
   </nav>
 </div></header>
 
 <div class="wrap">
 <section class="hero">
+  <canvas id="motes" aria-hidden="true"></canvas>
   <div>
     <p class="label">Post-mill · Partial preterist · Union &amp; sons · Life &amp; immortality · Heaven on earth · Hopeful universalist</p>
     <h1>Christ is seated. <em>His body reigns with him</em>, on earth as in heaven.</h1>
-    <p class="lede">One simple order of events from Eden to the new creation: what was promised, what was fulfilled by AD 70, what is unfolding now, and what is still ahead. It brings together your studies Last Things, Where Heaven Meets Earth, Relational Gospel Atlas, Beyond the Fire and Kingdom of Priests.</p>
+    <p class="lede">One simple order of events from Eden to the new creation: what was promised, what was fulfilled by AD 70, what is unfolding now, and what is still ahead. Evidence from Scripture and history and answers to two dozen objections are included. It brings together your studies Last Things, Where Heaven Meets Earth, Relational Gospel Atlas, Beyond the Fire and Kingdom of Priests.</p>
     <blockquote class="verse" style="margin-inline:0;margin-bottom:0">“The kingdom and dominion, and the greatness of the kingdom under the whole heaven, shall be given to the people of the saints of the most High.”<span class="ref">Daniel 7:27 (KJV)</span></blockquote>
     <div class="legend3"><span><i style="background:var(--gold)"></i>Promised</span><span><i style="background:var(--ember)"></i>Fulfilled AD 30–70</span><span><i style="background:var(--river)"></i>Unfolding now</span><span><i style="background:var(--violet)"></i>Still ahead</span></div>
   </div>
@@ -353,6 +459,85 @@ footer { border-top: 1px solid var(--line); padding-block: 26px 40px; color: var
   <div class="ledger" id="ledger"></div>
   <div class="sect vhead"><h2>The four Gospels and AD 70</h2><p>Matthew, Mark and Luke give the Olivet warnings with a time limit. John, likely the latest, moves the temple, the Father’s house and the resurrection into the person of Jesus and the life of his people now.</p></div>
   <div class="gospels" id="gospels"></div>
+</section>
+
+<!-- EVIDENCE -->
+<section class="view" id="v-evidence" hidden>
+  <div class="vhead"><h2>The evidence</h2><p>Jesus gave a time limit, named signs and said what would happen to the temple. Ancient historians, most of them not Christians, recorded what happened next. Press Play to watch the old order pass and the new temple rise.</p></div>
+  <div class="scene-wrap">
+    <figure class="scene" id="scene" style="margin:0">
+      <svg viewBox="0 0 600 380" role="img" aria-label="Animated scene: the temple, the Roman armies, the fire, the ruins and the new temple of living stones">
+        <defs>
+          <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="var(--bg-2)"/><stop offset="1" stop-color="var(--surface)"/></linearGradient>
+          <radialGradient id="cityglow" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="var(--gold)" stop-opacity=".55"/><stop offset="1" stop-color="var(--gold)" stop-opacity="0"/></radialGradient>
+        </defs>
+        <rect width="600" height="380" fill="url(#sky)"/>
+        <path d="M0 300 Q150 270 300 285 T600 290 V380 H0 Z" fill="color-mix(in srgb, var(--gold) 14%, var(--bg-2))"/>
+        <!-- city wall -->
+        <path d="M120 300 V262 h16 v-10 h14 v10 h300 v-10 h14 v10 h16 V300" fill="none" stroke="var(--muted)" stroke-width="2"/>
+        <!-- temple -->
+        <g class="temple">
+          <rect x="240" y="196" width="120" height="70" fill="var(--surface)" stroke="var(--ink)" stroke-width="2"/>
+          <path d="M228 198 L300 160 L372 198 Z" fill="var(--surface)" stroke="var(--ink)" stroke-width="2"/>
+          <g stroke="var(--ink)" stroke-width="2"><path d="M256 206v60M274 206v60M292 206v60M308 206v60M326 206v60M344 206v60"/></g>
+          <rect x="230" y="266" width="140" height="10" fill="var(--surface)" stroke="var(--ink)" stroke-width="2"/>
+          <text x="300" y="188" text-anchor="middle" font-family="var(--mono)" font-size="10" fill="var(--muted)">HEROD’S TEMPLE</text>
+        </g>
+        <!-- armies -->
+        <g class="army"><g class="armyring">
+          <g fill="var(--ember)"></g>
+        </g>
+          <text x="300" y="364" text-anchor="middle" font-family="var(--mono)" font-size="10" fill="var(--ember)">“JERUSALEM COMPASSED WITH ARMIES” · LUKE 21:20</text>
+        </g>
+        <!-- fire -->
+        <g class="fire">
+          <path class="flame" d="M262 262 q-14 -40 10 -70 q4 30 18 38 q6 -26 -4 -50 q34 26 26 82 z" fill="var(--ember)" opacity=".85"/>
+          <path class="flame" d="M300 262 q-10 -54 16 -84 q2 40 14 44 q10 -20 4 -40 q22 34 10 80 z" fill="var(--gold)" opacity=".85"/>
+          <path class="flame" d="M322 264 q-8 -30 10 -50 q4 20 12 24 q4 -12 0 -26 q18 22 8 52 z" fill="var(--ember)" opacity=".7"/>
+          <text x="300" y="140" text-anchor="middle" font-family="var(--mono)" font-size="10" fill="var(--ember)">10 AV, AD 70 · THE TEMPLE BURNS</text>
+        </g>
+        <!-- rubble -->
+        <g class="rubble" fill="var(--surface)" stroke="var(--ink)" stroke-width="1.5">
+          <rect x="236" y="282" width="22" height="12" transform="rotate(-12 247 288)"/><rect x="262" y="286" width="26" height="12" transform="rotate(8 275 292)"/>
+          <rect x="292" y="284" width="20" height="12" transform="rotate(-20 302 290)"/><rect x="316" y="287" width="24" height="12" transform="rotate(14 328 293)"/>
+          <rect x="344" y="284" width="18" height="11" transform="rotate(-6 353 290)"/><rect x="252" y="272" width="16" height="10" transform="rotate(30 260 277)"/>
+          <rect x="328" y="273" width="16" height="10" transform="rotate(-28 336 278)"/>
+          <text x="300" y="322" text-anchor="middle" font-family="var(--mono)" font-size="10" fill="var(--muted)" stroke="none">“NOT ONE STONE UPON ANOTHER” · MATT 24:2</text>
+        </g>
+        <!-- new temple of living stones and the city from above -->
+        <g class="glowcity">
+          <circle cx="300" cy="90" r="80" fill="url(#cityglow)"/>
+          <rect x="268" y="58" width="64" height="64" fill="none" stroke="var(--gold)" stroke-width="2.5" transform="rotate(45 300 90)"/>
+          <rect x="280" y="70" width="40" height="40" fill="color-mix(in srgb, var(--gold) 20%, transparent)" stroke="var(--gold)" stroke-width="1.5"/>
+          <text x="300" y="30" text-anchor="middle" font-family="var(--mono)" font-size="10" fill="var(--gold)">NEW JERUSALEM COMING DOWN · REV 21:2</text>
+        </g>
+        <g class="newt"></g>
+      </svg>
+      <div class="scene-ctl" id="sceneCtl"></div>
+    </figure>
+    <aside class="cap" id="cap" aria-live="polite"></aside>
+  </div>
+
+  <div class="sect vhead"><h2>The time statements</h2><p>The New Testament keeps saying the events were near to its first readers. Here are 30 of those statements. Press the button and watch them light up.</p></div>
+  <div class="counter"><b id="twCount">30</b><span class="muted">time statements, from Matthew to Revelation</span><button class="btn" type="button" id="twPlay">Light them up</button></div>
+  <div class="wall" id="wall" style="margin-top:12px"></div>
+
+  <div class="sect vhead"><h2>Prophecy beside history</h2><p>On the left, what Scripture said. On the right, what the ancient record shows. Josephus, a Jewish priest and general, was an eyewitness of the war. Tacitus and Suetonius were Roman historians. Eusebius wrote the earliest surviving history of the church.</p></div>
+  <div class="pairs" id="pairs"></div>
+
+  <div class="sect vhead"><h2>Signs of the leaven</h2><p>Jesus said the kingdom grows like leaven until the whole is leavened. Over the last two centuries, long-run measures of human life have improved sharply, much of it through the hospitals, schools and reforms that followed the gospel. Postmillennial writers read this as one sign of that growth. It does not prove the case alone, but it fits the picture.</p></div>
+  <div class="bars" id="bars"></div>
+  <p class="hint" style="margin-top:8px">Approximate world figures, rounded, from Our World in Data (poverty from Bourguignon and Morrisson, then the World Bank). Starting years vary between 1800 and 1820.</p>
+
+  <div class="sect vhead"><h2>Witnesses through the centuries</h2><p>These readings are not new. Christians in every age have held parts of them.</p></div>
+  <div class="voices" id="voices"></div>
+</section>
+
+<!-- OBJECTIONS -->
+<section class="view" id="v-objections" hidden>
+  <div class="vhead"><h2>Objections answered</h2><p>The hardest questions people raise, each answered from Scripture and history as these six lenses read them. Where careful readers still disagree, the answer says so.</p></div>
+  <div class="objbar"><input id="objq" type="search" placeholder="Search objections, e.g. generation, Satan, Revelation date" aria-label="Search objections"><button class="btn" type="button" id="objOpen">Open all</button><span class="hint" id="objCount"></span></div>
+  <div class="objs" id="objs"></div>
 </section>
 
 <!-- REIGN -->
@@ -746,6 +931,7 @@ function select(i, scroll) {
       <h3>${esc(e.t)}</h3><span class="ref">${esc(e.r)}</span>
       <p>${esc(e.w)}</p>
       <div class="role"><b>The body of Christ</b>${esc(e.b)}</div>
+      ${e.x ? `<p class="label">Related scriptures</p><div class="related">${e.x.map(r => `<span>${esc(r)}</span>`).join('')}</div>` : ''}
     </article>
     <aside class="dcard" style="--ec:var(--line)"><p class="label">Through the six lenses</p><div class="lens-lines">${lenses}</div></aside>`;
   $('#count').textContent = `${cur + 1} of ${EV.length}`;
@@ -841,7 +1027,7 @@ $('#panel').addEventListener('click', ev => {
 function renderMapChips() {
   $('#mapChips').innerHTML = Object.entries(MAPS).map(([k, m]) => `<button class="chip" type="button" data-k="${k}" aria-pressed="${k === mapKey}" style="--c:var(--lapis)"><i></i>${m.name}</button>`).join('');
 }
-$('#mapChips').addEventListener('click', ev => { const b = ev.target.closest('.chip'); if (!b) return; mapKey = b.dataset.k; store('st-map', mapKey); renderMapChips(); drawMap(mapKey, $('#map'), true); mapFocus(null); });
+$('#mapChips').addEventListener('click', ev => { const b = ev.target.closest('.chip'); if (!b) return; mapKey = b.dataset.k; store('st-map', mapKey); renderMapChips(); drawMap(mapKey, $('#map'), true); mapFocus(null); const mm = $('#map'); mm.classList.remove('mapdraw'); void mm.getBoundingClientRect(); mm.classList.add('mapdraw'); });
 
 /* ---------- ledger ---------- */
 const STN = { f: `Fulfilled`, n: `Now`, a: `Still ahead` };
@@ -873,14 +1059,216 @@ $('#sheetBody').innerHTML = `
   <div><p class="label" style="margin-bottom:8px">Memory verses (KJV)</p><div class="mem">${MEMORY.map(([r, t]) => `<div>“${esc(t)}”<span class="ref">${esc(r)}</span></div>`).join('')}</div></div>
   <div><p class="label" style="margin-bottom:6px">Discuss</p><ol style="margin:0;padding-left:1.2em;display:grid;gap:4px;font-size:.95rem"><li>Psalm 110 says Christ sits <i>until</i>. What is he waiting for, and how does Hebrews 10:13 answer that?</li><li>Why does it matter that Daniel 7’s Son of Man goes <i>up</i> to the Ancient of Days?</li><li>Name one way your congregation can be “leaves for the healing of the nations” this month.</li><li>How does Romans 16:20 change the way you see your own part in defeating death?</li></ol></div>`;
 
+/* ---------- related scriptures for each timeline event (same order as EV) ---------- */
+const REL = [
+ `Gen 2:15 with Num 3:7–8 (“serve and keep”: priestly words)|Ezek 28:13–14|Ps 8:4–6|Heb 2:6–9|Rev 22:2`,
+ `Rom 5:12–19|1 Cor 15:21–22|Heb 2:14–15|Rev 12:9–11|Rom 16:20`,
+ `Gal 3:8, 16, 29|Rom 4:13 (heir of the world)|Heb 7:1–17|Ps 110:4`,
+ `Deut 7:6|Isa 61:6|1 Pet 2:5, 9|Rev 1:6|Heb 12:18–24`,
+ `Matt 22:41–45|Acts 2:34–35|Heb 1:13|Heb 5:6; 7:17|1 Cor 15:25`,
+ `Matt 21:42–44|Luke 1:32–33|Mark 14:62|Rev 5:9–10|Rev 11:15|Rev 20:4`,
+ `Gal 4:4|Mark 1:15|Matt 26:28|Heb 9:26; 10:12–14|Luke 21:20`,
+ `Joel 3:18|Zech 14:8|John 7:37–39|Heb 12:22|Rev 21:1–4|Rev 22:1–2`,
+ `Matt 1:23|Col 1:19|Heb 1:3|2 Cor 4:6|1 Tim 3:16`,
+ `Col 1:20|Eph 2:14–16|John 19:30|1 John 2:2|Rom 5:18`,
+ `John 11:25–26|Rom 6:4–11|Eph 2:5|Col 3:1|1 Pet 1:3`,
+ `Ps 68:18|Eph 4:8–13|Phil 2:9–11|1 Pet 3:22|Rev 3:21|Rev 5:6–10`,
+ `Ezek 36:26–27|Jer 31:31–34|2 Cor 3:3, 18|Eph 1:13–14|Acts 1:8`,
+ `Rom 1:8|Rom 10:18|Rom 16:26|Col 1:6|1 Thess 1:8|Acts 17:6`,
+ `Deut 28:49–57|Matt 23:35–38|Luke 19:41–44|Luke 23:28–31|1 Thess 2:16|Rev 11:8`,
+ `Matt 12:28–29|Luke 10:17–19|John 12:31|Col 2:15|Rev 1:6; 5:10`,
+ `Ps 110:1–2|Eph 1:22–23|Heb 2:8–9|Luke 10:19|Mal 4:3`,
+ `Gal 4:25–26|Eph 5:25–27|Rev 3:12|Rev 19:7–8|Isa 54:11–12|Isa 60:1–3`,
+ `Ezek 47:9–12|Ps 46:4|Isa 35:1–7|John 4:14|Zech 14:8`,
+ `Rom 8:29|Gal 3:26; 4:19|Eph 4:13|Col 1:27|2 Pet 1:4`,
+ `Ps 2:8|Ps 72:8–11, 19|Isa 11:9|Isa 60:1–5|Num 14:21|Rev 11:15`,
+ `Titus 2:13|Col 3:4|1 Thess 4:13–18|John 5:28–29|Phil 3:20–21|Rom 8:23`,
+ `Hos 13:14|Rev 20:14|Rev 21:4|2 Tim 1:10|Heb 2:14`,
+ `Eph 1:10|Rom 11:32–36|1 Tim 2:4–6; 4:10|John 12:32|Rev 5:13`,
+ `Isa 66:22–23|2 Pet 3:13|Rev 21:5, 24–27|Rev 22:3–5|Rom 8:21`
+];
+REL.forEach((r, i) => { if (EV[i]) EV[i].x = r.split('|'); });
+
+/* ---------- AD 70 scene ---------- */
+const STAGES = [
+ { n: `AD 30`, t: `The temple stands`, r: `Matt 24:1–3; Mark 13:1–2`, w: `The disciples point out the temple’s great stones. Jesus answers: “There shall not be left here one stone upon another.” They ask when, and he gives them signs and a time limit: this generation.`, s: `Herod’s temple was one of the wonders of the age. Josephus says its front was covered in gold that blazed in the sun (War 5.222).` },
+ { n: `AD 66`, t: `Armies surround Jerusalem`, r: `Luke 21:20–21`, w: `“When ye shall see Jerusalem compassed with armies, then know that the desolation thereof is nigh. Then let them which are in Judaea flee to the mountains.”`, s: `Cestius Gallus besieged the city in AD 66 and then withdrew without cause (Josephus, War 2.19.7). Eusebius records that the church fled to Pella, obeying the warning (Church History 3.5.3).` },
+ { n: `AD 70`, t: `The temple burns`, r: `Matt 22:7; Luke 19:43–44; Dan 9:26`, w: `“He sent forth his armies … and burned up their city.” The enemies “cast a trench about thee, and compass thee round.”`, s: `Titus built a wall around the city (War 5.499–510). The daily sacrifice ceased (War 6.94). The temple burned on the 10th of Av, AD 70 (War 6.250). Josephus counts 1,100,000 dead and 97,000 captives (War 6.420).` },
+ { n: `AD 70–73`, t: `Not one stone upon another`, r: `Matt 24:2; Heb 8:13; 12:26–27`, w: `The old covenant, “ready to vanish away,” is gone. What could be shaken was removed.`, s: `Titus ordered the city and temple razed, leaving only three towers and part of the west wall (War 7.1–3). The Arch of Titus in Rome, still standing, shows the temple lampstand carried in triumph.` },
+ { n: `Now`, t: `The new temple rises`, r: `Heb 12:22, 28; Eph 2:21–22; Rev 21:2–3`, w: `“Ye are come unto mount Sion … the heavenly Jerusalem.” A kingdom which cannot be moved. God dwells in a temple of living stones, the body of Christ.`, s: `From AD 70 no temple or sacrifice has stood in Jerusalem. The church spread through every nation, as Daniel’s stone became a mountain.` }
+];
+let stage = 0, playT = null;
+function buildScene() {
+  const ring = $('#scene .armyring g');
+  let a = '';
+  for (let i = 0; i < 28; i++) { const t = i / 28 * Math.PI * 2, x = 300 + 235 * Math.cos(t), y = 272 + 44 * Math.sin(t); a += `<path style="animation-delay:${(i % 4) * .3}s" d="M${(x - 5).toFixed(1)} ${(y + 6).toFixed(1)} l5 -12 l5 12 z"/>`; }
+  ring.innerHTML = a;
+  let n = '';
+  const rows = [[6, 250], [8, 236], [10, 222], [12, 208], [10, 194], [6, 180]];
+  rows.forEach(([c, y], ri) => { for (let i = 0; i < c; i++) { const x = 300 - (c - 1) * 9 + i * 18; n += `<circle cx="${x}" cy="${y}" r="5" fill="var(--river)" style="animation-delay:${((ri * 7 + i) % 12) * .2}s"/>`; } });
+  n += `<text x="300" y="336" text-anchor="middle" font-family="var(--mono)" font-size="10" fill="var(--river)">“YE ALSO, AS LIVELY STONES, ARE BUILT UP” · 1 PET 2:5</text>`;
+  $('#scene .newt').innerHTML = n;
+  $('#sceneCtl').innerHTML = `<button class="btn" type="button" id="scPlay">▶ Play</button>` + STAGES.map((s, i) => `<button class="btn" type="button" data-s="${i}">${s.n}</button>`).join('');
+  $('#sceneCtl').addEventListener('click', ev => {
+    const b = ev.target.closest('button'); if (!b) return;
+    if (b.id === 'scPlay') { playScene(); return; }
+    stopScene(); setStage(+b.dataset.s);
+  });
+  setStage(0);
+}
+function setStage(i) {
+  stage = i;
+  const sc = $('#scene');
+  for (let k = 2; k <= 5; k++) sc.classList.toggle('on' + k, i + 1 >= k);
+  document.querySelectorAll('#sceneCtl [data-s]').forEach(b => b.setAttribute('aria-pressed', +b.dataset.s === i ? 'true' : 'false'));
+  const s = STAGES[i];
+  $('#cap').innerHTML = `<span class="label">${s.n} · Scene ${i + 1} of ${STAGES.length}</span><h3>${esc(s.t)}</h3><span class="ref">${esc(s.r)}</span><p>${esc(s.w)}</p><p class="src"><b>The record:</b> ${esc(s.s)}</p>`;
+}
+function playScene() { stopScene(); setStage(0); let i = 0; playT = setInterval(() => { i++; if (i >= STAGES.length) { stopScene(); return; } setStage(i); }, 3200); }
+function stopScene() { if (playT) clearInterval(playT); playT = null; }
+
+/* ---------- time statements ---------- */
+const TIMES = [
+ [`Matt 3:2`,`The kingdom of heaven is`,`at hand`],[`Mark 1:15`,`The time is`,`fulfilled`],[`Matt 10:23`,`Ye shall not have gone over the cities of Israel,`,`till the Son of man be come`],
+ [`Matt 16:28`,`Some standing here`,`shall not taste of death`],[`Matt 23:36`,`All these things shall come upon`,`this generation`],[`Matt 24:34`,`This generation`,`shall not pass`],
+ [`Matt 26:64`,`Hereafter`,`shall ye see`],[`Luke 21:22`,`That all things which are written`,`may be fulfilled`],[`John 4:23`,`The hour cometh,`,`and now is`],
+ [`Rom 13:12`,`The night is far spent,`,`the day is at hand`],[`Rom 16:20`,`Bruise Satan under your feet`,`shortly`],[`1 Cor 7:29`,`The time`,`is short`],
+ [`1 Cor 7:31`,`The fashion of this world`,`passeth away`],[`1 Cor 10:11`,`Upon whom the ends of the world`,`are come`],[`Phil 4:5`,`The Lord`,`is at hand`],
+ [`Heb 1:2`,`Hath in`,`these last days spoken`],[`Heb 8:13`,`Waxeth old, is`,`ready to vanish away`],[`Heb 10:25`,`As ye see`,`the day approaching`],
+ [`Heb 10:37`,`Yet a little while … and`,`will not tarry`],[`Jas 5:8`,`The coming of the Lord`,`draweth nigh`],[`Jas 5:9`,`The judge standeth`,`before the door`],
+ [`1 Pet 4:7`,`The end of all things`,`is at hand`],[`1 Pet 4:17`,`The time is come`,`that judgment must begin`],[`1 John 2:18`,`It is`,`the last time`],
+ [`Rev 1:1`,`Things which must`,`shortly come to pass`],[`Rev 1:3`,`The time`,`is at hand`],[`Rev 3:11`,`Behold, I come`,`quickly`],
+ [`Rev 22:6`,`Things which must`,`shortly be done`],[`Rev 22:10`,`Seal not … for the time`,`is at hand`],[`Rev 22:20`,`Surely I come`,`quickly`]
+];
+let twT = null;
+function renderWall() {
+  $('#wall').innerHTML = TIMES.map(([r, a, b]) => `<div class="tw lit"><span class="ref">${r}</span><span>“${esc(a)} <em>${esc(b)}</em>”</span></div>`).join('');
+  $('#twPlay').onclick = () => {
+    if (twT) clearInterval(twT);
+    const cells = [...document.querySelectorAll('.tw')]; cells.forEach(c => c.classList.remove('lit'));
+    let i = 0; $('#twCount').textContent = '0';
+    twT = setInterval(() => { if (i >= cells.length) { clearInterval(twT); twT = null; return; } cells[i].classList.add('lit'); i++; $('#twCount').textContent = i; }, 110);
+  };
+}
+
+/* ---------- prophecy and history ---------- */
+const PAIRS = [
+ [`Matt 24:5, 24`,`False christs and false prophets`,`Josephus describes impostors who led crowds into the desert promising signs, and a false prophet who drew thousands to the temple to await deliverance on the day it burned. Acts mentions Theudas and “that Egyptian.”`,`Josephus, War 6.285–286; Antiquities 20.97, 169; Acts 5:36; 21:38`],
+ [`Matt 24:7; Luke 21:11`,`Famines and earthquakes`,`A great famine under Claudius (Acts 11:28). Earthquakes at Laodicea (AD 60) and Pompeii (AD 62). During the siege, famine so severe that a mother ate her child, as Deuteronomy 28:53–57 warned.`,`Tacitus, Annals 14.27; Seneca, Natural Questions 6.1; Josephus, War 6.201–213`],
+ [`Luke 21:11`,`Fearful sights and great signs from heaven`,`A star like a sword and a comet for a year. Chariots and armed troops seen running in the clouds. A voice in the temple at Pentecost: “Let us remove hence.” The Roman Tacitus reports the same portents.`,`Josephus, War 6.288–300; Tacitus, Histories 5.13`],
+ [`Luke 21:20–21`,`Armies, then flight to the mountains`,`Cestius Gallus surrounded the city in AD 66, then withdrew without reason, opening a window to escape. The Jerusalem church fled across the Jordan to Pella.`,`Josephus, War 2.19.7; Eusebius, Church History 3.5.3`],
+ [`Matt 24:21`,`Great tribulation, such as was not since the beginning`,`Josephus opens his history saying the misfortunes of all people from the beginning were not comparable to those of the Jews in this war.`,`Josephus, War, Preface 4 (1.12)`],
+ [`Luke 19:43`,`They shall cast a trench about thee`,`Titus’ army built a wall nearly five miles round the city in three days, sealing it in.`,`Josephus, War 5.499–510`],
+ [`Dan 9:27`,`He shall cause the sacrifice to cease`,`The daily sacrifice failed on the 17th of Tammuz, AD 70, for lack of men to offer it.`,`Josephus, War 6.94`],
+ [`Matt 24:2`,`Not one stone upon another`,`Titus ordered the whole city and temple demolished, except three towers and part of the western wall, to show what had been taken.`,`Josephus, War 7.1–3; Arch of Titus, Rome (AD 81)`],
+ [`Matt 24:14; Col 1:23`,`The gospel preached in all the world first`,`Paul wrote that the faith of the Romans was “spoken of throughout the whole world” and the gospel was preached “to every creature which is under heaven.”`,`Rom 1:8; 10:18; Col 1:6, 23`],
+ [`Rev 17:10`,`Five are fallen, one is, the other is not yet come`,`Counting from Julius, as Suetonius does: Julius, Augustus, Tiberius, Caligula and Claudius had fallen. Nero “is.” Galba ruled only seven months, “a short space.”`,`Suetonius, Lives of the Caesars; Rev 17:9–11`],
+ [`Rev 13:18`,`The number of a man: 666`,`“Nero Caesar” spelled in Hebrew letters (nrwn qsr) adds up to 666. Spelled from the Latin form without the final n it gives 616, the very variant Irenaeus knew in some manuscripts.`,`Irenaeus, Against Heresies 5.30.1; Dead Sea scroll Mur 18 spells nrwn qsr`],
+ [`Matt 24:34`,`This generation shall not pass`,`Jesus spoke about AD 30. Jerusalem fell in AD 70, forty years later, a biblical generation. Eusebius quoted Josephus to show the prophecy fulfilled.`,`Eusebius, Church History 3.7`]
+];
+const BARS = [
+ [`Extreme poverty`, 76, 9, `% of people`, `var(--ember)`, `down`],
+ [`Literacy`, 12, 87, `% of adults`, `var(--river)`, `up`],
+ [`Child deaths before 5`, 43, 4, `% of children`, `var(--violet)`, `down`],
+ [`Life expectancy`, 29, 73, `years`, `var(--gold)`, `up`]
+];
+const VOICES = [
+ [`Athanasius`, `On the Incarnation 27–29, c. 318`, `Before Christ, even the saints feared death. Now men, women and children trample on it and mock it. This, he says, is the proof that Christ destroyed death: his body treads it down.`],
+ [`Eusebius`, `Church History 3.5–7, c. 325`, `Records the church’s flight to Pella and sets Josephus beside Jesus’ words to show the prophecy of Jerusalem’s fall fulfilled.`],
+ [`Augustine`, `City of God 20.7–9, c. 426`, `The thousand years is the present age of the church. The saints reign with Christ now, and Satan is bound from deceiving the nations.`],
+ [`Gregory of Nyssa`, `On the Soul and the Resurrection, c. 380`, `Hoped that God’s purifying fire would at last restore all, so that God is all in all.`],
+ [`John Owen`, `Sermon on 2 Peter 3, 1680s`, `Read the passing “heavens and earth” of 2 Peter 3 as the Jewish church and state, ended in the destruction of Jerusalem.`],
+ [`Westminster Larger Catechism`, `Question 191, 1648`, `Teaches believers to pray that the gospel be spread throughout the world, the Jews called and the fullness of the Gentiles brought in.`],
+ [`Jonathan Edwards`, `A History of the Work of Redemption, 1739`, `Expected the gospel to triumph across the whole world in history before the end.`],
+ [`B. B. Warfield`, `“The Millennium and the Apocalypse,” 1904`, `Read Revelation 20 as the saints reigning with Christ now, and expected the world to be won to him.`]
+];
+
+/* ---------- objections ---------- */
+const OBJ = [
+ [`pp`,`Nobody saw Jesus come in AD 70.`,`If he came, it was invisible, so it wasn’t a coming.`,`Jesus told the high priest “ye shall see” (Matt 26:64). In Scripture, seeing God come in judgement means recognising his hand in events. “The LORD rideth upon a swift cloud, and shall come into Egypt” (Isa 19:1), yet no one saw a literal cloud. Daniel 7’s Son of Man comes upward to the Father. AD 70 showed openly that the one they condemned was enthroned. Josephus and Tacitus even report armies seen in the clouds. Partial preterists still expect a final, bodily appearing as well (Acts 1:11).`,`Matt 26:64; Isa 19:1; Ps 18:9–11; Dan 7:13; Rev 1:7`,`Futurists read Matthew 24:30 as the final return.`],
+ [`pp`,`“Generation” means “race”, so it is the Jewish people.`,`Then “this generation shall not pass” gives no date.`,`Everywhere else in Matthew, genea means the people alive then: “this generation” that rejected John and Jesus (11:16; 12:41–45), and “all these things shall come upon this generation” (23:36). Jesus also said “some standing here” would see it (16:28). If genea meant race, the time limit Jesus gave as a sign would tell the disciples nothing.`,`Matt 11:16; 12:41–45; 16:28; 23:36; 24:34`,``],
+ [`pp`,`It means the generation that sees the signs, in the future.`,``,`Jesus spoke to his disciples about the temple they were looking at (24:1–3) and used “ye” all the way through: “when ye shall see,” “pray ye that your flight be not in the winter.” Every sign he named happened in their lifetime, and Josephus recorded them.`,`Matt 24:1–3, 15–20, 33–34`,``],
+ [`pp`,`Revelation was written about AD 95, after Jerusalem fell.`,`So it can’t be about AD 70.`,`Inside the book: the temple still stands to be measured (11:1–2), the sixth king “is” (17:10), which fits Nero, and the number 666 fits Nero’s name. Irenaeus’ line (c. 180) says “it was seen” near the end of Domitian’s reign, and “it” may mean John rather than the vision. Even on a late date, Revelation says its contents were near to its first readers (1:1; 22:10).`,`Rev 1:1–3; 11:1–2; 17:10; 22:10`,`Many scholars accept the late date on Irenaeus’ testimony.`],
+ [`pp`,`Matthew 24 has a double fulfilment: AD 70 and the end.`,``,`Jesus answered questions about that temple and that age, and fixed the time with “this generation.” Nothing in the text marks a second, future layer, and adding one removes the time limit he gave. Your study “No Double Fulfillment of Matthew 24” works through each verse. The final return is taught plainly elsewhere (Acts 1:11; 1 Cor 15).`,`Matt 24:1–3, 34; Acts 1:11`,`Some partial preterists see a turn at 24:36 to the final day. Even so, verses 4–34 stay in the first century.`],
+ [`pm`,`The world is getting worse, so the kingdom isn’t growing.`,``,`Jesus said the kingdom grows like a mustard seed and leaven, slowly and hidden, until it fills everything (Matt 13:31–33). Wheat and tares grow together until the harvest (13:30), so evil still existing proves nothing. Over the long run the measures point up: poverty, child deaths and illiteracy have fallen steeply (see the Evidence view). Bad news is louder than slow growth.`,`Isa 9:7; Dan 2:35; Matt 13:30–33; Hab 2:14`,``],
+ [`pm`,`Satan can’t be bound now. He “walketh about, seeking whom he may devour.”`,`1 Peter 5:8`,`Revelation 20:3 names exactly what the binding stops: deceiving “the nations.” Before Christ the nations sat in darkness. Now the gospel goes to every people. Jesus said he had bound the strong man (Matt 12:29) and saw Satan fall (Luke 10:18). A chained lion can still roar and harm those who come near, so believers resist him, and he flees (1 Pet 5:9; Jas 4:7).`,`Rev 20:2–3; Matt 12:28–29; Luke 10:18; John 12:31`,``],
+ [`pp`,`The man of sin in 2 Thessalonians 2 is a future Antichrist.`,``,`Paul told the Thessalonians “ye know what withholdeth” (2:6) and that the mystery “doth already work” (2:7). The man of sin sits in “the temple of God” (2:4), which was standing when Paul wrote. Preterists look for him in the first century, among the zealot leaders who seized the temple or in the imperial line.`,`2 Thess 2:3–8; 1 John 2:18`,`Who exactly he was is debated even among preterists.`],
+ [`pp`,`Zechariah 14 says his feet will stand on the Mount of Olives.`,``,`Zechariah 14 begins with Jerusalem taken by the nations, houses rifled and half the city exiled (14:2), which fits AD 70. The LORD standing on a mountain is warrior language (Mic 1:3–4). Living waters flowing out of Jerusalem (14:8) are the Spirit flowing through the church (John 7:38; Rev 22:1). Jesus ascended from the Mount of Olives (Acts 1:12).`,`Zech 14:1–9; Mic 1:3–4; John 7:38`,`Futurists expect a literal splitting of the mountain.`],
+ [`pp`,`In Daniel 9:27 the one who confirms the covenant is the Antichrist.`,``,`The nearest person in the text is “Messiah the Prince,” who is “cut off, but not for himself” (9:26). Christ confirmed the covenant: “my blood of the new testament, which is shed for many” (Matt 26:28), the same “many” as Daniel’s. His death ended sacrifice in meaning, and in AD 70 it ended in fact. No text puts a 2,000-year gap between the 69th and 70th weeks.`,`Dan 9:24–27; Matt 26:28; Heb 9:26; 10:18`,``],
+ [`he`,`Revelation 21:4 says “no more death”, so the new creation can’t be now.`,``,`The vision holds both. The city is coming down now (Heb 12:22; Gal 4:26), and its full effects grow to the end. Even in Revelation 21–22 there are nations still to heal and people outside the gates (22:2, 15), which fits the present age. It works like eternal life: begun now, completed at the resurrection.`,`Heb 12:22; Rev 21:2–4; 22:2, 15`,`Partial preterists differ on whether 21:4 is now or still ahead.`],
+ [`li`,`People still die, so how is the body destroying death?`,``,`Christ has already broken death’s power (Heb 2:14) and abolished it (2 Tim 1:10). He reigns “until” its final destruction (1 Cor 15:25–26), and he reigns with his body (Eph 1:22–23; Rom 16:20). Death loses ground every time someone passes from death to life (John 5:24), the sick are healed, and fear of death is broken (Heb 2:15). Athanasius used exactly this as his proof in the 300s: ordinary Christians trample on death. The final victory comes at the resurrection.`,`1 Cor 15:25–26, 54; Heb 2:14–15; Rom 16:20`,``],
+ [`un`,`Saying Christ is “waiting” for us makes God dependent on people.`,``,`The words are Scripture’s: he sits “expecting till his enemies be made his footstool” (Heb 10:13), and heaven holds him “until” the restoration of all things (Acts 3:21). God chose to work through his body, as a head works through its members. The power is his (Phil 2:13). The waiting is a Father’s patience (2 Pet 3:9) and a farmer’s wait for the harvest (Jas 5:7).`,`Heb 10:12–13; Acts 3:21; Jas 5:7; Phil 2:13`,``],
+ [`pm`,`Dominion means Christians taking over the government.`,``,`Psalm 110 says “thy people shall be willing”: volunteers, not conscripts. Jesus refused the kingdoms of the world offered by force (Matt 4:8–10) and said of ruling over others, “so shall it not be among you” (Mark 10:42–44). Our weapons are not carnal (2 Cor 10:4). Dominion is Adam’s calling to serve and keep the garden, and nations are discipled by teaching.`,`Ps 110:3; Mark 10:42–45; 2 Cor 10:3–5; Matt 28:19–20`,``],
+ [`he`,`Our citizenship is in heaven, so heaven on earth makes us worldly.`,`Philippians 3:20`,`Philippi was a Roman colony. Its citizens were there to bring Rome’s life to that place, not to leave for Rome. Paul goes on: “from whence also we look for the Saviour,” who comes to transform our bodies (3:21). Jesus taught us to pray “in earth, as it is in heaven,” and the Bible ends with the city coming down to earth.`,`Phil 3:20–21; Matt 6:10; Rev 21:2–3`,``],
+ [`hu`,`Matthew 25:46 says “everlasting punishment”, so universal hope is false.`,``,`Hopeful universalists note that aionios means “of the age” and takes its sense from God’s own life, and that kolasis was used of pruning and correction. Aristotle distinguished it from vengeance. God’s judgements in Scripture aim at restoration (Lam 3:31–33; Isa 26:9; Mal 3:3). This is held as a hope, never forced.`,`Matt 25:46; Lam 3:31–33; Isa 26:9; Mal 3:2–3; 1 Cor 3:13–15`,`Most traditions read Matthew 25:46 as final. Conditionalists read it as permanent destruction.`],
+ [`hu`,`If all may be saved, why evangelise?`,``,`Because the gospel is good news to enjoy now, not only a ticket for later. Paul preached because “the love of Christ constraineth us … one died for all” (2 Cor 5:14). People need to wake up to the Father’s love, be freed from fear and live eternal life now (John 17:3). Knowing God “will have all men to be saved” (1 Tim 2:4) made Paul more urgent, not less.`,`2 Cor 5:14–20; 1 Tim 2:1–6; John 17:3`,``],
+ [`un`,`Union with all humanity removes the need for faith.`,``,`Union says what God has done in Christ for all (2 Cor 5:14–19). Faith is how we see it and live from it: “be ye reconciled to God” (5:20). An heir is a son before he knows it, but knowing changes how he lives (Gal 4:1–7). Faith is the eyes, not the cause.`,`2 Cor 5:14–20; Gal 4:1–7; Col 1:20–23`,`Traditional readers hold that union is made by faith.`],
+ [`un`,`“The manifestation of the sons” is the Latter Rain heresy.`,``,`The Latter Rain movement taught that an elite group would become immortal before Christ returns. Romans 8 says something different. All who are led by the Spirit are sons (8:14), creation waits for their revealing, and the revealing is completed at the redemption of the body (8:23). The sons show now in love and service, and in glory at the resurrection.`,`Rom 8:14–23; 1 John 3:1–3`,``],
+ [`li`,`The soul is naturally immortal.`,`Matthew 10:28; Luke 16`,`Only God “hath immortality” (1 Tim 6:16). Immortality is something we “seek” (Rom 2:7) and “put on” at the resurrection (1 Cor 15:53), and Christ “brought life and immortality to light” (2 Tim 1:10). Matthew 10:28 says God can destroy both soul and body. Luke 16 is a parable shaped on a story Jesus’ hearers knew.`,`1 Tim 6:16; Rom 2:7; 1 Cor 15:53; 2 Tim 1:10`,`Most traditions hold that the soul survives death by nature. This lens says survival is God’s gift.`],
+ [`pp`,`Paul said perilous times come “in the last days” (2 Tim 3:1).`,`So the last days are ours, and they are getting worse.`,`Paul told Timothy to turn away from such people (3:5), so they were in Timothy’s own day. The last days were the closing years of the old covenant age (Heb 1:2; 1 Pet 1:20). Paul also adds, “they shall proceed no further: for their folly shall be manifest” (3:9).`,`2 Tim 3:1–9; Heb 1:2; 1 Pet 1:20`,``],
+ [`pp`,`Hebrews 9:28 says he appears “the second time.”`,`So an AD 70 coming and a final coming can’t both be true.`,`Hebrews 9:28 pictures the high priest coming out of the holy place to bless the waiting people on the Day of Atonement. Scripture uses “coming” for more than one kind of event: comings in judgement (Isa 19:1; Matt 21:40–43), the coming of the Spirit (John 14:18, 23), and the final appearing. Partial preterists apply Hebrews 9:28 to the final appearing.`,`Heb 9:28; Isa 19:1; John 14:18, 23; Acts 1:11`,`Full preterists apply Hebrews 9:28 to AD 70.`],
+ [`pp`,`Acts 1:11 says he will come “in like manner”, so AD 70 wasn’t it.`,``,`Agreed. Partial preterists hold that Acts 1:11 is still ahead: a visible, bodily return. AD 70 was a coming in judgement, not the final appearing. Holding both keeps the creeds and the time statements together.`,`Acts 1:11; 1 Cor 15:23; Titus 2:13`,``],
+ [`pm`,`Romans 11 needs a future millennium and temple for Israel.`,``,`Paul says “all Israel shall be saved” as the Deliverer turns away ungodliness (11:26), by faith in Christ, grafted into one olive tree with the Gentiles (11:23). No temple or sacrifice is mentioned. Postmillennialists, with the Westminster divines, expect a great turning of the Jewish people to Christ within history. Your study “All Israel and the Finished Kingdom” goes deeper.`,`Rom 11:17–27; Eph 2:14–16; Gal 3:28–29`,``]
+];
+function renderObj() {
+  const q = ($('#objq').value || '').toLowerCase().trim();
+  const list = OBJ.filter(o => !q || o.join(' ').toLowerCase().includes(q));
+  $('#objs').innerHTML = list.map(([k, t, sub, a, r, d]) => `<details class="obj" style="--oc:${LENS[k].c}"><summary><b>${esc(t)}</b>${sub ? `<small>${esc(sub)}</small>` : ''}<small style="color:${LENS[k].c}">${LENS[k].n} lens</small></summary><div class="ans"><p>${esc(a)}</p><span class="ref">${esc(r)}</span>${d ? `<p class="deb"><b>Still debated:</b> ${esc(d)}</p>` : ''}</div></details>`).join('') || `<p class="muted">No objection matches “${esc(q)}”. Try a shorter word.</p>`;
+  $('#objCount').textContent = `${list.length} of ${OBJ.length}`;
+}
+$('#objq').addEventListener('input', renderObj);
+$('#objOpen').onclick = () => { const all = [...document.querySelectorAll('.obj')]; const open = !all.every(d => d.open); all.forEach(d => d.open = open); $('#objOpen').textContent = open ? 'Close all' : 'Open all'; };
+
+function renderEvidence() {
+  buildScene(); renderWall();
+  $('#pairs').innerHTML = PAIRS.map(([r, t, h, s]) => `<div class="pair"><div class="said"><span class="ref">${esc(r)}</span><b>${esc(t)}</b></div><div class="arrow" aria-hidden="true">→</div><div><span>${esc(h)}</span><span class="src">${esc(s)}</span></div></div>`).join('');
+  $('#bars').innerHTML = BARS.map(([n, a, b, u, c]) => { const mx = n === 'Life expectancy' ? 80 : 100; return `<div class="barrow"><span>${n}</span><div class="bartrack"><div class="bar1" style="--bc:color-mix(in srgb, ${c} 40%, transparent)"><i style="--v:${a / mx * 100}%"></i></div><small>around 1800–1820: ${a} ${u}</small><div class="bar1" style="--bc:${c}"><i style="--v:${b / mx * 100}%"></i></div><small>today: ${b} ${u}</small></div></div>`; }).join('');
+  $('#voices').innerHTML = VOICES.map(([n, w, t]) => `<div class="voice"><b>${esc(n)}</b><span class="ref">${esc(w)}</span><span>${esc(t)}</span></div>`).join('');
+}
+
+/* ---------- ambient light in the hero ---------- */
+function motes() {
+  const cv = $('#motes'); if (!cv) return;
+  const ctx = cv.getContext('2d'); let W = 0, H = 0, dpr = Math.min(2, window.devicePixelRatio || 1), P = [];
+  const still = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function size() { const r = cv.getBoundingClientRect(); W = r.width; H = r.height; cv.width = W * dpr; cv.height = H * dpr; ctx.setTransform(dpr, 0, 0, dpr, 0, 0); P = Array.from({ length: Math.round(W * H / 9000) }, () => ({ x: Math.random() * W, y: Math.random() * H, r: Math.random() * 1.8 + .4, v: Math.random() * .25 + .06, p: Math.random() * 6.28 })); }
+  function frame(t) {
+    const gold = getComputedStyle(document.documentElement).getPropertyValue('--gold').trim() || '#c9a13a';
+    ctx.clearRect(0, 0, W, H);
+    const cx = W > 800 ? W * .72 : W * .5, cy = W > 800 ? H * .32 : H * .2;
+    ctx.save(); ctx.translate(cx, cy); ctx.rotate(t / 26000);
+    for (let i = 0; i < 14; i++) { ctx.rotate(Math.PI * 2 / 14); const g = ctx.createLinearGradient(0, 0, 0, Math.max(W, H) * .6); g.addColorStop(0, gold); g.addColorStop(1, 'transparent'); ctx.globalAlpha = .06; ctx.fillStyle = g; ctx.beginPath(); ctx.moveTo(-6, 0); ctx.lineTo(6, 0); ctx.lineTo(60, Math.max(W, H) * .6); ctx.lineTo(-60, Math.max(W, H) * .6); ctx.fill(); }
+    ctx.restore();
+    ctx.fillStyle = gold;
+    P.forEach(p => { if (!still) { p.y -= p.v; p.x += Math.sin(t / 2000 + p.p) * .15; if (p.y < -4) { p.y = H + 4; p.x = Math.random() * W; } } ctx.globalAlpha = .35 + .35 * Math.sin(t / 900 + p.p); ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, 6.28); ctx.fill(); });
+    ctx.globalAlpha = 1;
+    if (!still) requestAnimationFrame(frame);
+  }
+  size(); window.addEventListener('resize', size); requestAnimationFrame(frame);
+}
+
+/* ---------- gentle reveal (content is readable before it runs) ---------- */
+function reveals() {
+  if (!('IntersectionObserver' in window) || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.remove('pre'); io.unobserve(e.target); } }), { rootMargin: '0px 0px -40px 0px' });
+  document.querySelectorAll('.view:not([hidden]) :is(.lrow, .gcard, .crow, .lcard, .pair, .voice, .steps li, .manner > div, .obj)').forEach(el => {
+    if (el.classList.contains('reveal')) return;
+    el.classList.add('reveal');
+    const r = el.getBoundingClientRect();
+    if (r.top > innerHeight) { el.classList.add('pre'); io.observe(el); }
+  });
+}
+
 /* ---------- routing ---------- */
-const VIEWS = ['timeline', 'maps', 'fulfilled', 'reign', 'lenses', 'sheet'];
+const VIEWS = ['timeline', 'maps', 'fulfilled', 'evidence', 'objections', 'reign', 'lenses', 'sheet'];
 function route() {
   const h = (location.hash || '').slice(1);
   const v = VIEWS.includes(h) ? h : 'timeline';
   VIEWS.forEach(x => { $('#v-' + x).hidden = x !== v; });
   document.querySelectorAll('.tabs a').forEach(a => a.setAttribute('aria-current', a.getAttribute('href') === '#' + v ? 'page' : 'false'));
   if (v === 'timeline') select(cur, true);
+  if (v === 'maps') { const m = $('#map'); m.classList.remove('mapdraw'); void m.getBoundingClientRect(); m.classList.add('mapdraw'); }
+  requestAnimationFrame(reveals);
 }
 window.addEventListener('hashchange', () => { route(); if (location.hash) $('#v-' + ((location.hash.slice(1)) || 'timeline'))?.scrollIntoView({ block: 'start' }); });
 
@@ -893,7 +1281,9 @@ const m2 = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
 m2.setAttribute('viewBox', '0 0 1200 940'); m2.setAttribute('role', 'img'); m2.setAttribute('aria-label', 'Second mind map');
 $('#map2print').appendChild(m2);
 drawMap(mapKey === 'web' ? 'gospels' : 'web', m2, false);
-window.addEventListener('beforeprint', () => { $('#map2print').hidden = false; mapFocus(null); drawMap(mapKey === 'web' ? 'gospels' : 'web', m2, false); });
+window.addEventListener('beforeprint', () => { document.querySelectorAll('.obj').forEach(d => d.open = true); document.querySelectorAll('.reveal.pre').forEach(e => e.classList.remove('pre')); setStage(4); $('#map2print').hidden = false; mapFocus(null); drawMap(mapKey === 'web' ? 'gospels' : 'web', m2, false); });
 window.addEventListener('afterprint', () => { $('#map2print').hidden = true; });
+renderEvidence(); renderObj(); motes();
+document.querySelectorAll('.stops').forEach(st => st.style.setProperty('--w', st.scrollWidth + 'px'));
 route();
 </script>
