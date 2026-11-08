@@ -1,0 +1,899 @@
+<title>Seated Together</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="A printable teaching app: the timeline of the kingdom, scripture mind maps, what futurists place ahead that is fulfilled, and how the body of Christ reigns now.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Della+Respira&family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,600;1,7..72,400&family=JetBrains+Mono:wght@400;600&display=swap">
+<style>
+/* Layout: a stained-glass teaching chart. A throne-and-river hero, then six views behind a sticky tab bar:
+   a four-era horizontal timeline, two radial mind maps, a fulfilled/now/ahead ledger, the reign of the body,
+   the six lenses, and a one-page teaching sheet. Print stacks every view on paper. */
+:root {
+  --bg: #edf0f4;
+  --bg-2: #e1e6ee;
+  --surface: #fbfcfd;
+  --ink: #16213a;
+  --muted: #56607a;
+  --line: #cdd4e0;
+  --lapis: #2747a3;     /* the throne */
+  --gold: #9a6b0c;      /* promise, priesthood */
+  --ember: #b5432a;     /* AD 70 judgement */
+  --river: #0d7a70;     /* the reign now, river of life */
+  --violet: #6a4cae;    /* fullness, restoration */
+  --on-accent: #ffffff;
+  --display: "Della Respira", "Trajan Pro", "Palatino Linotype", Georgia, serif;
+  --body: "Literata", "Iowan Old Style", Georgia, serif;
+  --mono: "JetBrains Mono", ui-monospace, Menlo, monospace;
+  --l-pm: #2747a3; --l-pp: #b5432a; --l-un: #0b6aa8; --l-li: #0d7a70; --l-he: #9a6b0c; --l-hu: #6a4cae;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #0c1226; --bg-2: #121a33; --surface: #172041; --ink: #ebe7dc; --muted: #a2a9c3; --line: #2a3561;
+  --lapis: #8fa8ff; --gold: #e2b653; --ember: #f08a6c; --river: #5fd0c2; --violet: #b9a0f5; --on-accent: #0c1226;
+  --l-pm: #8fa8ff; --l-pp: #f08a6c; --l-un: #6cc0f5; --l-li: #5fd0c2; --l-he: #e2b653; --l-hu: #b9a0f5;
+  color-scheme: dark; } }
+:root[data-theme="dark"] {
+  --bg: #0c1226; --bg-2: #121a33; --surface: #172041; --ink: #ebe7dc; --muted: #a2a9c3; --line: #2a3561;
+  --lapis: #8fa8ff; --gold: #e2b653; --ember: #f08a6c; --river: #5fd0c2; --violet: #b9a0f5; --on-accent: #0c1226;
+  --l-pm: #8fa8ff; --l-pp: #f08a6c; --l-un: #6cc0f5; --l-li: #5fd0c2; --l-he: #e2b653; --l-hu: #b9a0f5;
+  color-scheme: dark; }
+
+* { box-sizing: border-box; }
+html { scroll-padding-top: 80px; }
+body { background: var(--bg); color: var(--ink); font-family: var(--body); font-size: 17px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--surface); }
+h1, h2, h3, h4 { font-family: var(--display); font-weight: 400; line-height: 1.15; margin: 0; text-wrap: balance; letter-spacing: .01em; }
+p { margin: 0; }
+button { font: inherit; color: inherit; }
+:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; border-radius: 4px; }
+.wrap { max-width: 1180px; margin: 0 auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+.ref { font-family: var(--mono); font-size: .76rem; color: var(--gold); letter-spacing: .01em; }
+.label { font-family: var(--mono); font-size: .68rem; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
+.muted { color: var(--muted); }
+
+/* header */
+.top { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 20; background: color-mix(in srgb, var(--surface) 92%, transparent); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border-bottom: 1px solid var(--line); }
+.top .wrap { display: flex; align-items: center; gap: 14px; padding-block: 9px; flex-wrap: wrap; }
+.brand { display: flex; align-items: center; gap: 10px; font-family: var(--display); font-size: 1.25rem; white-space: nowrap; text-decoration: none; color: var(--ink); }
+.brand svg { width: 30px; height: 30px; }
+.tabs { display: flex; gap: 4px; margin-left: auto; overflow-x: auto; scrollbar-width: none; max-width: 100%; }
+.tabs::-webkit-scrollbar { display: none; }
+.tabs a { text-decoration: none; color: var(--muted); font-weight: 600; font-size: .9rem; padding: 6px 12px; border-radius: 999px; white-space: nowrap; }
+.tabs a:hover { color: var(--ink); }
+.tabs a[aria-current="page"] { background: var(--lapis); color: var(--on-accent); }
+
+/* hero */
+.hero { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); gap: 28px; align-items: center; padding-block: 34px 18px; }
+.hero h1 { font-size: clamp(2.1rem, 1.3rem + 3.4vw, 3.7rem); }
+.hero h1 em { font-style: normal; color: var(--gold); }
+.hero .lede { margin-top: 14px; color: var(--muted); font-size: 1.08rem; max-width: 60ch; }
+.hero .verse { margin-top: 18px; border-left: 2px solid var(--gold); padding: 2px 0 2px 14px; font-style: italic; max-width: 56ch; }
+.hero .verse .ref { display: block; font-style: normal; margin-top: 4px; }
+.hero-art svg { width: 100%; max-width: 520px; height: auto; display: block; margin-inline: auto; }
+.flow { stroke-dasharray: 5 9; animation: flow 1.8s linear infinite; }
+@keyframes flow { to { stroke-dashoffset: -28; } }
+.glow { animation: glow 4s ease-in-out infinite; transform-box: fill-box; transform-origin: center; }
+@keyframes glow { 50% { opacity: .55; transform: scale(1.06); } }
+.legend3 { display: flex; flex-wrap: wrap; gap: 8px 16px; margin-top: 16px; font-size: .9rem; color: var(--muted); }
+.legend3 span { display: inline-flex; align-items: center; gap: 7px; }
+.legend3 i { width: 12px; height: 12px; border-radius: 50%; }
+@media (max-width: 800px) { .hero { grid-template-columns: minmax(0, 1fr); } .hero-art { order: -1; max-width: 380px; margin-inline: auto; } }
+
+.view { padding-block: 10px 90px; }
+.vhead { display: grid; gap: 8px; margin: 18px 0 18px; max-width: 800px; }
+.vhead h2 { font-size: clamp(1.7rem, 1.2rem + 1.8vw, 2.4rem); }
+.vhead p { color: var(--muted); }
+.hint { font-size: .88rem; color: var(--muted); }
+
+/* chips */
+.bar { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-bottom: 12px; }
+.chip { border: 1px solid var(--line); background: var(--surface); border-radius: 999px; padding: 5px 13px; cursor: pointer; font-size: .88rem; font-weight: 600; display: inline-flex; align-items: center; gap: 7px; }
+.chip i { width: 9px; height: 9px; border-radius: 50%; background: var(--c, var(--muted)); }
+.chip[aria-pressed="true"] { border-color: var(--c, var(--ink)); background: color-mix(in srgb, var(--c, var(--ink)) 15%, var(--surface)); }
+.btn { border: 1px solid var(--line); background: var(--surface); border-radius: 999px; padding: 6px 14px; cursor: pointer; font-weight: 600; font-size: .9rem; }
+.btn:hover { border-color: var(--gold); }
+
+/* status pills */
+.pill { font-family: var(--mono); font-size: .64rem; letter-spacing: .1em; text-transform: uppercase; padding: 3px 9px; border-radius: 999px; white-space: nowrap; display: inline-block; width: max-content; }
+.pill.f { color: var(--ember); background: color-mix(in srgb, var(--ember) 13%, transparent); }
+.pill.n { color: var(--river); background: color-mix(in srgb, var(--river) 14%, transparent); }
+.pill.a { color: var(--violet); background: color-mix(in srgb, var(--violet) 14%, transparent); }
+.pill.p { color: var(--gold); background: color-mix(in srgb, var(--gold) 14%, transparent); }
+
+/* ---------- timeline ---------- */
+.track-wrap { overflow-x: auto; border: 1px solid var(--line); border-radius: 14px; background: var(--surface); scroll-behavior: smooth; }
+.track { display: flex; min-width: max-content; }
+.era { display: grid; grid-template-rows: auto 1fr; border-right: 1px dashed var(--line); }
+.era:last-child { border-right: 0; }
+.era-h { padding: 12px 14px 8px; display: grid; gap: 2px; border-top: 4px solid var(--ec); background: color-mix(in srgb, var(--ec) 7%, transparent); }
+.era-h b { font-family: var(--display); font-weight: 400; font-size: 1.15rem; color: var(--ec); }
+.era-h span { font-family: var(--mono); font-size: .7rem; color: var(--muted); }
+.stops { display: flex; position: relative; padding: 0 8px 14px; }
+.stops::before { content: ""; position: absolute; left: 0; right: 0; top: 30px; height: 3px; background: var(--ec); opacity: .5; }
+.stop { position: relative; width: 118px; flex: none; display: grid; justify-items: center; align-content: start; gap: 6px; padding: 20px 6px 4px; border: 0; background: none; cursor: pointer; text-align: center; border-radius: 10px; }
+.stop .dot { width: 22px; height: 22px; border-radius: 50%; background: var(--surface); border: 3px solid var(--ec); position: relative; z-index: 1; transition: transform .2s; }
+.stop .d { font-family: var(--mono); font-size: .66rem; color: var(--muted); }
+.stop .t { font-size: .84rem; line-height: 1.3; font-weight: 600; }
+.stop:hover .dot { transform: scale(1.18); }
+.stop[aria-pressed="true"] { background: color-mix(in srgb, var(--ec) 11%, transparent); }
+.stop[aria-pressed="true"] .dot { background: var(--ec); box-shadow: 0 0 0 6px color-mix(in srgb, var(--ec) 22%, transparent); }
+.here { position: absolute; top: 2px; left: 50%; transform: translateX(-50%); font-family: var(--mono); font-size: .58rem; letter-spacing: .1em; text-transform: uppercase; color: var(--on-accent); background: var(--river); padding: 1px 6px; border-radius: 999px; white-space: nowrap; z-index: 2; }
+.tl-ctl { display: flex; gap: 8px; align-items: center; margin: 12px 0; flex-wrap: wrap; }
+.tl-ctl .count { font-family: var(--mono); font-size: .8rem; color: var(--muted); }
+.detail { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: 16px; }
+.dcard { background: var(--surface); border: 1px solid var(--line); border-top: 4px solid var(--ec); border-radius: 14px; padding: 20px; display: grid; gap: 12px; align-content: start; min-width: 0; }
+.dcard h3 { font-size: clamp(1.4rem, 1.1rem + 1vw, 1.9rem); }
+.dmeta { display: flex; flex-wrap: wrap; gap: 8px 12px; align-items: center; }
+.role { background: color-mix(in srgb, var(--gold) 12%, transparent); border-radius: 10px; padding: 12px 14px; }
+.role b { color: var(--gold); font-family: var(--mono); font-size: .7rem; letter-spacing: .12em; text-transform: uppercase; display: block; margin-bottom: 2px; font-weight: 600; }
+.lens-lines { display: grid; gap: 8px; }
+.ll { display: grid; grid-template-columns: 112px minmax(0, 1fr); gap: 10px; font-size: .95rem; padding-top: 8px; border-top: 1px dashed var(--line); }
+.ll b { font-family: var(--mono); font-size: .66rem; letter-spacing: .06em; text-transform: uppercase; color: var(--c); padding-top: 4px; font-weight: 600; }
+@media (max-width: 860px) { .detail { grid-template-columns: minmax(0, 1fr); } }
+@media (max-width: 480px) { .ll { grid-template-columns: minmax(0, 1fr); gap: 0; } }
+
+.glance { margin-top: 30px; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; }
+.gcol { display: grid; gap: 6px; align-content: start; min-width: 0; }
+.gcol h3 { font-size: 1.15rem; color: var(--ec); border-bottom: 2px solid var(--ec); padding-bottom: 6px; }
+.gcol button { text-align: left; border: 0; background: none; padding: 5px 0; cursor: pointer; display: grid; gap: 1px; border-bottom: 1px solid var(--line); }
+.gcol button span { font-weight: 600; font-size: .92rem; line-height: 1.3; }
+.gcol button small { font-family: var(--mono); font-size: .68rem; color: var(--muted); }
+.gcol button:hover span { color: var(--ec); }
+.print-list { display: none; }
+@media (max-width: 900px) { .glance { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 480px) { .glance { grid-template-columns: minmax(0, 1fr); } }
+
+/* ---------- mind maps ---------- */
+.mapwrap { display: grid; grid-template-columns: minmax(0, 1.7fr) minmax(0, 1fr); gap: 16px; align-items: start; }
+.stage { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; overflow-x: auto; }
+.stage svg { display: block; width: 100%; min-width: 760px; height: auto; }
+.mnode { cursor: pointer; }
+.mnode text { font-family: var(--body); fill: var(--ink); font-size: 13px; pointer-events: none; font-weight: 600; }
+.mnode .sub { font-weight: 400; fill: var(--muted); font-size: 11px; }
+.mnode.br text { font-family: var(--display); font-size: 15px; font-weight: 400; fill: var(--on-accent); }
+.mnode.ctr text { font-family: var(--display); font-weight: 400; font-size: 20px; }
+.mnode.ctr text.sub { font-family: var(--mono); font-size: 12px; }
+.mnode, .medge { transition: opacity .25s; }
+.dim { opacity: .14; }
+.medge { fill: none; }
+.xlink { stroke-dasharray: 5 5; }
+.panel { position: sticky; top: 84px; background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 18px; display: grid; gap: 12px; min-width: 0; }
+.panel h3 { font-size: 1.45rem; }
+.panel .links { display: flex; flex-wrap: wrap; gap: 6px; }
+.panel .links button { border: 1px solid var(--line); background: var(--bg); border-radius: 8px; padding: 3px 9px; cursor: pointer; font-size: .84rem; font-family: var(--mono); }
+.panel .links button:hover { border-color: var(--gold); }
+@media (max-width: 920px) { .mapwrap { grid-template-columns: minmax(0, 1fr); } .panel { position: static; } }
+
+/* ---------- fulfilled ledger ---------- */
+.ledger { display: grid; gap: 10px; }
+.lrow { display: grid; grid-template-columns: minmax(0, .95fr) minmax(0, 1.5fr) 110px; gap: 14px; background: var(--surface); border: 1px solid var(--line); border-left: 4px solid var(--sc); border-radius: 12px; padding: 14px 16px; align-items: start; }
+.lrow .claim { display: grid; gap: 4px; }
+.lrow .claim b { font-size: 1.02rem; }
+.lrow .claim small { font-size: .85rem; color: var(--muted); }
+.lrow .read { display: grid; gap: 6px; font-size: .96rem; min-width: 0; }
+.lrow .st { justify-self: end; }
+.lhead { display: grid; grid-template-columns: minmax(0, .95fr) minmax(0, 1.5fr) 110px; gap: 14px; padding: 0 20px; }
+@media (max-width: 760px) { .lrow { grid-template-columns: minmax(0, 1fr); gap: 8px; } .lrow .st { justify-self: start; grid-row: 1; } .lhead { display: none; } }
+.gospels { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; margin-top: 12px; }
+.gcard { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 16px; display: grid; gap: 10px; align-content: start; min-width: 0; }
+.gcard h3 { font-size: 1.35rem; color: var(--gc); }
+.gcard .sym { font-family: var(--mono); font-size: .68rem; color: var(--muted); letter-spacing: .08em; text-transform: uppercase; }
+.gcard ul { margin: 0; padding: 0; list-style: none; display: grid; gap: 8px; }
+.gcard li { font-size: .92rem; display: grid; gap: 1px; border-top: 1px dashed var(--line); padding-top: 6px; }
+.gcard .now { font-size: .9rem; background: color-mix(in srgb, var(--river) 11%, transparent); border-radius: 8px; padding: 8px 10px; }
+.gcard .now b { color: var(--river); }
+@media (max-width: 1000px) { .gospels { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 520px) { .gospels { grid-template-columns: minmax(0, 1fr); } }
+
+/* ---------- reign ---------- */
+.reignflex { display: grid; grid-template-columns: minmax(0, 1fr) 320px; gap: 20px; align-items: start; }
+.body-art { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 10px; position: sticky; top: 84px; }
+.body-art svg { width: 100%; height: auto; display: block; }
+.body-art text { font-family: var(--mono); font-size: 10.5px; fill: var(--muted); }
+.body-art .bt { font-family: var(--display); font-size: 14px; fill: var(--ink); }
+.steps { display: grid; gap: 0; list-style: none; margin: 0; padding: 0; counter-reset: s; }
+.steps li { counter-increment: s; position: relative; padding: 0 0 18px 50px; }
+.steps li::before { content: counter(s); position: absolute; left: 0; top: 0; width: 34px; height: 34px; border-radius: 50%; display: grid; place-items: center; font-family: var(--mono); font-size: .85rem; font-weight: 600; background: var(--sc); color: var(--on-accent); }
+.steps li::after { content: ""; position: absolute; left: 16px; top: 36px; bottom: 2px; width: 2px; background: var(--line); }
+.steps li:last-child::after { display: none; }
+.steps h4 { font-size: 1.2rem; }
+.steps p { font-size: .97rem; }
+.compare { display: grid; gap: 10px; margin-top: 8px; }
+.crow { display: grid; grid-template-columns: 150px minmax(0, 1fr) minmax(0, 1fr); gap: 0; background: var(--surface); border: 1px solid var(--line); border-radius: 12px; overflow: hidden; }
+.crow > div { padding: 12px 14px; font-size: .94rem; min-width: 0; }
+.crow .k { font-family: var(--display); font-size: 1.1rem; display: grid; gap: 6px; align-content: start; background: var(--bg-2); }
+.crow .k svg { width: 26px; height: 26px; color: var(--lapis); }
+.crow .nw { border-left: 3px solid var(--river); }
+.crow .ft { border-left: 3px solid var(--violet); }
+.chead { display: grid; grid-template-columns: 150px minmax(0, 1fr) minmax(0, 1fr); padding: 0 2px; }
+.chead span { padding: 0 14px; }
+.chead span:nth-child(2) { color: var(--river); } .chead span:nth-child(3) { color: var(--violet); }
+@media (max-width: 760px) { .crow, .chead { grid-template-columns: minmax(0, 1fr); } .chead { display: none; } .crow .nw::before { content: "Now · "; font-weight: 600; color: var(--river); } .crow .ft::before { content: "In the fullness · "; font-weight: 600; color: var(--violet); } }
+@media (max-width: 900px) { .reignflex { grid-template-columns: minmax(0, 1fr); } .body-art { position: static; max-width: 360px; margin-inline: auto; } }
+.manner { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; margin-top: 8px; }
+.manner div { border-top: 3px solid var(--c); padding-top: 10px; display: grid; gap: 4px; }
+.manner h4 { font-size: 1.1rem; color: var(--c); }
+.manner p { font-size: .94rem; }
+@media (max-width: 760px) { .manner { grid-template-columns: minmax(0, 1fr); } }
+.sect { margin-top: 44px; }
+
+/* ---------- lenses ---------- */
+.lensgrid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
+.lcard { background: var(--surface); border: 1px solid var(--line); border-top: 4px solid var(--c); border-radius: 12px; padding: 16px; display: grid; gap: 8px; align-content: start; }
+.lcard h3 { font-size: 1.3rem; color: var(--c); }
+.lcard .care { font-size: .9rem; color: var(--muted); border-top: 1px dashed var(--line); padding-top: 8px; }
+.note { margin-top: 26px; max-width: 76ch; color: var(--muted); font-size: .96rem; display: grid; gap: 10px; }
+.note h3 { color: var(--ink); font-size: 1.2rem; }
+@media (max-width: 900px) { .lensgrid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 560px) { .lensgrid { grid-template-columns: minmax(0, 1fr); } }
+
+/* ---------- teaching sheet ---------- */
+.sheet { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 24px; display: grid; gap: 20px; }
+.sheet h2 { font-size: 1.9rem; }
+.strip { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0; border-radius: 10px; overflow: hidden; border: 1px solid var(--line); }
+.strip > div { padding: 12px; border-top: 6px solid var(--ec); display: grid; gap: 6px; align-content: start; min-width: 0; }
+.strip > div + div { border-left: 1px solid var(--line); }
+.strip h4 { font-size: 1.05rem; color: var(--ec); }
+.strip ol { margin: 0; padding-left: 1.1em; font-size: .86rem; display: grid; gap: 2px; }
+.anv { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
+.anv div { display: grid; gap: 4px; align-content: start; }
+.anv h4 { font-size: 1.1rem; }
+.anv ul { margin: 0; padding-left: 1.1em; font-size: .9rem; display: grid; gap: 3px; }
+.mem { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
+.mem div { border-left: 2px solid var(--gold); padding: 2px 0 2px 10px; font-size: .88rem; font-style: italic; }
+.mem div .ref { display: block; font-style: normal; }
+@media (max-width: 800px) { .strip, .anv, .mem { grid-template-columns: minmax(0, 1fr); } .strip > div + div { border-left: 0; border-top-width: 6px; } }
+
+footer { border-top: 1px solid var(--line); padding-block: 26px 40px; color: var(--muted); font-size: .88rem; }
+
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; } }
+
+/* ---------- print: every view, on paper ---------- */
+@media print {
+  :root, :root[data-theme="dark"] {
+    --bg: #fff; --bg-2: #f1f3f6; --surface: #fff; --ink: #111; --muted: #444; --line: #bbb;
+    --lapis: #2747a3; --gold: #8a5e06; --ember: #a8381f; --river: #0b6c63; --violet: #5a3ea0; --on-accent: #fff;
+    --l-pm: #2747a3; --l-pp: #a8381f; --l-un: #0b6aa8; --l-li: #0b6c63; --l-he: #8a5e06; --l-hu: #5a3ea0;
+    color-scheme: light;
+  }
+  body { font-size: 11pt; background: #fff; }
+  .top, .bar, .tl-ctl, .track-wrap, .detail, .glance, .panel, .hint, .hero-art { display: none !important; }
+  .view[hidden] { display: block !important; }
+  .view { padding-block: 0; break-before: page; }
+  #v-sheet { break-before: auto; }
+  .print-list { display: grid; gap: 8px; }
+  .pl-item { break-inside: avoid; border-left: 3px solid var(--ec); padding: 4px 0 4px 10px; font-size: 10pt; display: grid; gap: 2px; }
+  .pl-era { font-family: var(--display); font-size: 14pt; color: var(--ec); margin-top: 8px; }
+  .stage { overflow: visible; border: 0; }
+  .stage svg { min-width: 0; }
+  .lrow, .gcard, .crow, .lcard, .strip, .sheet, .steps li { break-inside: avoid; }
+  .sheet { border: 0; padding: 0; }
+  .body-art { position: static; max-width: 240px; }
+  .reignflex { grid-template-columns: minmax(0, 1fr) 220px; }
+  .mapwrap { grid-template-columns: minmax(0, 1fr); }
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+  footer { display: none; }
+}
+</style>
+
+<header class="top"><div class="wrap">
+  <a class="brand" href="#timeline"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M6 15h20l-2-8-4 4-4-6-4 6-4-4z" fill="none" stroke="var(--gold)" stroke-width="2" stroke-linejoin="round"/><path d="M16 17v6c0 3-3 4-6 4M16 23c0 3 3 4 6 4" fill="none" stroke="var(--river)" stroke-width="2" stroke-linecap="round"/></svg>Seated Together</a>
+  <nav class="tabs" aria-label="Views">
+    <a href="#timeline">Timeline</a><a href="#maps">Mind maps</a><a href="#fulfilled">Already fulfilled</a><a href="#reign">Reigning now</a><a href="#lenses">Six lenses</a><a href="#sheet">Teaching sheet</a>
+  </nav>
+</div></header>
+
+<div class="wrap">
+<section class="hero">
+  <div>
+    <p class="label">Post-mill · Partial preterist · Union &amp; sons · Life &amp; immortality · Heaven on earth · Hopeful universalist</p>
+    <h1>Christ is seated. <em>His body reigns with him</em>, on earth as in heaven.</h1>
+    <p class="lede">One simple order of events from Eden to the new creation: what was promised, what was fulfilled by AD 70, what is unfolding now, and what is still ahead. It brings together your studies Last Things, Where Heaven Meets Earth, Relational Gospel Atlas, Beyond the Fire and Kingdom of Priests.</p>
+    <blockquote class="verse" style="margin-inline:0;margin-bottom:0">“The kingdom and dominion, and the greatness of the kingdom under the whole heaven, shall be given to the people of the saints of the most High.”<span class="ref">Daniel 7:27 (KJV)</span></blockquote>
+    <div class="legend3"><span><i style="background:var(--gold)"></i>Promised</span><span><i style="background:var(--ember)"></i>Fulfilled AD 30–70</span><span><i style="background:var(--river)"></i>Unfolding now</span><span><i style="background:var(--violet)"></i>Still ahead</span></div>
+  </div>
+  <div class="hero-art" aria-hidden="true">
+    <svg viewBox="0 0 520 420">
+      <defs>
+        <radialGradient id="halo" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="var(--gold)" stop-opacity=".45"/><stop offset="1" stop-color="var(--gold)" stop-opacity="0"/></radialGradient>
+        <linearGradient id="riv" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="var(--river)" stop-opacity=".9"/><stop offset="1" stop-color="var(--river)" stop-opacity=".35"/></linearGradient>
+      </defs>
+      <!-- heaven arc and earth arc -->
+      <path d="M30 150 Q260 -40 490 150" fill="none" stroke="var(--lapis)" stroke-width="1.5" stroke-dasharray="3 6"/>
+      <text x="44" y="130" font-family="var(--mono)" font-size="11" fill="var(--muted)">HEAVEN</text>
+      <path d="M20 370 Q260 300 500 370 L500 420 L20 420 Z" fill="color-mix(in srgb, var(--river) 14%, transparent)"/>
+      <text x="40" y="404" font-family="var(--mono)" font-size="11" fill="var(--muted)">EARTH</text>
+      <!-- halo and throne -->
+      <circle class="glow" cx="260" cy="110" r="90" fill="url(#halo)"/>
+      <path d="M222 128 h76 l-6 -40 -16 14 -16 -26 -16 26 -16 -14 z" fill="none" stroke="var(--gold)" stroke-width="3" stroke-linejoin="round"/>
+      <rect x="226" y="132" width="68" height="34" rx="4" fill="var(--surface)" stroke="var(--lapis)" stroke-width="2.5"/>
+      <text x="260" y="154" text-anchor="middle" font-family="var(--mono)" font-size="10.5" fill="var(--lapis)">PS 110:1</text>
+      <!-- river down -->
+      <path d="M260 166 C 260 220, 300 240, 280 290 S 230 340, 260 372" fill="none" stroke="url(#riv)" stroke-width="16" stroke-linecap="round"/>
+      <path class="flow" d="M260 166 C 260 220, 300 240, 280 290 S 230 340, 260 372" fill="none" stroke="var(--surface)" stroke-width="2.5" stroke-linecap="round"/>
+      <!-- trees of life -->
+      <g fill="var(--river)"><circle cx="232" cy="300" r="13"/><rect x="230" y="306" width="4" height="20"/><circle cx="318" cy="300" r="13"/><rect x="316" y="306" width="4" height="20"/></g>
+      <!-- the saints: thrones around -->
+      <g fill="var(--surface)" stroke="var(--gold)" stroke-width="2">
+        <circle cx="140" cy="176" r="12"/><circle cx="380" cy="176" r="12"/><circle cx="104" cy="232" r="12"/><circle cx="416" cy="232" r="12"/><circle cx="96" cy="296" r="12"/><circle cx="424" cy="296" r="12"/>
+      </g>
+      <g stroke="var(--gold)" stroke-width="1" stroke-dasharray="2 4" fill="none"><path d="M152 172 L226 146"/><path d="M368 172 L294 146"/><path d="M116 226 L226 156"/><path d="M404 226 L294 156"/></g>
+      <text x="96" y="330" text-anchor="middle" font-family="var(--mono)" font-size="10" fill="var(--muted)">REV 20:4</text>
+      <text x="424" y="330" text-anchor="middle" font-family="var(--mono)" font-size="10" fill="var(--muted)">EPH 2:6</text>
+      <text x="260" y="396" text-anchor="middle" font-family="var(--mono)" font-size="10" fill="var(--muted)">REV 22:1–2 · EZEK 47</text>
+    </svg>
+  </div>
+</section>
+
+<!-- TIMELINE -->
+<section class="view" id="v-timeline">
+  <div class="vhead"><h2>The order of events</h2><p>Four eras along one line. Tap any point to see what happened, the body of Christ’s part in it, and how each lens reads it. The green tag marks where we stand today.</p></div>
+  <div class="track-wrap" id="trackWrap" tabindex="0" role="region" aria-label="Timeline, scroll sideways"><div class="track" id="track"></div></div>
+  <div class="tl-ctl"><button class="btn" id="prev" type="button">← Earlier</button><button class="btn" id="next" type="button">Later →</button><span class="count" id="count"></span></div>
+  <div class="detail" id="detail"></div>
+  <div class="glance" id="glance"></div>
+  <div class="print-list" id="printList"></div>
+</section>
+
+<!-- MIND MAPS -->
+<section class="view" id="v-maps" hidden>
+  <div class="vhead"><h2>Mind maps</h2><p>Solid lines join each text to its theme. Dashed lines show where one text answers another across the Bible. Select a text to trace its threads.</p></div>
+  <div class="bar" id="mapChips"></div>
+  <div class="mapwrap">
+    <div class="stage" tabindex="0" role="region" aria-label="Mind map, scroll sideways on small screens"><svg id="map" viewBox="0 0 1200 940" role="img" aria-label="Mind map"></svg></div>
+    <aside class="panel" id="panel" aria-live="polite"></aside>
+  </div>
+  <div class="stage" id="map2print" hidden></div>
+</section>
+
+<!-- FULFILLED -->
+<section class="view" id="v-fulfilled" hidden>
+  <div class="vhead"><h2>What futurists place ahead</h2><p>Each line sets a common futurist expectation beside how these lenses read the same texts. Most belong to the generation Jesus named (AD 30–70). Some are true now. A few are still ahead.</p></div>
+  <div class="bar" id="stChips"></div>
+  <div class="lhead label"><span>The futurist claim</span><span>How these lenses read it</span><span style="text-align:right">Status</span></div>
+  <div class="ledger" id="ledger"></div>
+  <div class="sect vhead"><h2>The four Gospels and AD 70</h2><p>Matthew, Mark and Luke give the Olivet warnings with a time limit. John, likely the latest, moves the temple, the Father’s house and the resurrection into the person of Jesus and the life of his people now.</p></div>
+  <div class="gospels" id="gospels"></div>
+</section>
+
+<!-- REIGN -->
+<section class="view" id="v-reign" hidden>
+  <div class="vhead"><h2>How the body reigns: now and in the fullness</h2><p>The Head is seated. The body fills the earth. Everything the saints receive in the new heavens and new earth has its first fruits now.</p></div>
+  <div class="chead label"><span></span><span>Now, since the ascension and AD 70</span><span>In the new heavens and new earth</span></div>
+  <div class="compare" id="compare"></div>
+
+  <div class="sect vhead"><h2>Death destroyed through the body</h2><p>Christ defeated death at the cross and the empty tomb. He now reigns <em>until</em> every enemy is under his feet, and his feet are his people. He is waiting, and so is creation, for the sons to be revealed.</p></div>
+  <div class="reignflex">
+    <ol class="steps" id="steps"></ol>
+    <figure class="body-art" style="margin:0" aria-label="Illustration: Christ the Head enthroned, his body reaching to the earth, death under its feet">
+      <svg viewBox="0 0 300 470" role="img" aria-label="Head, body and feet">
+        <defs><pattern id="ppl" width="14" height="14" patternUnits="userSpaceOnUse"><circle cx="7" cy="5" r="2.6" fill="var(--river)"/><path d="M2.5 13 q4.5 -7 9 0" fill="var(--river)"/></pattern></defs>
+        <circle class="glow" cx="150" cy="62" r="52" fill="color-mix(in srgb, var(--gold) 22%, transparent)"/>
+        <path d="M122 46 h56 l-5 -22 -10 9 -13 -17 -13 17 -10 -9 z" fill="none" stroke="var(--gold)" stroke-width="2.5" stroke-linejoin="round"/>
+        <circle cx="150" cy="70" r="20" fill="var(--surface)" stroke="var(--gold)" stroke-width="2.5"/>
+        <text class="bt" x="150" y="114" text-anchor="middle">The Head</text>
+        <text x="150" y="128" text-anchor="middle">SEATED · EPH 1:20</text>
+        <path d="M150 136 C 70 170, 60 300, 72 380 L 228 380 C 240 300, 230 170, 150 136 Z" fill="url(#ppl)" stroke="var(--river)" stroke-width="2"/>
+        <rect x="96" y="244" width="108" height="40" rx="6" fill="var(--surface)" stroke="var(--river)"/>
+        <text class="bt" x="150" y="262" text-anchor="middle">The Body</text>
+        <text x="150" y="276" text-anchor="middle">THE FULLNESS · EPH 1:23</text>
+        <g fill="var(--river)"><ellipse cx="112" cy="390" rx="30" ry="10"/><ellipse cx="188" cy="390" rx="30" ry="10"/></g>
+        <path d="M40 420 c 20 -16 40 16 60 0 s 40 16 60 0 s 40 16 60 0 s 30 12 40 4" fill="none" stroke="var(--ember)" stroke-width="5" stroke-linecap="round"/>
+        <path d="M232 418 l14 -6 -4 12" fill="var(--ember)"/>
+        <text class="bt" x="150" y="448" text-anchor="middle">Under your feet</text>
+        <text x="150" y="462" text-anchor="middle">ROM 16:20 · 1 COR 15:25–26</text>
+      </svg>
+    </figure>
+  </div>
+
+  <div class="sect vhead"><h2>The manner of the reign</h2><p>All six lenses agree that this reign looks like Jesus. It is never domination.</p></div>
+  <div class="manner" id="manner"></div>
+</section>
+
+<!-- LENSES -->
+<section class="view" id="v-lenses" hidden>
+  <div class="vhead"><h2>The six lenses</h2><p>Each one adds something to the picture: a reigning Christ, a fulfilled old covenant, a humanity united to him, a gift of life, a kingdom growing on earth, and a hope for all.</p></div>
+  <div class="lensgrid" id="lensgrid"></div>
+  <div class="note">
+    <h3>Where other Christians read it differently</h3>
+    <p>Amillennial readers also see Christ reigning now and Revelation 20 as the present age, but expect no golden age of the gospel before his return. Premillennial and dispensational readers put Daniel’s seventieth week, the tribulation and a thousand-year reign after a future return. Full preterists place the second coming and the resurrection in AD 70 as well. Partial preterists, with the historic creeds, keep a final bodily return, resurrection and judgement still ahead.</p>
+    <p>Traditional readers hold that union with Christ is received by faith and that judgement may be final. The hope of the sons in Romans 8 belongs to all God’s children. It is different from the Latter Rain “Manifest Sons of God” teaching (1948–51), which expected an elite group to gain immortality before Christ returns. Dominion here means reigning by service and the Spirit. It does not mean taking control of institutions.</p>
+  </div>
+</section>
+
+<!-- TEACHING SHEET -->
+<section class="view" id="v-sheet" hidden>
+  <div class="vhead"><h2>Teaching sheet</h2><p class="hint">Made for one printed page. To print the whole app, open this page in its own browser tab and use your browser’s Print command (Ctrl+P or ⌘P). Every view prints, one after another. Landscape works best for the mind maps.</p></div>
+  <div class="sheet" id="sheetBody"></div>
+</section>
+</div>
+
+<footer><div class="wrap">Scripture quotations are from the King James Version. The readings set out here are those of the six lenses named above. Other Christian traditions read many of these texts differently, as the Six lenses view explains.</div></footer>
+
+<script>
+const LENS = {
+  pm: { n: `Postmillennial`, c: `var(--l-pm)` },
+  pp: { n: `Partial preterist`, c: `var(--l-pp)` },
+  un: { n: `Union & sons`, c: `var(--l-un)` },
+  li: { n: `Life & immortality`, c: `var(--l-li)` },
+  he: { n: `Heaven on earth`, c: `var(--l-he)` },
+  hu: { n: `Hopeful universal`, c: `var(--l-hu)` }
+};
+const ERAS = [
+  { id: `p`, n: `The Promise`, span: `Creation – 4 BC`, c: `var(--gold)`, st: `p`, stn: `Promised` },
+  { id: `f`, n: `The Fulfilment`, span: `AD 30 – 70 · this generation`, c: `var(--ember)`, st: `f`, stn: `Fulfilled` },
+  { id: `n`, n: `The Reign Now`, span: `AD 70 – today`, c: `var(--river)`, st: `n`, stn: `Unfolding now` },
+  { id: `a`, n: `The Fullness`, span: `Still ahead`, c: `var(--violet)`, st: `a`, stn: `Still ahead` }
+];
+
+const EV = [
+ { e:`p`, d:`Creation`, t:`Eden: royal priests in a garden-temple`, r:`Gen 1:26–28; 2:8–15; Ps 8:4–6`,
+   w:`Humanity is made in God’s image and given dominion. The garden is the first place where heaven meets earth. Adam is to tend it and spread it.`,
+   b:`Kingship and priesthood are humanity’s first calling. The gospel restores it to the body of Christ.`,
+   l:{ he:`Eden is the first temple. Filling and subduing the earth means extending the garden until it covers the world.`, li:`The tree of life stood in the middle. Life was always received from God.` } },
+ { e:`p`, d:`Gen 3`, t:`The fall and the promise of the seed`, r:`Gen 3:15, 22–24`,
+   w:`Death enters. God promises a seed of the woman who will crush the serpent’s head. The way to the tree of life is guarded.`,
+   b:`The body is the seed’s people. “The God of peace shall bruise Satan under your feet shortly” (Rom 16:20).`,
+   l:{ li:`Cut off from the tree, humanity becomes mortal. Immortality is God’s gift, not our nature (1 Tim 6:16).`, hu:`Even the exile is mercy: Adam is kept from living for ever in a fallen state.` } },
+ { e:`p`, d:`c. 2000 BC`, t:`Abraham and Melchizedek`, r:`Gen 12:3; 14:18–20; Heb 7`,
+   w:`All the families of the earth will be blessed in Abraham’s seed. Melchizedek, king of Salem and priest of God, brings bread and wine.`,
+   b:`Believers share a Melchizedek priesthood: king and priest together, resting on life, not lineage.`,
+   l:{ pm:`“All families of the earth” sets the scope the kingdom grows toward.`, hu:`The promise is for every family, not a few.` } },
+ { e:`p`, d:`c. 1446 BC`, t:`Sinai: a kingdom of priests offered`, r:`Exod 19:5–6; 20:19`,
+   w:`God offers the whole nation the Eden calling. The people draw back in fear and ask Moses to speak for them.`,
+   b:`What Israel drew back from, the church receives: “a royal priesthood, an holy nation” (1 Pet 2:9).`,
+   l:{ he:`The tabernacle is a small cosmos: court, holy place and the most holy place where God’s throne rests.` } },
+ { e:`p`, d:`c. 1000 BC`, t:`David hears Psalm 110`, r:`Ps 2; Ps 110:1–4; 2 Sam 7:12–16`,
+   w:`“Sit thou at my right hand, until I make thine enemies thy footstool.” David’s Lord is also “a priest for ever after the order of Melchizedek.”`,
+   b:`“Thy people shall be willing in the day of thy power” (Ps 110:3). The King’s people volunteer. They rule in the midst of enemies.`,
+   l:{ pm:`“Until” names a long reign before the end, while enemies are made a footstool step by step.`, pp:`Psalm 110 is the Old Testament text the New Testament quotes most. The session began at the ascension.` } },
+ { e:`p`, d:`c. 603–553 BC`, t:`Daniel 2 and 7: the stone and the Son of Man`, r:`Dan 2:34–35, 44; 7:13–14, 18, 22, 27`,
+   w:`A stone cut without hands strikes the empires and becomes a mountain filling the earth. One like the Son of Man comes with clouds to the Ancient of Days and receives dominion. Then the saints possess the kingdom.`,
+   b:`The dominion given to the Son is given “to the people of the saints of the most High” (Dan 7:27). His reign is shared.`,
+   l:{ pp:`The Son of Man goes up to the Ancient of Days. This is the ascension, not a coming down to earth.`, pm:`The kingdom is set up “in the days of these kings” (Rome) and grows like a stone into a mountain.`, un:`A human being is enthroned. In him our humanity is seated with the Father.` } },
+ { e:`p`, d:`c. 539 BC`, t:`Daniel 9: seventy weeks`, r:`Dan 9:24–27`,
+   w:`Seventy weeks to finish transgression, make an end of sins, bring in everlasting righteousness and anoint the most holy. Then the city and sanctuary are destroyed.`,
+   b:`Everlasting righteousness has been brought in. The body lives from a finished work.`,
+   l:{ pp:`The weeks run without a gap to Christ. His death ends sacrifice. The city falls in AD 70.`, pm:`No seven-year tribulation is left in the future.` } },
+ { e:`p`, d:`c. 740–520 BC`, t:`The prophets: river, mountain, new heavens`, r:`Isa 2:2–4; 9:7; 25:7–8; 65:17–25; Ezek 47`,
+   w:`The government only increases. On God’s mountain death is swallowed up. New heavens and a new earth still have long life and building in them. A river from the temple heals the sea.`,
+   b:`These pictures return in Revelation 21–22. They describe God’s people as the temple and the river flowing out.`,
+   l:{ he:`Isaiah 65 pictures a renewed world in history, not an escape from it.`, pp:`“Heavens and earth” is often covenant language for Israel’s world (Isa 51:15–16).` } },
+
+ { e:`f`, d:`c. 4 BC`, t:`The Word made flesh`, r:`John 1:14, 51; Col 2:9`,
+   w:`God tabernacles among us. Jesus is Jacob’s ladder, where heaven and earth join.`,
+   b:`What the temple was, Jesus is. What Jesus is, his body becomes.`,
+   l:{ un:`God became what we are, so we might share what he is. Humanity and God are joined in one person for ever.` } },
+ { e:`f`, d:`AD 30`, t:`The cross: death’s power broken`, r:`Heb 2:14–15; Col 2:15; 2 Cor 5:19; John 12:31–32`,
+   w:`Through death he destroys “him that had the power of death.” The powers are disarmed. God reconciles the world to himself.`,
+   b:`The body is given “the ministry of reconciliation” (2 Cor 5:18), announcing what God has done.`,
+   l:{ un:`God crossed the gap from his side. Faith wakes up to what is already true.`, hu:`“I will draw all men unto me.”`, li:`The death of death begins here.` } },
+ { e:`f`, d:`AD 30`, t:`Resurrection: life and immortality brought to light`, r:`2 Tim 1:10; 1 Cor 15:20–22; Rev 1:18`,
+   w:`Christ “abolished death, and hath brought life and immortality to light through the gospel.” He holds the keys of death and hell.`,
+   b:`We “reign in life” through him (Rom 5:17). We have passed from death to life (John 5:24).`,
+   l:{ li:`Eternal life is knowing the Father and the Son (John 17:3). It starts now.`, hu:`The firstfruits promise the whole harvest: “in Christ shall all be made alive.”` } },
+ { e:`f`, d:`AD 30`, t:`Ascension: the King enthroned, now waiting`, r:`Acts 1:9; 2:33–36; Eph 1:20–23; Heb 10:12–13`,
+   w:`Daniel 7:13 is fulfilled: the Son of Man rides the clouds to the Father. He sits down, “from henceforth expecting till his enemies be made his footstool.”`,
+   b:`“And hath raised us up together, and made us sit together in heavenly places” (Eph 2:6). We reign from his victory, not toward it.`,
+   l:{ pp:`“All power is given unto me in heaven and in earth” (Matt 28:18). The kingdom is set up, not postponed.`, pm:`The thousand years of Revelation 20 begin here.`, un:`A human being is taken into the life of the Trinity, and we are seated with him.` } },
+ { e:`f`, d:`AD 30`, t:`Pentecost: the last days begin`, r:`Acts 2:16–21; Joel 2:28–32; Eph 2:21–22`,
+   w:`The Spirit falls on all flesh. Peter says Joel’s “last days” have arrived. A temple of living stones begins.`,
+   b:`Every believer becomes a prophet, a priest and a dwelling of God.`,
+   l:{ pp:`These are the last days of the old covenant age, before “the great and notable day of the Lord” on Jerusalem.`, un:`“I in my Father, and ye in me, and I in you” (John 14:20).` } },
+ { e:`f`, d:`AD 30–66`, t:`The gospel to all the world`, r:`Matt 24:14; Col 1:6, 23; Rom 10:18`,
+   w:`Before the end of the age the gospel is preached in all the known world. Paul says it went “to every creature which is under heaven.”`,
+   b:`The commission continues: disciple the nations.`,
+   l:{ pp:`Matthew 24:14 was fulfilled before AD 70, as Paul’s letters show.`, pm:`The first-century preaching is the seed. The discipling of the nations through the ages is the harvest.` } },
+ { e:`f`, d:`AD 66–70`, t:`Jerusalem falls: the old heaven and earth pass`, r:`Matt 24:1–34; Luke 21:20–24; Heb 8:13; 12:26–28`,
+   w:`Armies surround Jerusalem. The temple burns, and not one stone is left on another, within the generation Jesus named. The old covenant, “ready to vanish away,” is gone.`,
+   b:`The saints receive “a kingdom which cannot be moved” (Heb 12:28) and possess it (Dan 7:22).`,
+   l:{ pp:`The great tribulation and the coming on the clouds in judgement belong here. The final bodily return is still ahead.`, he:`The old covenant “heaven and earth” passes (Matt 5:18; 24:35). The way into the holiest is open.`, hu:`Jesus’ warnings of Gehenna pointed first to this judgement, as Beyond the Fire argues.` } },
+
+ { e:`n`, d:`AD 70 →`, t:`The thousand years: reigning with Christ`, r:`Rev 20:1–6; Dan 7:22; 1 Cor 15:25`,
+   w:`Satan is bound from deceiving the nations. Those of the first resurrection are “priests of God and of Christ, and shall reign with him.”`,
+   b:`Priests first, then kings. The body rules safely only because it first worships.`,
+   l:{ pm:`A long golden age of the gospel: revival, reformation and cultures slowly changed.`, un:`The first resurrection is being raised with Christ now (Col 3:1).` } },
+ { e:`n`, d:`Now`, here:true, t:`The footstool is being made`, r:`1 Cor 15:25–26; Heb 10:13; Rom 16:20; Jas 5:7`,
+   w:`Christ is seated and waiting. He reigns until every enemy, death last of all, is under his feet. “The husbandman waiteth for the precious fruit of the earth.”`,
+   b:`We are his feet. Every work of healing, mercy, justice and truth pushes death back.`,
+   l:{ pm:`Enemies are subdued step by step through the gospel, not by force.`, li:`Every act of love and healing is life overcoming death now.`, hu:`The last enemy is a power to be destroyed, not a people.` } },
+ { e:`n`, d:`Now`, t:`New Jerusalem coming down`, r:`Heb 12:22–24; Gal 4:26; Rev 21:2–3`,
+   w:`“Ye are come unto mount Sion, and unto the city of the living God, the heavenly Jerusalem.” The church is the bride and the city.`,
+   b:`The body is the tabernacle of God with men (Rev 21:3), a garden-city spreading through the world.`,
+   l:{ he:`The Bible ends with heaven coming down, not souls leaving: “thy will be done in earth, as it is in heaven.”`, pp:`Many read Revelation 21–22 as the new covenant order after AD 70, with its fullness still ahead.` } },
+ { e:`n`, d:`Now`, t:`The river and the healing of the nations`, r:`Rev 22:1–2; Ezek 47:1–12; John 7:38`,
+   w:`A river of water of life flows from the throne. The leaves of the tree are for the healing of the nations.`,
+   b:`Out of the believer flow rivers of living water. The body serves as leaves of healing.`,
+   l:{ li:`The tree barred in Genesis 3 is open again.`, pm:`Nations still exist and still need healing, which fits an age of growth in history.` } },
+ { e:`n`, d:`Now`, t:`Creation waits for the sons`, r:`Rom 8:19–23; Gal 4:6–7; 1 John 3:1–2`,
+   w:`“The earnest expectation of the creature waiteth for the manifestation of the sons of God.” Creation will be set free into their glorious liberty.`,
+   b:`The sons are revealed by love, as the Spirit leads them in service and suffering.`,
+   l:{ un:`Sonship belongs to all God’s children, not an elite. It shows now and is unveiled fully at the resurrection.`, hu:`Creation itself, not only a few, will be set free.` } },
+ { e:`n`, d:`Now → ahead`, t:`The stone fills the earth`, r:`Hab 2:14; Isa 2:2–4; Matt 13:31–33; Ps 22:27`,
+   w:`“The earth shall be filled with the knowledge of the glory of the LORD, as the waters cover the sea.”`,
+   b:`The body disciples nations by teaching, healing, serving and building. “Not by might, nor by power, but by my spirit.”`,
+   l:{ pm:`Most of the world will turn to Christ before he returns. Last Things tracks long-run measures of flourishing as signs of the leaven at work.`, he:`Heaven on earth grows through people led by the Spirit.` } },
+
+ { e:`a`, d:`Ahead`, t:`The appearing and the resurrection`, r:`Acts 1:11; 1 Cor 15:23, 51–54; 1 John 3:2; Phil 3:21`,
+   w:`“This same Jesus … shall so come in like manner.” The dead are raised. The mortal puts on immortality.`,
+   b:`The bride is presented, made ready. “When he shall appear, we shall be like him.”`,
+   l:{ pp:`The AD 70 coming in judgement differs from this final, bodily return.`, pm:`Christ returns to a world largely won by the gospel, after the millennium.`, li:`Immortality is fully given here.` } },
+ { e:`a`, d:`Ahead`, t:`Death, the last enemy, destroyed`, r:`1 Cor 15:26, 54–55; Isa 25:8; Rev 20:14; 21:4`,
+   w:`“Death is swallowed up in victory.” Death and hell are cast into the lake of fire. God wipes away every tear.`,
+   b:`What Christ won, and his body enforced through the ages, is complete. “O death, where is thy sting?”`,
+   l:{ hu:`Judgement corrects and purifies. The fire is God’s presence (Mal 3:2–3), and the hope is that all are finally reconciled.`, li:`Conditional immortality reads the second death as the end of the unrepentant, not endless torment.` } },
+ { e:`a`, d:`The end`, t:`Restoration of all things: God all in all`, r:`Acts 3:21; 1 Cor 15:24–28; Col 1:20; Phil 2:10–11`,
+   w:`Heaven receives Christ “until the times of restitution of all things.” The Son delivers the kingdom to the Father, “that God may be all in all.”`,
+   b:`With its Head, the body offers the whole creation back to the Father.`,
+   l:{ hu:`The hope of the restoration of all, voiced by Gregory of Nyssa and held today as a hope.`, pm:`This is where the “until” of Psalm 110 ends. The reign does not stop. It reaches its goal.` } },
+ { e:`a`, d:`For ever`, t:`New heavens and new earth in fullness`, r:`Rev 21:1–5; 22:3–5; 2 Pet 3:13; Eph 1:10`,
+   w:`“Behold, I make all things new.” No more curse. His servants see his face, “and they shall reign for ever and ever.”`,
+   b:`The Eden calling is fulfilled: a kingdom of priests in a world full of God.`,
+   l:{ he:`Heaven and earth are one, all things gathered in Christ.`, pp:`What began in the covenant in AD 70 is completed across the cosmos.` } }
+];
+
+/* ---------- mind maps ---------- */
+const MAPS = {
+ web: { name: `Scripture web`, ctr: { ref: `Psalm 110:1`, t: `Christ enthroned`, s: `“Sit thou at my right hand, until I make thine enemies thy footstool.” The text the New Testament quotes most, and the hub of the whole story.` },
+  br: [
+   { t: `Throne & Kingdom`, c: `var(--lapis)`, lv: [
+     [`k1`,`Daniel 2:44`,`God sets up a kingdom in the days of Rome that will never be destroyed. A stone becomes a mountain filling the earth.`],
+     [`k2`,`Daniel 7:13–14`,`The Son of Man comes with clouds to the Ancient of Days and receives everlasting dominion.`],
+     [`k3`,`Acts 2:34–36`,`Peter quotes Psalm 110: the risen Jesus is now on David’s throne, Lord and Christ.`],
+     [`k4`,`1 Cor 15:24–25`,`He must reign until he has put all enemies under his feet, then he delivers the kingdom to the Father.`] ] },
+   { t: `Kings & Priests`, c: `var(--gold)`, lv: [
+     [`p1`,`Genesis 14:18`,`Melchizedek, king of Salem and priest of the most high God, brings bread and wine.`],
+     [`p2`,`Exodus 19:6`,`“Ye shall be unto me a kingdom of priests, and an holy nation.”`],
+     [`p3`,`Psalm 110:4`,`“Thou art a priest for ever after the order of Melchizedek.” The King is a priest.`],
+     [`p4`,`1 Peter 2:9`,`“A royal priesthood, an holy nation.” Sinai’s offer received by the church.`],
+     [`p5`,`Rev 1:6; 5:10`,`“Hath made us kings and priests unto God … and we shall reign on the earth.”`] ] },
+   { t: `The Holy People`, c: `var(--l-un)`, lv: [
+     [`s1`,`Daniel 7:18, 22, 27`,`The saints take and possess the kingdom. Dominion under the whole heaven is given to them.`],
+     [`s2`,`Ephesians 2:6`,`Raised up together and made to sit together in heavenly places in Christ Jesus.`],
+     [`s3`,`Revelation 20:4–6`,`Thrones, and those who sat on them. They lived and reigned with Christ a thousand years.`],
+     [`s4`,`Romans 5:17`,`Those who receive abundance of grace “shall reign in life by one, Jesus Christ.”`] ] },
+   { t: `Heaven & Earth`, c: `var(--l-he)`, lv: [
+     [`h1`,`Genesis 2:8–15`,`A garden-temple where God walks with humanity. The first meeting place of heaven and earth.`],
+     [`h2`,`Isaiah 65:17–25`,`New heavens and a new earth, with long life, building and planting.`],
+     [`h3`,`Matthew 6:10`,`“Thy will be done in earth, as it is in heaven.”`],
+     [`h4`,`Hebrews 12:22–24`,`“Ye are come unto mount Sion … the heavenly Jerusalem.” Present tense.`] ] },
+   { t: `Revelation 21–22`, c: `var(--river)`, lv: [
+     [`r1`,`Revelation 21:1–4`,`A new heaven and a new earth. The tabernacle of God is with men. No more death.`],
+     [`r2`,`Revelation 21:22–26`,`No temple, for God and the Lamb are its temple. The nations walk in its light. The gates are never shut.`],
+     [`r3`,`Revelation 22:1–2`,`The river of the water of life and the tree whose leaves heal the nations.`],
+     [`r4`,`Revelation 22:3–5`,`No more curse. They see his face, and they reign for ever and ever.`] ] },
+   { t: `AD 70`, c: `var(--ember)`, lv: [
+     [`a1`,`Matthew 24:34`,`“This generation shall not pass, till all these things be fulfilled.”`],
+     [`a2`,`Daniel 9:24–27`,`Seventy weeks to the Anointed One, then the city and sanctuary destroyed.`],
+     [`a3`,`Luke 21:20–22`,`Jerusalem compassed with armies: “these be the days of vengeance.”`],
+     [`a4`,`Hebrews 12:26–28`,`What can be shaken is removed, so we receive a kingdom which cannot be moved.`] ] },
+   { t: `Death Destroyed`, c: `var(--violet)`, lv: [
+     [`d1`,`Genesis 3:15`,`The seed of the woman will bruise the serpent’s head.`],
+     [`d2`,`2 Timothy 1:10`,`Christ abolished death and brought life and immortality to light.`],
+     [`d3`,`Romans 16:20`,`“The God of peace shall bruise Satan under your feet shortly.” Your feet.`],
+     [`d4`,`Isaiah 25:7–8`,`On this mountain he will swallow up death in victory and wipe away tears.`],
+     [`d5`,`1 Cor 15:26, 54`,`The last enemy that shall be destroyed is death. Death is swallowed up in victory.`] ] },
+   { t: `Sons & Restoration`, c: `var(--l-hu)`, lv: [
+     [`n1`,`Romans 8:19–21`,`Creation waits for the manifestation of the sons of God, to be set free.`],
+     [`n2`,`Hebrews 10:12–13`,`Christ sat down, “from henceforth expecting till his enemies be made his footstool.” He is waiting.`],
+     [`n3`,`Acts 3:21`,`Heaven receives him “until the times of restitution of all things.”`],
+     [`n4`,`Colossians 1:20`,`Through the cross he reconciles all things, in earth and in heaven.`] ] }
+  ],
+  x: [[`k2`,`k3`],[`s1`,`s3`],[`p2`,`p4`],[`p4`,`p5`],[`p1`,`p3`],[`h2`,`r1`],[`h4`,`r1`],[`h1`,`r3`],[`k4`,`d5`],[`n2`,`k4`],[`d1`,`d3`],[`a2`,`a1`],[`a4`,`k1`],[`d4`,`r1`],[`n3`,`n4`],[`n1`,`r4`],[`s2`,`s3`],[`k2`,`s1`]] },
+
+ gospels: { name: `Four Gospels & AD 70`, ctr: { ref: `Matthew 24:34`, t: `This generation`, s: `“This generation shall not pass, till all these things be fulfilled.” Jesus dated the fall of the old order to those who heard him. Jerusalem fell about forty years later, in AD 70.` },
+  br: [
+   { t: `Matthew`, c: `var(--lapis)`, lv: [
+     [`m1`,`Matthew 10:23`,`“Ye shall not have gone over the cities of Israel, till the Son of man be come.”`],
+     [`m2`,`Matthew 16:27–28`,`“There be some standing here, which shall not taste of death, till they see the Son of man coming in his kingdom.”`],
+     [`m3`,`Matthew 23:36–38`,`“All these things shall come upon this generation … your house is left unto you desolate.”`],
+     [`m4`,`Matthew 26:64`,`To the high priest: “Hereafter shall ye see the Son of man sitting on the right hand of power, and coming in the clouds.”`],
+     [`m5`,`Matthew 28:18`,`“All power is given unto me in heaven and in earth.” The kingdom is now.`] ] },
+   { t: `Mark`, c: `var(--ember)`, lv: [
+     [`k1`,`Mark 9:1`,`Some standing here will see “the kingdom of God come with power.”`],
+     [`k2`,`Mark 13:2`,`“There shall not be left one stone upon another.”`],
+     [`k3`,`Mark 13:30`,`“This generation shall not pass, till all these things be done.”`],
+     [`k4`,`Mark 14:62`,`“Ye shall see the Son of man sitting on the right hand of power.” Daniel 7 and Psalm 110 together.`] ] },
+   { t: `Luke`, c: `var(--gold)`, lv: [
+     [`l1`,`Luke 17:20–21`,`“The kingdom of God cometh not with observation … the kingdom of God is within you.”`],
+     [`l2`,`Luke 19:41–44`,`Jesus weeps over Jerusalem: “thine enemies shall cast a trench about thee … because thou knewest not the time of thy visitation.”`],
+     [`l3`,`Luke 21:20–24`,`“When ye shall see Jerusalem compassed with armies, then know that the desolation thereof is nigh.”`],
+     [`l4`,`Luke 23:28–30`,`“Daughters of Jerusalem, weep not for me, but weep for yourselves.”`] ] },
+   { t: `John`, c: `var(--river)`, lv: [
+     [`j1`,`John 2:19–21`,`“Destroy this temple, and in three days I will raise it up.” He spoke of the temple of his body.`],
+     [`j2`,`John 4:21–23`,`Neither this mountain nor Jerusalem: “the hour cometh, and now is” for true worship.`],
+     [`j3`,`John 5:24–25`,`“The hour is coming, and now is,” when the dead hear and live. Passed from death to life.`],
+     [`j4`,`John 14:2–3, 23`,`The Father’s house has many dwellings, and “we will come unto him, and make our abode with him.”`],
+     [`j5`,`John 21:22`,`“If I will that he tarry till I come, what is that to thee?”`] ] },
+   { t: `Acts & Letters`, c: `var(--violet)`, lv: [
+     [`e1`,`Acts 2:16–21`,`“This is that which was spoken by the prophet Joel.” The last days had begun.`],
+     [`e2`,`1 Cor 10:11`,`Written for us, “upon whom the ends of the world are come.”`],
+     [`e3`,`Hebrews 8:13`,`The old covenant “is ready to vanish away.”`],
+     [`e4`,`Hebrews 10:37`,`“Yet a little while, and he that shall come will come, and will not tarry.”`],
+     [`e5`,`James 5:8–9`,`“The coming of the Lord draweth nigh … the judge standeth before the door.”`] ] },
+   { t: `Revelation`, c: `var(--l-un)`, lv: [
+     [`v1`,`Revelation 1:1, 3`,`“Things which must shortly come to pass … for the time is at hand.”`],
+     [`v2`,`Revelation 1:7`,`He comes with clouds, and “they also which pierced him” will see.`],
+     [`v3`,`Revelation 11:1–8`,`A temple still standing to be measured, in the city “where also our Lord was crucified.”`],
+     [`v4`,`Revelation 18:24`,`In her was found the blood of prophets, echoing Matthew 23:35–36.`],
+     [`v5`,`Revelation 22:10`,`“Seal not the sayings … for the time is at hand.”`] ] }
+  ],
+  x: [[`m2`,`k1`],[`k3`,`m3`],[`m4`,`k4`],[`m4`,`v2`],[`l3`,`k2`],[`m3`,`v4`],[`j1`,`e3`],[`m2`,`j5`],[`e1`,`e2`],[`v1`,`v5`],[`l2`,`l3`],[`j4`,`j2`]] }
+};
+
+const LEDGER = [
+ [`f`,`A seven-year tribulation still to come`,`Daniel’s 70th week, split off by a gap of 2,000 years`,`The seventy weeks run on without a gap. Messiah is “cut off” and confirms the covenant. His death ends sacrifice. The city and sanctuary fall in AD 70.`,`Dan 9:24–27; Matt 26:28; Heb 9:26`],
+ [`f`,`The great tribulation is future`,`A global time of trouble before the return`,`Jesus places it in Judea (“flee into the mountains”), on the sabbath, within “this generation.” The Jewish War of AD 66–70 fits every detail.`,`Matt 24:16–21, 34; Luke 21:20–24`],
+ [`f`,`The abomination of desolation in a rebuilt temple`,`An Antichrist sets up an image in a third temple`,`Luke explains Matthew’s phrase: “when ye shall see Jerusalem compassed with armies.” The Roman standards stood on the holy ground.`,`Matt 24:15; Luke 21:20`],
+ [`f`,`The Antichrist, a coming world ruler`,`One man who rules the world at the end`,`John uses the word for many deceivers already in his day. The beast of Revelation is read as Nero and Rome: the number of a man, 666.`,`1 John 2:18, 22; 4:3; Rev 13:18; 17:9–10`],
+ [`f`,`The mark of the beast`,`A chip or code needed to buy and sell`,`Allegiance to Caesar on hand and head, set against God’s seal on the foreheads of his servants. Trade guilds demanded emperor worship.`,`Rev 13:16–17; 7:3; Deut 6:8`],
+ [`f`,`The coming on the clouds is future`,`Christ returns visibly to earth in Matthew 24:30`,`“Coming on clouds” is Old Testament judgement language (the LORD rides a cloud into Egypt). It is the Son of Man vindicated and enthroned, seen in the judgement on Jerusalem.`,`Matt 24:30; 26:64; Isa 19:1; Dan 7:13`],
+ [`f`,`The sun darkened and the stars falling`,`Cosmic disasters at the end of the world`,`Prophets used this language for the fall of rulers: Babylon (Isa 13) and Egypt (Ezek 32). Here it marks the end of Jerusalem’s rulers.`,`Matt 24:29; Isa 13:10; Ezek 32:7`],
+ [`f`,`Armageddon, a world war in Israel`,`The final battle in the valley of Megiddo`,`A symbol taken from Megiddo, where kings fell. In Revelation it is part of the judgement on the harlot city.`,`Rev 16:16; Judg 5:19; 2 Kings 23:29`],
+ [`f`,`Elijah must still come`,`A prophet returns before the end`,`Jesus said Elijah had already come in John the Baptist.`,`Mal 4:5; Matt 11:14; 17:12`],
+ [`f`,`The 144,000 are future evangelists`,`Jewish preachers during the tribulation`,`The firstfruits of Israel sealed before the judgement fell, like the believers who fled Jerusalem to Pella before AD 70.`,`Rev 7:3–8; 14:4; Luke 21:21`],
+ [`f`,`The last days are our days`,`We are living at the end of history`,`The New Testament writers called their own time the last days of the old covenant age.`,`Heb 1:2; Acts 2:17; 1 Cor 10:11; 1 Pet 1:20`],
+ [`f`,`“Heaven and earth shall pass away” means the universe ends`,`The physical cosmos is burned up first`,`The old covenant world of temple and law passed in AD 70, as Jesus said not one jot would pass “till heaven and earth pass.” The renewal of the whole creation is still ahead.`,`Matt 5:18; 24:35; Heb 8:13; Isa 51:16`],
+ [`f`,`The gospel must still reach every nation before the end`,`Missions must finish before Christ can return`,`Paul says the gospel had gone to “every creature which is under heaven” before AD 70. Discipling the nations goes on now.`,`Matt 24:14; Col 1:6, 23; Rom 16:26`],
+ [`n`,`A temple must be rebuilt`,`A third temple in Jerusalem`,`The temple now is the body of Christ, the living stones where God dwells.`,`1 Cor 3:16; Eph 2:21–22; 1 Pet 2:5; John 2:21`],
+ [`n`,`The kingdom was postponed`,`The kingdom comes only after the return`,`“The kingdom of God is come unto you.” We have been moved into the kingdom of his dear Son.`,`Matt 12:28; Col 1:13; Rev 1:9`],
+ [`n`,`The millennium comes after the return`,`A future thousand-year reign from Jerusalem`,`The thousand years is the present reign of Christ with his saints, from the ascension and AD 70 onward.`,`Rev 20:4–6; 1 Cor 15:25`],
+ [`n`,`Satan will be bound in the future`,`Satan is free until the millennium`,`Jesus bound the strong man and saw Satan fall. Satan is bound now from deceiving the nations.`,`Matt 12:29; Luke 10:18; John 12:31; Rev 20:2–3`],
+ [`n`,`New Jerusalem comes only at the end`,`The holy city arrives after the end of the world`,`“Ye are come unto … the heavenly Jerusalem.” The city is coming down now, with its fullness still ahead.`,`Heb 12:22; Gal 4:26; Rev 21:2`],
+ [`n`,`Reigning with Christ comes later`,`Believers reign only after the return`,`We are already seated with him and reign in life. Our reign grows to its fullness in the new creation.`,`Eph 2:6; Rom 5:17; Rev 1:6; 5:10`],
+ [`n`,`Death is defeated only at the end`,`Nothing changes for death until the last day`,`Christ broke death’s power and holds its keys. He reigns until death is put under his feet. Death is being pushed back now and is destroyed at the end.`,`Heb 2:14; Rev 1:18; 1 Cor 15:25–26`],
+ [`a`,`A secret rapture before the tribulation`,`Believers are taken away from the earth`,`There is no secret rapture. “To meet the Lord in the air” uses the word for a welcome party that goes out to escort a king back to the city. It belongs to the one final, public return.`,`1 Thess 4:16–17; Acts 1:11`],
+ [`a`,`The final return and the resurrection`,`Christ returns and the dead are raised`,`This is still ahead in these lenses, as in the creeds. Full preterists differ here.`,`Acts 1:11; 1 Cor 15:23, 51–54; John 5:28–29`],
+ [`a`,`The final judgement`,`Christ judges the living and the dead`,`Still ahead. In the hopeful universalist lens the judgement corrects and restores, and its fire refines.`,`Acts 17:31; Rev 20:11–15; Mal 3:2–3`]
+];
+
+const GOSPELS = [
+ { n:`Matthew`, c:`var(--lapis)`, sym:`The King and his kingdom`, it:[[`10:23`,`Before the cities of Israel are covered`],[`23:36–38`,`Upon this generation; your house desolate`],[`24:34`,`This generation shall not pass`],[`26:64`,`You will see him seated and coming`]], now:`All power in heaven and earth is his. We go and disciple the nations (28:18–20).` },
+ { n:`Mark`, c:`var(--ember)`, sym:`The kingdom with power`, it:[[`9:1`,`Some here will see it come with power`],[`13:2`,`Not one stone on another`],[`13:30`,`This generation`],[`14:62`,`Seated at the right hand of power`]], now:`The kingdom has come with power. These signs follow those who believe (16:17–18).` },
+ { n:`Luke`, c:`var(--gold)`, sym:`The days of vengeance`, it:[[`17:20–21`,`The kingdom is within you`],[`19:41–44`,`You knew not the time of your visitation`],[`21:20–24`,`Jerusalem compassed with armies`],[`23:28–30`,`Weep for yourselves`]], now:`The kingdom is among us and grows like leaven (13:20–21).` },
+ { n:`John`, c:`var(--river)`, sym:`The hour now is`, it:[[`2:19–21`,`The temple of his body`],[`4:21–23`,`Neither this mountain nor Jerusalem`],[`5:24–25`,`Passed from death to life`],[`14:23`,`We will make our abode with him`]], now:`Eternal life now, the Father and Son dwelling in us, worship in Spirit and truth.` }
+];
+
+const COMPARE = [
+ [`Kings`,`crown`,`Seated with Christ. We reign in life over sin, fear and death by the gift of righteousness.`,`Eph 2:6; Rom 5:17`,`We reign openly “for ever and ever.”`,`Rev 22:5`],
+ [`Priests`,`censer`,`We stand before God for the world. Our prayers rise as incense and move history.`,`1 Pet 2:9; Rev 8:3–5`,`We serve him and see his face. God and the Lamb are the temple.`,`Rev 22:3–4; 21:22`],
+ [`Dominion`,`globe`,`Dominion under the whole heaven is given to the saints, used to serve, heal and build.`,`Dan 7:27; Gen 1:28; Ps 8:6`,`All things put under his feet, the earth full of his glory.`,`Heb 2:8; Hab 2:14`],
+ [`Judges`,`scale`,`We discern and speak truth, binding and loosing in his name.`,`1 Cor 6:2–3; Matt 18:18`,`The saints share in the verdict of mercy.`,`Dan 7:22; Rev 20:4`],
+ [`Temple`,`temple`,`Since AD 70 there is no other temple. The body is where heaven meets earth.`,`1 Cor 3:16; Eph 2:21–22`,`The whole creation becomes the holy of holies.`,`Rev 21:16, 22`],
+ [`Sons`,`sun`,`Led by the Spirit, crying “Abba.” Creation sees the sons as they love and serve.`,`Rom 8:14–19`,`Full unveiling and the redemption of the body. Creation set free.`,`Rom 8:21–23; 1 John 3:2`],
+ [`Life`,`leaf`,`Eternal life now. Rivers of living water flow out of us for the healing of nations.`,`John 17:3; 7:38`,`Mortality swallowed up by life. No more death.`,`1 Cor 15:54; Rev 21:4`],
+ [`Bride & City`,`city`,`The heavenly Jerusalem, our mother, already here. The Spirit and the bride say “Come.”`,`Gal 4:26; Heb 12:22; Rev 22:17`,`Presented without spot, the dwelling of God with humanity.`,`Rev 21:2–3; Eph 5:27`]
+];
+const ICONS = {
+ crown:`<path d="M3 18h18l-1.5-9-4.5 4-3-7-3 7-4.5-4z"/>`,
+ censer:`<path d="M12 3v4M7 10h10l-1 7H8z"/><path d="M9 3c0 1 1 1 1 2M15 3c0 1-1 1-1 2"/>`,
+ globe:`<circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3 3 15 0 18M12 3c-3 3-3 15 0 18"/>`,
+ scale:`<path d="M12 3v18M7 21h10M4 7h16M4 7l-2 6h6zM20 7l-2 6h6z"/>`,
+ temple:`<path d="M3 9l9-5 9 5M5 9v10M19 9v10M9 9v10M15 9v10M3 20h18"/>`,
+ sun:`<circle cx="12" cy="12" r="4"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M5 5l2 2M17 17l2 2M5 19l2-2M17 7l2-2"/>`,
+ leaf:`<path d="M5 19C5 9 11 4 20 4c0 9-5 15-15 15zM5 19l9-9"/>`,
+ city:`<path d="M3 20V9l4-3 4 3v11M11 20V5l5-2 5 2v15M14 9h2M14 13h2M6 12h2"/>`
+};
+
+const STEPS = [
+ [`var(--ember)`,`Christ defeated death`,`Through death he destroyed “him that had the power of death,” and rose holding the keys.`,`Heb 2:14–15; Rev 1:18; 2 Tim 1:10`],
+ [`var(--lapis)`,`He sat down and is waiting`,`He sat down “from henceforth expecting till his enemies be made his footstool.” His work is finished. He waits for its fruit, like a farmer for the harvest.`,`Heb 10:12–13; Jas 5:7; Acts 3:21`],
+ [`var(--gold)`,`He reigns until`,`“He must reign, till he hath put all enemies under his feet.” The reign is now, and it has a goal.`,`1 Cor 15:25; Ps 110:1`],
+ [`var(--river)`,`Through his body, his feet`,`All things are put under his feet, and he is head over all things “to the church, which is his body, the fulness.” God bruises Satan “under your feet.”`,`Eph 1:22–23; Rom 16:20; Luke 10:19`],
+ [`var(--l-un)`,`Creation waits for the sons`,`Creation groans, waiting for the sons of God to be revealed. The saints of old wait too: “they without us should not be made perfect.”`,`Rom 8:19–23; Heb 11:39–40`],
+ [`var(--violet)`,`The last enemy destroyed`,`On God’s mountain, his people, death is swallowed up in victory. The body is clothed with immortality.`,`Isa 25:7–8; 1 Cor 15:26, 54–57`]
+];
+const MANNER = [
+ [`var(--lapis)`,`By service`,`Knowing all things were in his hands, Jesus took a towel. Royal priests reign the way he reigns.`,`John 13:3–5; Mark 10:42–45`],
+ [`var(--river)`,`By the Spirit`,`“Not by might, nor by power, but by my spirit.” The kingdom is never imposed by force or politics.`,`Zech 4:6; 2 Cor 10:3–5`],
+ [`var(--gold)`,`From worship`,`Priests first, then kings. Authority flows from access to the throne.`,`Rev 5:8–10; 20:6`],
+ [`var(--l-un)`,`From union`,`Christ living his life through his people. We reign from rest in him.`,`John 15:5; Gal 2:20`],
+ [`var(--ember)`,`Through suffering love`,`John was our companion “in tribulation, and in the kingdom and patience.”`,`Rev 1:9; Rom 8:17`],
+ [`var(--violet)`,`Toward all people`,`We bless and pray for all, because God “will have all men to be saved.”`,`1 Tim 2:1–4; Matt 5:44–45`]
+];
+const LENSINFO = [
+ [`pm`,`The kingdom grows until it fills the earth before Christ returns. Revelation 20 is the present age of his reign.`,`Dan 2:35; Isa 9:7; Matt 13:31–33; 1 Cor 15:25; Hab 2:14`,`Growth comes by the gospel and the Spirit, not by force.`],
+ [`pp`,`The Olivet Discourse, Daniel 9 and much of Revelation were fulfilled in AD 66–70. The final return, resurrection and judgement are still ahead.`,`Matt 24:34; 16:28; Rev 1:1; Luke 21:20–22; Heb 8:13`,`Different from full preterism, which puts the resurrection in AD 70 too.`],
+ [`un`,`In the incarnation Christ joined himself to humanity. We are raised and seated in him. The sons are revealed as the Spirit leads.`,`2 Cor 5:14–19; Eph 2:6; Col 1:27; John 14:20; Rom 8:19`,`Not the Latter Rain “Manifest Sons” teaching. Romans 8 is for all God’s children.`],
+ [`li`,`Immortality is God’s gift, not human nature. Christ abolished death and brought life and immortality to light. Eternal life starts now.`,`2 Tim 1:10; 1 Tim 6:16; John 17:3; 1 Cor 15:53`,`Holders differ on the end: some expect the lost to cease, some hope all receive life.`],
+ [`he`,`The Bible is the story of God coming to dwell with us, not souls escaping earth: Eden, tabernacle, temple, Christ, church, New Jerusalem.`,`Gen 2; Exod 25:8; John 1:14; Eph 1:10; Rev 21:1–3`,`Not building heaven on earth in our own strength.`],
+ [`hu`,`God will in the end reconcile every person through Christ. Judgement is real and it corrects. Held as a hope, not a certainty.`,`Col 1:20; 1 Cor 15:22–28; Phil 2:10–11; 1 Tim 4:10`,`Others point to texts of final exclusion (Rev 21:27; 22:15).`]
+];
+const MEMORY = [
+ [`Psalm 110:1`,`Sit thou at my right hand, until I make thine enemies thy footstool.`],
+ [`Daniel 7:27`,`The greatness of the kingdom under the whole heaven shall be given to the people of the saints.`],
+ [`Matthew 24:34`,`This generation shall not pass, till all these things be fulfilled.`],
+ [`Ephesians 2:6`,`And hath raised us up together, and made us sit together in heavenly places.`],
+ [`Revelation 1:6`,`And hath made us kings and priests unto God and his Father.`],
+ [`Hebrews 10:13`,`From henceforth expecting till his enemies be made his footstool.`],
+ [`Romans 16:20`,`The God of peace shall bruise Satan under your feet shortly.`],
+ [`1 Corinthians 15:26`,`The last enemy that shall be destroyed is death.`],
+ [`Revelation 22:5`,`And they shall reign for ever and ever.`]
+];
+
+/* ---------- helpers ---------- */
+const $ = (s, el = document) => el.querySelector(s);
+const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+const eraOf = id => ERAS.find(e => e.id === id);
+function store(k, v) { try { if (v === undefined) return localStorage.getItem(k); localStorage.setItem(k, v); } catch (e) { return null; } }
+
+/* ---------- timeline ---------- */
+let cur = EV.findIndex(e => e.here);
+function renderTrack() {
+  $('#track').innerHTML = ERAS.map(er => {
+    const items = EV.map((e, i) => [e, i]).filter(([e]) => e.e === er.id);
+    return `<div class="era" style="--ec:${er.c}"><div class="era-h"><b>${er.n}</b><span>${er.span}</span></div><div class="stops">${
+      items.map(([e, i]) => `<button class="stop" type="button" data-i="${i}" aria-pressed="false">${e.here ? '<span class="here">You are here</span>' : ''}<span class="dot"></span><span class="d">${esc(e.d)}</span><span class="t">${esc(e.t)}</span></button>`).join('')
+    }</div></div>`;
+  }).join('');
+  $('#track').addEventListener('click', ev => { const b = ev.target.closest('.stop'); if (b) select(+b.dataset.i, true); });
+  $('#glance').innerHTML = ERAS.map(er => `<div class="gcol" style="--ec:${er.c}"><h3>${er.n}</h3>${
+    EV.map((e, i) => [e, i]).filter(([e]) => e.e === er.id).map(([e, i]) => `<button type="button" data-i="${i}"><span>${esc(e.t)}</span><small>${esc(e.d)} · ${esc(e.r.split(';')[0])}</small></button>`).join('')
+  }</div>`).join('');
+  $('#glance').addEventListener('click', ev => { const b = ev.target.closest('button'); if (b) { select(+b.dataset.i, true); $('#trackWrap').scrollIntoView({ behavior: 'smooth', block: 'start' }); } });
+  $('#printList').innerHTML = ERAS.map(er => `<div class="pl-era" style="--ec:${er.c}">${er.n} · ${er.span}</div>` +
+    EV.filter(e => e.e === er.id).map(e => `<div class="pl-item" style="--ec:${er.c}"><b>${esc(e.d)} — ${esc(e.t)}</b><span class="ref">${esc(e.r)}</span><span>${esc(e.w)}</span><span><i>The body:</i> ${esc(e.b)}</span></div>`).join('')).join('');
+}
+function select(i, scroll) {
+  cur = Math.max(0, Math.min(EV.length - 1, i));
+  const e = EV[cur], er = eraOf(e.e);
+  document.querySelectorAll('.stop').forEach(b => b.setAttribute('aria-pressed', +b.dataset.i === cur ? 'true' : 'false'));
+  const btn = $(`.stop[data-i="${cur}"]`);
+  if (scroll && btn) { const w = $('#trackWrap'); w.scrollLeft = btn.offsetLeft - w.clientWidth / 2 + btn.offsetWidth / 2; }
+  const lenses = Object.entries(e.l).map(([k, v]) => `<div class="ll" style="--c:${LENS[k].c}"><b>${LENS[k].n}</b><span>${esc(v)}</span></div>`).join('');
+  $('#detail').innerHTML = `
+    <article class="dcard" style="--ec:${er.c}">
+      <div class="dmeta"><span class="pill ${er.st}">${er.stn}</span><span class="label">${esc(e.d)} · ${er.n}</span></div>
+      <h3>${esc(e.t)}</h3><span class="ref">${esc(e.r)}</span>
+      <p>${esc(e.w)}</p>
+      <div class="role"><b>The body of Christ</b>${esc(e.b)}</div>
+    </article>
+    <aside class="dcard" style="--ec:var(--line)"><p class="label">Through the six lenses</p><div class="lens-lines">${lenses}</div></aside>`;
+  $('#count').textContent = `${cur + 1} of ${EV.length}`;
+  $('#prev').disabled = cur === 0; $('#next').disabled = cur === EV.length - 1;
+}
+$('#prev').onclick = () => select(cur - 1, true);
+$('#next').onclick = () => select(cur + 1, true);
+$('#trackWrap').addEventListener('keydown', ev => { if (ev.key === 'ArrowRight') { select(cur + 1, true); ev.preventDefault(); } if (ev.key === 'ArrowLeft') { select(cur - 1, true); ev.preventDefault(); } });
+
+/* ---------- mind map ---------- */
+let mapKey = 'web', mapSel = null;
+function layout(m) {
+  const cx = 600, cy = 470, nb = m.br.length;
+  const total = m.br.reduce((s, b) => s + b.lv.length, 0);
+  const nodes = {}, out = { cx, cy, br: [], leaves: [] };
+  let k = 0;
+  const step = 360 / total;
+  m.br.forEach((b, bi) => {
+    const n = b.lv.length;
+    const a0 = -90 + (k + (n - 1) / 2) * step;
+    const ar = a0 * Math.PI / 180;
+    const bx = cx + 245 * Math.cos(ar), by = cy + 205 * Math.sin(ar);
+    out.br.push({ ...b, x: bx, y: by, a: ar, i: bi });
+    b.lv.forEach((lv, li) => {
+      const a = (-90 + k * step) * Math.PI / 180;
+      const x = cx + 385 * Math.cos(a), y = cy + 315 * Math.sin(a);
+      const node = { id: lv[0], ref: lv[1], s: lv[2], x, y, a, bi, c: b.c, bt: b.t };
+      nodes[lv[0]] = node; out.leaves.push(node); k++;
+    });
+  });
+  out.nodes = nodes;
+  return out;
+}
+function drawMap(key, svg, interactive) {
+  const m = MAPS[key], L = layout(m);
+  let s = '';
+  const curve = (x1, y1, x2, y2, pull) => { const mx = (x1 + x2) / 2, my = (y1 + y2) / 2; const qx = mx + (L.cx - mx) * pull, qy = my + (L.cy - my) * pull; return `M${x1.toFixed(1)} ${y1.toFixed(1)} Q${qx.toFixed(1)} ${qy.toFixed(1)} ${x2.toFixed(1)} ${y2.toFixed(1)}`; };
+  m.x.forEach(([a, b]) => { const A = L.nodes[a], B = L.nodes[b]; if (!A || !B) return; s += `<path class="medge xlink" data-a="${a}" data-b="${b}" d="${curve(A.x, A.y, B.x, B.y, .55)}" stroke="var(--muted)" stroke-width="1.3" opacity=".7"/>`; });
+  L.br.forEach(b => { s += `<path class="medge" data-br="${b.i}" d="${curve(L.cx, L.cy, b.x, b.y, -.15)}" stroke="${b.c}" stroke-width="4" stroke-linecap="round" opacity=".55"/>`; });
+  L.leaves.forEach(n => { const b = L.br[n.bi]; s += `<path class="medge" data-br="${n.bi}" data-leaf="${n.id}" d="${curve(b.x, b.y, n.x, n.y, -.1)}" stroke="${n.c}" stroke-width="1.8" opacity=".75"/>`; });
+  L.leaves.forEach(n => {
+    const right = Math.cos(n.a) >= 0, deg = n.a * 180 / Math.PI + (right ? 0 : 180);
+    const anchor = right ? 'start' : 'end', tx = n.x + (right ? 12 : -12), ty = n.y;
+    s += `<g class="mnode lf" data-id="${n.id}" tabindex="0" role="button" aria-label="${esc(n.ref)}"><circle cx="${n.x.toFixed(1)}" cy="${n.y.toFixed(1)}" r="7" fill="var(--surface)" stroke="${n.c}" stroke-width="3"/><text x="${tx.toFixed(1)}" y="${ty.toFixed(1)}" text-anchor="${anchor}" dominant-baseline="middle" transform="rotate(${deg.toFixed(1)} ${n.x.toFixed(1)} ${n.y.toFixed(1)})">${esc(n.ref)}</text></g>`;
+  });
+  L.br.forEach(b => {
+    const w = b.t.length * 8.4 + 26;
+    s += `<g class="mnode br" data-brn="${b.i}" tabindex="0" role="button" aria-label="${esc(b.t)}"><rect x="${(b.x - w / 2).toFixed(1)}" y="${(b.y - 16).toFixed(1)}" width="${w.toFixed(1)}" height="32" rx="16" fill="${b.c}"/><text x="${b.x.toFixed(1)}" y="${(b.y + 5).toFixed(1)}" text-anchor="middle">${esc(b.t)}</text></g>`;
+  });
+  s += `<g class="mnode ctr" data-ctr="1" tabindex="0" role="button" aria-label="${esc(m.ctr.t)}"><circle cx="${L.cx}" cy="${L.cy}" r="70" fill="var(--surface)" stroke="var(--gold)" stroke-width="3"/><circle cx="${L.cx}" cy="${L.cy}" r="78" fill="none" stroke="var(--gold)" stroke-width="1" stroke-dasharray="3 5"/><text x="${L.cx}" y="${L.cy - 4}" text-anchor="middle" font-size="19">${esc(m.ctr.t)}</text><text x="${L.cx}" y="${L.cy + 18}" text-anchor="middle" class="sub" style="font-family:var(--mono)">${esc(m.ctr.ref)}</text></g>`;
+  svg.innerHTML = s;
+  svg._L = L;
+  if (!interactive) return;
+  svg.onclick = ev => {
+    const g = ev.target.closest('.mnode'); if (!g) { mapFocus(null); return; }
+    if (g.dataset.id) mapFocus({ leaf: g.dataset.id }); else if (g.dataset.brn) mapFocus({ br: +g.dataset.brn }); else mapFocus(null);
+  };
+  svg.onkeydown = ev => { if (ev.key === 'Enter' || ev.key === ' ') { const g = ev.target.closest('.mnode'); if (g) { ev.preventDefault(); g.dispatchEvent(new MouseEvent('click', { bubbles: true })); } } };
+}
+function mapFocus(sel) {
+  mapSel = sel;
+  const svg = $('#map'), L = svg._L, m = MAPS[mapKey];
+  const all = svg.querySelectorAll('.mnode, .medge');
+  all.forEach(el => el.classList.remove('dim'));
+  const panel = $('#panel');
+  if (!sel) {
+    panel.innerHTML = `<p class="label">Centre</p><h3>${esc(m.ctr.t)}</h3><span class="ref">${esc(m.ctr.ref)}</span><p>${esc(m.ctr.s)}</p><p class="hint">Select a theme or a text on the map to follow its connections.</p><div class="links">${L.br.map(b => `<button type="button" data-brn="${b.i}" style="border-color:${b.c}">${esc(b.t)}</button>`).join('')}</div>`;
+  } else if (sel.br !== undefined) {
+    const b = L.br[sel.br];
+    const keep = new Set(L.leaves.filter(n => n.bi === sel.br).map(n => n.id));
+    svg.querySelectorAll('.lf').forEach(g => { if (!keep.has(g.dataset.id)) g.classList.add('dim'); });
+    svg.querySelectorAll('.br').forEach(g => { if (+g.dataset.brn !== sel.br) g.classList.add('dim'); });
+    svg.querySelectorAll('.medge').forEach(p => { if (p.dataset.br !== String(sel.br) && !(keep.has(p.dataset.a) || keep.has(p.dataset.b))) p.classList.add('dim'); });
+    panel.innerHTML = `<p class="label">Theme</p><h3 style="color:${b.c}">${esc(b.t)}</h3><div style="display:grid;gap:10px">${b.lv.map(l => `<div><span class="ref">${esc(l[1])}</span><p style="font-size:.95rem">${esc(l[2])}</p></div>`).join('')}</div>`;
+  } else {
+    const n = L.nodes[sel.leaf];
+    const linked = m.x.filter(p => p.includes(sel.leaf)).map(p => p[0] === sel.leaf ? p[1] : p[0]);
+    const keep = new Set([sel.leaf, ...linked]);
+    svg.querySelectorAll('.lf').forEach(g => { if (!keep.has(g.dataset.id)) g.classList.add('dim'); });
+    svg.querySelectorAll('.br').forEach(g => { if (+g.dataset.brn !== n.bi) g.classList.add('dim'); });
+    svg.querySelectorAll('.medge').forEach(p => {
+      const isX = p.classList.contains('xlink');
+      const ok = isX ? (p.dataset.a === sel.leaf || p.dataset.b === sel.leaf) : (p.dataset.leaf === sel.leaf || (p.dataset.br === String(n.bi) && !p.dataset.leaf) || (p.dataset.leaf && keep.has(p.dataset.leaf)));
+      if (!ok) p.classList.add('dim');
+    });
+    panel.innerHTML = `<p class="label" style="color:${n.c}">${esc(n.bt)}</p><h3>${esc(n.ref)}</h3><p>${esc(n.s)}</p>${linked.length ? `<p class="label">Answers and echoes</p><div class="links">${linked.map(id => `<button type="button" data-leaf="${id}">${esc(L.nodes[id].ref)}</button>`).join('')}</div>` : ''}<button class="btn" type="button" data-reset="1" style="justify-self:start">Show whole map</button>`;
+  }
+}
+$('#panel').addEventListener('click', ev => {
+  const b = ev.target.closest('button'); if (!b) return;
+  if (b.dataset.leaf) mapFocus({ leaf: b.dataset.leaf }); else if (b.dataset.brn) mapFocus({ br: +b.dataset.brn }); else if (b.dataset.reset) mapFocus(null);
+});
+function renderMapChips() {
+  $('#mapChips').innerHTML = Object.entries(MAPS).map(([k, m]) => `<button class="chip" type="button" data-k="${k}" aria-pressed="${k === mapKey}" style="--c:var(--lapis)"><i></i>${m.name}</button>`).join('');
+}
+$('#mapChips').addEventListener('click', ev => { const b = ev.target.closest('.chip'); if (!b) return; mapKey = b.dataset.k; store('st-map', mapKey); renderMapChips(); drawMap(mapKey, $('#map'), true); mapFocus(null); });
+
+/* ---------- ledger ---------- */
+const STN = { f: `Fulfilled`, n: `Now`, a: `Still ahead` };
+const STC = { f: `var(--ember)`, n: `var(--river)`, a: `var(--violet)` };
+let stFilter = 'all';
+function renderLedger() {
+  $('#stChips').innerHTML = [[`all`, `All`, `var(--ink)`], [`f`, `Fulfilled AD 30–70`, STC.f], [`n`, `True now`, STC.n], [`a`, `Still ahead`, STC.a]].map(([k, n, c]) => `<button class="chip" type="button" data-k="${k}" aria-pressed="${k === stFilter}" style="--c:${c}"><i></i>${n} <span class="muted" style="font-family:var(--mono);font-size:.75rem">${k === 'all' ? LEDGER.length : LEDGER.filter(r => r[0] === k).length}</span></button>`).join('');
+  $('#ledger').innerHTML = LEDGER.filter(r => stFilter === 'all' || r[0] === stFilter).map(([s, claim, sub, read, refs]) =>
+    `<article class="lrow" style="--sc:${STC[s]}"><div class="claim"><b>${esc(claim)}</b><small>${esc(sub)}</small></div><div class="read"><span>${esc(read)}</span><span class="ref">${esc(refs)}</span></div><span class="pill ${s} st">${STN[s]}</span></article>`).join('');
+}
+$('#stChips').addEventListener('click', ev => { const b = ev.target.closest('.chip'); if (!b) return; stFilter = b.dataset.k; renderLedger(); });
+$('#gospels').innerHTML = GOSPELS.map(g => `<article class="gcard" style="--gc:${g.c}"><span class="sym">${esc(g.sym)}</span><h3>${g.n}</h3><ul>${g.it.map(([r, t]) => `<li><span class="ref">${g.n} ${esc(r)}</span>${esc(t)}</li>`).join('')}</ul><p class="now"><b>Now:</b> ${esc(g.now)}</p></article>`).join('');
+
+/* ---------- reign ---------- */
+$('#compare').innerHTML = COMPARE.map(([k, ic, nw, nr, ft, fr]) => `<div class="crow"><div class="k"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${ICONS[ic]}</svg>${k}</div><div class="nw">${esc(nw)} <span class="ref">${esc(nr)}</span></div><div class="ft">${esc(ft)} <span class="ref">${esc(fr)}</span></div></div>`).join('');
+$('#steps').innerHTML = STEPS.map(([c, h, p, r]) => `<li style="--sc:${c}"><h4>${h}</h4><p>${esc(p)}</p><span class="ref">${esc(r)}</span></li>`).join('');
+$('#manner').innerHTML = MANNER.map(([c, h, p, r]) => `<div style="--c:${c}"><h4>${h}</h4><p>${esc(p)}</p><span class="ref">${esc(r)}</span></div>`).join('');
+$('#lensgrid').innerHTML = LENSINFO.map(([k, h, t, care]) => `<article class="lcard" style="--c:${LENS[k].c}"><h3>${LENS[k].n}</h3><p>${esc(h)}</p><span class="ref">${esc(t)}</span><p class="care">${esc(care)}</p></article>`).join('');
+
+/* ---------- teaching sheet ---------- */
+$('#sheetBody').innerHTML = `
+  <div><p class="label">Teaching sheet</p><h2>Seated together: the kingdom from Eden to the new creation</h2></div>
+  <div class="strip">${ERAS.map(er => `<div style="--ec:${er.c}"><h4>${er.n}</h4><span class="label">${er.span}</span><ol>${EV.filter(e => e.e === er.id).map(e => `<li>${esc(e.t)}</li>`).join('')}</ol></div>`).join('')}</div>
+  <div class="anv">
+    <div><h4 style="color:var(--ember)">Already fulfilled</h4><ul><li>The seventy weeks and the end of sacrifice</li><li>The great tribulation, AD 66–70</li><li>The Son of Man enthroned and vindicated</li><li>The old covenant heaven and earth passed</li><li>The gospel to the known world</li></ul></div>
+    <div><h4 style="color:var(--river)">True now</h4><ul><li>Christ reigns; the saints reign with him</li><li>The body is the temple and the bride</li><li>Satan bound from deceiving nations</li><li>The river heals the nations</li><li>Death pushed back under our feet</li></ul></div>
+    <div><h4 style="color:var(--violet)">Still ahead</h4><ul><li>The visible appearing of Christ</li><li>Resurrection and immortality</li><li>Death, the last enemy, destroyed</li><li>All things restored, God all in all</li><li>New heavens and new earth in fullness</li></ul></div>
+  </div>
+  <div><p class="label" style="margin-bottom:8px">Memory verses (KJV)</p><div class="mem">${MEMORY.map(([r, t]) => `<div>“${esc(t)}”<span class="ref">${esc(r)}</span></div>`).join('')}</div></div>
+  <div><p class="label" style="margin-bottom:6px">Discuss</p><ol style="margin:0;padding-left:1.2em;display:grid;gap:4px;font-size:.95rem"><li>Psalm 110 says Christ sits <i>until</i>. What is he waiting for, and how does Hebrews 10:13 answer that?</li><li>Why does it matter that Daniel 7’s Son of Man goes <i>up</i> to the Ancient of Days?</li><li>Name one way your congregation can be “leaves for the healing of the nations” this month.</li><li>How does Romans 16:20 change the way you see your own part in defeating death?</li></ol></div>`;
+
+/* ---------- routing ---------- */
+const VIEWS = ['timeline', 'maps', 'fulfilled', 'reign', 'lenses', 'sheet'];
+function route() {
+  const h = (location.hash || '').slice(1);
+  const v = VIEWS.includes(h) ? h : 'timeline';
+  VIEWS.forEach(x => { $('#v-' + x).hidden = x !== v; });
+  document.querySelectorAll('.tabs a').forEach(a => a.setAttribute('aria-current', a.getAttribute('href') === '#' + v ? 'page' : 'false'));
+  if (v === 'timeline') select(cur, true);
+}
+window.addEventListener('hashchange', () => { route(); if (location.hash) $('#v-' + ((location.hash.slice(1)) || 'timeline'))?.scrollIntoView({ block: 'start' }); });
+
+renderTrack();
+const savedMap = store('st-map'); if (savedMap && MAPS[savedMap]) mapKey = savedMap;
+renderMapChips(); drawMap(mapKey, $('#map'), true); mapFocus(null);
+renderLedger();
+// second map, rendered only for print
+const m2 = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+m2.setAttribute('viewBox', '0 0 1200 940'); m2.setAttribute('role', 'img'); m2.setAttribute('aria-label', 'Second mind map');
+$('#map2print').appendChild(m2);
+drawMap(mapKey === 'web' ? 'gospels' : 'web', m2, false);
+window.addEventListener('beforeprint', () => { $('#map2print').hidden = false; mapFocus(null); drawMap(mapKey === 'web' ? 'gospels' : 'web', m2, false); });
+window.addEventListener('afterprint', () => { $('#map2print').hidden = true; });
+route();
+</script>
