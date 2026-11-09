@@ -3,7 +3,7 @@
 <meta name="description" content="A teaching app on the reign of Christ and his body: timeline, mind maps, evidence, objections, powers and mission, Teach mode and a quiz.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,400;0,6..12,500;0,6..12,600;0,6..12,700;0,6..12,800;1,6..12,400;1,6..12,600&family=JetBrains+Mono:wght@400;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,400;0,6..12,500;0,6..12,600;0,6..12,700;0,6..12,800;1,6..12,400;1,6..12,600&family=Noto+Serif+Hebrew:wght@500;600&family=JetBrains+Mono:wght@400;600&display=swap">
 <style>
 /* Layout: a modern study app with an illuminated soul. Left rail + glass top bar (bottom tab bar on phones),
    a Home dashboard, ten views, a search palette, and a full-screen Teach mode. Gold leaf, lapis and river light
@@ -580,6 +580,167 @@ footer { margin-top: auto; }
   body { background: #fff; }
 }
 
+
+/* =================== BLESSING & CURSE =================== */
+.heb { font-family: "Noto Serif Hebrew", "SBL Hebrew", "Times New Roman", serif; direction: rtl; unicode-bidi: isolate; }
+.blgrid { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: 16px; align-items: start; }
+@media (max-width: 900px) { .blgrid { grid-template-columns: minmax(0, 1fr); } }
+.blstage { border-radius: var(--r); border: 1px solid var(--line); background: var(--surface); overflow: hidden; box-shadow: var(--shadow-sm); }
+.blstage svg { display: block; width: 100%; height: auto; }
+.blctl { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; padding: 10px 12px; border-top: 1px solid var(--line); }
+.blinfo { border-radius: var(--r); border: 1px solid var(--line); background: var(--surface); padding: 18px; display: grid; gap: 10px; align-content: start; box-shadow: var(--shadow-sm); animation: rise .4s both; }
+.blinfo h3 { font-size: 1.35rem; }
+/* tree */
+#tree .fruit { transition: transform 1.1s cubic-bezier(.5,0,.6,1.4), opacity .8s; transform-box: fill-box; }
+#tree.chase .fruit { transform: var(--fall); opacity: .45; }
+#tree .roots, #tree .spring { transition: opacity .8s; }
+#tree.chase .roots, #tree.chase .spring { opacity: .12; }
+#tree .canopy { transition: fill .8s, opacity .8s; }
+#tree.chase .canopy { opacity: .35; }
+#tree .rootflow { stroke-dasharray: 4 8; animation: flowup 1.4s linear infinite; }
+@keyframes flowup { to { stroke-dashoffset: 24; } }
+#tree.chase .rootflow { animation-play-state: paused; }
+#tree .fruit circle { animation: bob 3s ease-in-out infinite; transform-box: fill-box; transform-origin: center; }
+@keyframes bob { 50% { transform: scale(1.08); } }
+#tree.chase .fruit circle { animation: none; }
+.vs { display: grid; gap: 6px; margin-top: 14px; }
+.vsrow { display: grid; grid-template-columns: 150px minmax(0, 1fr) minmax(0, 1fr); gap: 0; border-radius: 12px; overflow: hidden; border: 1px solid var(--line); background: var(--surface); }
+.vsrow > div { padding: 10px 12px; font-size: .92rem; min-width: 0; }
+.vsrow .k { font-weight: 700; background: var(--surface-2); }
+.vsrow .a { border-left: 3px solid var(--gold); }
+.vsrow .b { border-left: 3px solid var(--line); color: var(--muted); }
+.vshead { display: grid; grid-template-columns: 150px minmax(0, 1fr) minmax(0, 1fr); padding: 0 2px; }
+.vshead span { padding: 0 12px; }
+@media (max-width: 640px) { .vsrow, .vshead { grid-template-columns: minmax(0, 1fr); } .vshead { display: none; } .vsrow .a::before { content: "The Blessing · "; font-weight: 700; color: var(--gold); } .vsrow .b::before { content: "blessings · "; font-weight: 700; } }
+/* words */
+.words { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 196px), 1fr)); gap: 12px; }
+.word > .heb, .word > span:not(.tr) { justify-self: start; }
+.word { border-radius: var(--r); border: 1px solid var(--line); background: var(--surface); padding: 16px; display: grid; gap: 8px; align-content: start; box-shadow: var(--shadow-sm); }
+.word svg { width: 100%; height: 110px; display: block; }
+.word .heb { font-size: 2rem; color: var(--wc); line-height: 1.2; }
+.word b { font-size: 1.05rem; }
+.word p { font-size: .9rem; }
+.word .tr { font-family: var(--mono); font-size: .72rem; color: var(--muted); }
+.poolw { transform-box: fill-box; transform-origin: 50% 100%; animation: fill 4s ease-in-out infinite; }
+@keyframes fill { 0% { transform: scaleY(.15); } 60%, 100% { transform: scaleY(1); } }
+.spill { animation: spill 4s ease-in-out infinite; opacity: 0; }
+@keyframes spill { 0%, 55% { opacity: 0; } 70%, 95% { opacity: 1; } 100% { opacity: 0; } }
+.beam { transform-origin: 120px 50px; animation: tilt 5s ease-in-out infinite; }
+.beam .panL { transform-origin: 50px 50px; animation: untilt 5s ease-in-out infinite; } .beam .panR { transform-origin: 190px 50px; animation: untilt 5s ease-in-out infinite; }
+@keyframes tilt { 0%, 100% { transform: rotate(-14deg); } 50% { transform: rotate(-9deg); } }
+@keyframes untilt { 0%, 100% { transform: rotate(14deg); } 50% { transform: rotate(9deg); } }
+.rope { stroke-dasharray: 260; animation: bind 4s ease-in-out infinite; }
+@keyframes bind { 0% { stroke-dashoffset: 260; } 60%, 100% { stroke-dashoffset: 0; } }
+.sprout { transform-box: fill-box; transform-origin: 50% 100%; animation: shrink 4s ease-in-out infinite; }
+@keyframes shrink { 0%, 30% { transform: scaleY(1); } 70%, 100% { transform: scaleY(.55); } }
+.wordfly { animation: fly 3.2s ease-out infinite; }
+.wordfly:nth-child(2) { animation-delay: 1s; } .wordfly:nth-child(3) { animation-delay: 2s; }
+@keyframes fly { from { transform: translate(0, 0); opacity: 0; } 15% { opacity: 1; } to { transform: translate(120px, -30px); opacity: 0; } }
+/* priestly blessing */
+.pb { display: grid; gap: 12px; justify-items: center; padding: 22px 16px; border-radius: var(--r); border: 1px solid color-mix(in srgb, var(--gold) 40%, var(--line)); background: radial-gradient(500px 220px at 50% 0%, color-mix(in srgb, var(--gold) 14%, transparent), transparent 70%), var(--surface); box-shadow: var(--shadow-sm); }
+.pbline { display: grid; gap: 4px; justify-items: center; text-align: center; border: 1px solid transparent; background: none; cursor: pointer; padding: 8px 12px; border-radius: 12px; width: 100%; max-width: 760px; }
+.pbline:hover, .pbline[aria-pressed="true"] { border-color: color-mix(in srgb, var(--gold) 50%, var(--line)); background: color-mix(in srgb, var(--gold) 7%, transparent); }
+.pbline .heb { font-size: clamp(1.3rem, 1rem + 1.4vw, 2rem); display: flex; flex-wrap: wrap; justify-content: center; gap: .1em .35em; }
+.pbline .heb span { display: inline-block; transition: opacity .5s, transform .5s, color .5s; }
+.pb.play .pbline .heb span { opacity: 0; transform: translateY(10px) scale(.9); }
+.pb.play .pbline .heb span.in { opacity: 1; transform: none; color: var(--gold); }
+.pbline .en { font-size: .95rem; color: var(--muted); }
+.pbline .ct { font-family: var(--mono); font-size: .66rem; letter-spacing: .12em; color: var(--gold); }
+/* five for five */
+.ff { display: grid; grid-template-columns: minmax(0, 1fr) 70px minmax(0, 1fr); gap: 8px; align-items: stretch; }
+.ffcol { display: grid; gap: 8px; }
+.ffcol h4 { font-size: 1rem; }
+.fft { border-radius: 12px; padding: 10px 12px; border: 1px solid var(--line); background: var(--surface); font-size: .9rem; display: grid; gap: 2px; transition: opacity .5s, background .5s, border-color .5s, transform .5s; }
+.fft.c { border-left: 4px solid var(--ember); }
+.fft.b { border-left: 4px solid var(--gold); }
+.ff.play .fft.c { opacity: 1; } .ff.play .fft.b { opacity: .2; transform: translateX(10px); }
+.ff .fft.c.hit { background: color-mix(in srgb, var(--ember) 8%, var(--surface)); opacity: .45; text-decoration: line-through; text-decoration-color: color-mix(in srgb, var(--ember) 60%, transparent); }
+.ff .fft.b.lit { opacity: 1; transform: none; background: color-mix(in srgb, var(--gold) 12%, var(--surface)); border-color: color-mix(in srgb, var(--gold) 50%, var(--line)); }
+.ffmid { display: grid; place-items: center; }
+.ffmid svg { width: 60px; height: 100%; max-height: 360px; }
+@media (max-width: 640px) { .ff { grid-template-columns: minmax(0, 1fr); } .ffmid { display: none; } }
+/* story flowchart */
+.story { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 210px), 1fr)); gap: 26px 16px; counter-reset: sn; position: relative; }
+.snode { position: relative; counter-increment: sn; border-radius: 14px; padding: 14px 14px 12px; border: 1px solid var(--line); border-top: 4px solid var(--nc); background: var(--surface); text-align: left; cursor: pointer; display: grid; gap: 4px; box-shadow: var(--shadow-sm); transition: transform .3s, box-shadow .3s, opacity .4s; }
+.snode::before { content: counter(sn); position: absolute; top: -12px; left: 12px; width: 24px; height: 24px; border-radius: 50%; display: grid; place-items: center; font-family: var(--mono); font-size: .7rem; font-weight: 700; background: var(--nc); color: var(--on-accent); }
+.snode::after { content: "→"; position: absolute; right: -15px; top: 40%; color: var(--muted); font-weight: 700; }
+.snode:last-child::after { display: none; }
+.snode b { font-size: .98rem; line-height: 1.3; }
+.snode small { font-size: .82rem; color: var(--muted); }
+.snode .tag { font-family: var(--mono); font-size: .6rem; letter-spacing: .12em; text-transform: uppercase; color: var(--nc); }
+.snode[aria-pressed="true"] { transform: translateY(-3px); box-shadow: 0 14px 30px -14px color-mix(in srgb, var(--nc) 70%, transparent); border-color: var(--nc); }
+.story.playing .snode { opacity: .35; }
+.story.playing .snode.lit { opacity: 1; }
+/* Gerizim and Ebal */
+#ge .wave { fill: none; stroke-width: 3; opacity: 0; }
+#ge .wave.go { animation: wave 1.6s ease-out forwards; }
+@keyframes wave { from { opacity: .9; r: 10; } to { opacity: 0; r: 120; } }
+#ge .amen { opacity: 0; transition: opacity .3s; font-family: var(--mono); font-size: 13px; font-weight: 700; }
+#ge .amen.go { opacity: 1; }
+#ge .lev { animation: twinkle 2s ease-in-out infinite; }
+.vbars { display: grid; gap: 8px; }
+.vbar { display: grid; grid-template-columns: 110px minmax(0, 1fr) 40px; gap: 10px; align-items: center; font-size: .9rem; }
+.vbar .t { height: 14px; border-radius: 7px; background: var(--line); overflow: hidden; }
+.vbar .t i { display: block; height: 100%; width: var(--v); background: var(--bc); border-radius: 7px; animation: grow 1.4s cubic-bezier(.2,.7,.2,1) both; }
+.vbar b { font-family: var(--mono); font-size: .8rem; text-align: right; }
+/* Jeremiah 17 tree */
+#jer .dry, #jer .lush, #jer .river, #jer .crack, #jer .jfruit { transition: opacity .2s; }
+#jer .lush { transform-box: fill-box; transform-origin: 50% 100%; }
+/* mercy dots */
+.mercy { display: grid; grid-template-columns: minmax(0, 220px) minmax(0, 1fr); gap: 18px; align-items: center; padding: 18px; border-radius: var(--r); border: 1px solid var(--line); background: var(--surface); box-shadow: var(--shadow-sm); }
+.mercy .four { display: flex; gap: 6px; }
+.mercy .four i { width: 26px; height: 26px; border-radius: 6px; background: var(--ember); }
+.dots { display: grid; grid-template-columns: repeat(50, minmax(0, 1fr)); gap: 2px; }
+.dots i { aspect-ratio: 1; border-radius: 50%; background: var(--line); transition: background .3s; }
+.dots i.on { background: var(--gold); }
+@media (max-width: 640px) { .mercy { grid-template-columns: minmax(0, 1fr); } .dots { grid-template-columns: repeat(40, minmax(0, 1fr)); } }
+/* compare */
+.bc { display: grid; gap: 8px; }
+.bcrow { display: grid; grid-template-columns: 140px minmax(0, 1fr) minmax(0, 1fr); border-radius: 12px; overflow: hidden; border: 1px solid var(--line); background: var(--surface); }
+.bcrow > div { padding: 10px 12px; font-size: .92rem; min-width: 0; }
+.bcrow .k { font-weight: 700; background: var(--surface-2); }
+.bcrow .b { background: color-mix(in srgb, var(--gold) 8%, transparent); }
+.bcrow .c { background: color-mix(in srgb, var(--ember) 7%, transparent); }
+@media (max-width: 640px) { .bcrow { grid-template-columns: minmax(0, 1fr); } .bcrow .b::before { content: "Blessing · "; font-weight: 700; color: var(--gold); } .bcrow .c::before { content: "Curse · "; font-weight: 700; color: var(--ember); } }
+/* decision flow */
+.flowq { display: grid; gap: 14px; }
+.fstep { display: grid; gap: 10px; padding: 18px; border-radius: var(--r); border: 1px solid var(--line); background: var(--surface); box-shadow: var(--shadow-sm); animation: rise .4s both; position: relative; }
+.fstep + .fstep::before { content: ""; position: absolute; left: 34px; top: -15px; width: 2px; height: 14px; background: var(--gold); }
+.fstep h3 { font-size: 1.2rem; }
+.fopts { display: flex; flex-wrap: wrap; gap: 8px; }
+.fopts button { border: 1px solid var(--line); background: var(--bg); border-radius: 12px; padding: 9px 14px; cursor: pointer; font-weight: 600; font-size: .92rem; transition: border-color .2s, background .2s; }
+.fopts button:hover { border-color: var(--gold); }
+.fopts button[aria-pressed="true"] { background: var(--gold); color: var(--on-accent); border-color: var(--gold); }
+.fstep.ans { border-left: 4px solid var(--river); }
+/* berakhah anatomy */
+.anat { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; direction: rtl; }
+.anat button { display: grid; gap: 2px; justify-items: center; border: 1px solid var(--line); background: var(--surface); border-radius: 12px; padding: 8px 12px; cursor: pointer; direction: ltr; transition: border-color .2s, transform .2s; }
+.anat button .heb { font-size: 1.5rem; color: var(--gold); }
+.anat button small { font-family: var(--mono); font-size: .66rem; color: var(--muted); }
+.anat button[aria-pressed="true"] { border-color: var(--gold); transform: translateY(-3px); box-shadow: var(--shadow-sm); }
+.ring100 { display: grid; grid-template-columns: 180px minmax(0, 1fr); gap: 18px; align-items: center; }
+.ring100 svg { width: 180px; height: 180px; }
+@media (max-width: 560px) { .ring100 { grid-template-columns: minmax(0, 1fr); justify-items: center; } }
+.bcards { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 240px), 1fr)); gap: 10px; }
+.bcard { border-radius: var(--r); border: 1px solid var(--line); background: var(--surface); padding: 14px; display: grid; gap: 6px; align-content: start; box-shadow: var(--shadow-sm); }
+.bcard .when { font-family: var(--mono); font-size: .64rem; letter-spacing: .12em; text-transform: uppercase; color: var(--gold); }
+.bcard .tl { font-style: italic; font-size: .92rem; }
+.bcard .heb { font-size: 1.15rem; }
+/* cross */
+#cx .arrowc { stroke-dasharray: 8 10; animation: flow 1.2s linear infinite reverse; }
+#cx .streamb { stroke-dasharray: 6 10; animation: flow 1.2s linear infinite; }
+#cx.paused .arrowc, #cx.paused .streamb { animation-play-state: paused; }
+/* blessing builder */
+.builder { display: grid; gap: 12px; padding: 18px; border-radius: var(--r); border: 1px solid var(--line); background: var(--surface); box-shadow: var(--shadow-sm); }
+.builder .row2 { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.builder input[type=text] { flex: 1 1 200px; min-width: 0; border: 1px solid var(--line); background: var(--bg); color: var(--ink); border-radius: 10px; padding: 9px 12px; font: inherit; }
+.builder select { border: 1px solid var(--line); background: var(--bg); color: var(--ink); border-radius: 10px; padding: 9px 12px; font: inherit; max-width: 100%; }
+.bout { font-size: 1.15rem; font-style: italic; line-height: 1.55; padding: 16px 18px; border-radius: 12px; background: color-mix(in srgb, var(--gold) 9%, transparent); border-left: 3px solid var(--gold); white-space: pre-line; }
+.lensrow { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr)); gap: 10px; }
+.lensrow div { border-top: 3px solid var(--c); padding-top: 8px; display: grid; gap: 4px; font-size: .93rem; }
+.lensrow b { color: var(--c); }
+@media print { .blctl, .fopts, .builder .row2, #bCopy { display: none !important; } .pb.play .pbline .heb span { opacity: 1; transform: none; } }
+
 /* Avenir Next type treatment */
 h1, h2, h3, h4, .brand, .topbar .crumb b, .tile h3, .pcard h3, .stat b, .counter b, .dpanel .dn, .era-h b, .pair b, .voice b, .crow .k, .wallinfo h3 { font-weight: 600; letter-spacing: -.015em; }
 .hero h1, .vhead h2, .slide h2 { font-weight: 700; letter-spacing: -.025em; }
@@ -824,6 +985,100 @@ h1, h2, h3, h4, .brand, .topbar .crumb b, .tile h3, .pcard h3, .stat b, .counter
   <div id="rdetail"></div>
   <div class="sect vhead" style="margin-top:30px"><h2>Fears, and gracious answers</h2><p>Most people who object are protecting something good. Start there.</p></div>
   <div class="fears" id="fears"></div>
+</section>
+
+<!-- BLESSING & CURSE -->
+<section class="view" id="v-blessing" hidden>
+  <div class="vhead"><h2>Blessing and curse</h2><p>What “the Blessing” is and how it differs from “blessings”, what blessing and curse mean in Hebrew and in Jewish life, and how the story runs from the first blessing in Genesis 1 to “no more curse” in Revelation 22.</p></div>
+
+  <!-- 1 -->
+  <div class="vhead"><h2>The Blessing and blessings</h2><p>The Blessing is the root: God’s own presence, favour and life, given in Christ. Blessings are the fruit it bears. Switch between seeking the root and chasing the fruit.</p></div>
+  <div class="blgrid">
+    <figure class="blstage" style="margin:0">
+      <svg id="tree" viewBox="0 0 560 430" role="img" aria-label="A tree. Its root is The Blessing, its trunk is In Christ, and its fruits are blessings. When fruit is chased without the root, the fruit falls."></svg>
+      <div class="blctl" id="treeCtl"><button class="chip" type="button" data-m="root" aria-pressed="true" style="--c:var(--gold)"><i></i>Seek the Blessing</button><button class="chip" type="button" data-m="chase" aria-pressed="false" style="--c:var(--ember)"><i></i>Chase the blessings</button></div>
+    </figure>
+    <aside class="blinfo" id="treeInfo" aria-live="polite"></aside>
+  </div>
+  <div class="vshead label" style="margin-top:16px"><span></span><span style="color:var(--gold)">The Blessing (singular)</span><span>blessings (plural)</span></div>
+  <div class="vs" id="vs"></div>
+
+  <!-- 2 -->
+  <div class="sect vhead"><h2>The words themselves</h2><p>Hebrew has one main word for blessing and three for curse. Each word carries a picture.</p></div>
+  <div class="words" id="words"></div>
+
+  <!-- 3 -->
+  <div class="sect vhead"><h2>The priestly blessing: 3, 5, 7</h2><p>Numbers 6:24–26 grows line by line: three Hebrew words, then five, then seven, ending on shalom. It is the oldest Bible text ever found, on two tiny silver scrolls from Ketef Hinnom in Jerusalem (about 600 BC). Press Play, then tap a line.</p></div>
+  <div class="pb" id="pb"></div>
+  <div class="blctl" style="border:0;padding-inline:0"><button class="btn" type="button" id="pbPlay">▶ Play</button><span class="hint">“And they shall put my name upon the children of Israel; and I will bless them” (Num 6:27).</span></div>
+  <div id="pbInfo"></div>
+
+  <!-- 4 -->
+  <div class="sect vhead"><h2>Five curses answered by five blessings</h2><p>Genesis 1–11 has five curses. In Genesis 12:1–3 the word “bless” appears five times. God answers each curse with a blessing through Abraham, “and in thee shall all families of the earth be blessed.”</p></div>
+  <div class="ff" id="ff"></div>
+  <div class="blctl" style="border:0;padding-inline:0"><button class="btn" type="button" id="ffPlay">▶ Play</button></div>
+
+  <!-- 5 -->
+  <div class="sect vhead"><h2>The story of blessing and curse</h2><p>Fifteen steps from the garden to the city. Gold is blessing, red is curse, blue is a turning point. Press Play or tap any step.</p></div>
+  <div class="blctl" style="border:0;padding:0 0 12px"><button class="btn" type="button" id="storyPlay">▶ Play the story</button><span class="legend3" style="margin:0"><span><i style="background:var(--gold)"></i>Blessing</span><span><i style="background:var(--ember)"></i>Curse</span><span><i style="background:var(--lapis)"></i>Turning point</span></span></div>
+  <div class="story" id="story"></div>
+  <div id="storyInfo" style="margin-top:14px"></div>
+
+  <!-- 6 -->
+  <div class="sect vhead"><h2>Two mountains: Gerizim and Ebal</h2><p>Moses commanded that the blessing be set on Mount Gerizim and the curse on Mount Ebal (Deut 11:29; 27). Joshua carried it out (Josh 8:30–35). The Mishnah says the Levites stood in the valley with the ark, turned toward Gerizim to speak each blessing and toward Ebal to speak each curse, and all the people answered “Amen” (Sotah 7:5).</p></div>
+  <div class="blgrid">
+    <figure class="blstage" style="margin:0">
+      <svg id="ge" viewBox="0 0 640 380" role="img" aria-label="Map: Mount Ebal to the north, Mount Gerizim to the south, the valley of Shechem between with the ark and the Levites, six tribes on each mountain."></svg>
+      <div class="blctl"><button class="btn" type="button" id="gePlay">▶ Play the ceremony</button><span class="hint" id="geStep"></span></div>
+    </figure>
+    <aside class="blinfo" id="geInfo"></aside>
+  </div>
+
+  <!-- 7 -->
+  <div class="sect vhead"><h2>Where are your roots?</h2><p>Jeremiah 17:5–8 sets the curse and the blessing side by side as two plants. Drag the slider from trust in man to trust in the LORD.</p></div>
+  <div class="blgrid">
+    <figure class="blstage" style="margin:0">
+      <svg id="jer" viewBox="0 0 520 320" role="img" aria-label="A dry shrub in the desert that becomes a fruitful tree by a river as the slider moves."></svg>
+      <div class="blctl" style="display:grid;gap:6px"><label class="label" for="jerRange">Trust in man ← → Trust in the LORD</label><input type="range" id="jerRange" min="0" max="100" value="15" style="width:100%;accent-color:var(--river);height:28px"></div>
+    </figure>
+    <aside class="blinfo" id="jerInfo" aria-live="polite"></aside>
+  </div>
+
+  <!-- 8 -->
+  <div class="sect vhead"><h2>Blessing outweighs curse</h2><p>God visits iniquity “unto the third and fourth generation” but shows mercy “unto thousands” (Exod 20:5–6). Deuteronomy 7:9 says “a thousand generations.” Press Play to see the difference.</p></div>
+  <div class="mercy"><div style="display:grid;gap:8px"><span class="label">Third and fourth generation</span><div class="four"><i></i><i></i><i></i><i></i></div><span class="label" style="margin-top:8px">A thousand generations</span><b id="mercyN" style="font-size:2rem;color:var(--gold);font-variant-numeric:tabular-nums">1000</b><button class="btn" type="button" id="mercyPlay" style="justify-self:start">▶ Play</button></div><div class="dots" id="dots" aria-hidden="true"></div></div>
+
+  <!-- 9 -->
+  <div class="sect vhead"><h2>Blessing and curse compared</h2><p>A curse is not an equal and opposite power. Like darkness to light, it is what remains where the blessing is withdrawn.</p></div>
+  <div class="bc" id="bc"></div>
+
+  <!-- 10 -->
+  <div class="sect vhead"><h2>From curse to blessing at the cross</h2><p>“Christ hath redeemed us from the curse of the law, being made a curse for us … that the blessing of Abraham might come on the Gentiles through Jesus Christ; that we might receive the promise of the Spirit through faith” (Gal 3:13–14).</p></div>
+  <figure class="blstage" style="margin:0"><svg id="cx" viewBox="0 0 760 300" role="img" aria-label="The curses of the law flow into the cross, and the blessing of Abraham flows out to the nations and the Spirit."></svg>
+    <div class="blctl"><button class="btn" type="button" id="cxPause">Pause</button><span class="hint">Deut 21:23 · Gal 3:13–14 · Acts 3:25–26 · Rev 22:3</span></div></figure>
+
+  <!-- 11 -->
+  <div class="sect vhead"><h2>Am I under a curse?</h2><p>A short flowchart for a question many people carry. Choose your answers.</p></div>
+  <div class="flowq" id="flowq"></div>
+
+  <!-- 12 -->
+  <div class="sect vhead"><h2>Blessing in Jewish life</h2><p>Jewish prayer is built on the berakhah, a short blessing that begins “Blessed are You, LORD our God, King of the universe.” Tap each word.</p></div>
+  <div class="anat" id="anat"></div>
+  <div id="anatInfo" style="margin-top:10px"></div>
+  <div class="ring100 sect">
+    <svg id="ring" viewBox="0 0 180 180" role="img" aria-label="A ring of one hundred daily blessings filling in"></svg>
+    <div style="display:grid;gap:8px"><h3 style="font-size:1.35rem">A hundred blessings a day</h3><p>Rabbi Meir taught that a person should say a hundred blessings every day (Talmud, Menachot 43b). The count comes from the morning blessings, the Amidah prayed three times (19 blessings each), the blessings around the Shema, and blessings over food, sights and news.</p><p class="muted" style="font-size:.93rem">“Whoever enjoys anything of this world without a blessing is as if he misused what is holy” (Berakhot 35a). “A person must bless for the bad just as for the good” (Mishnah Berakhot 9:5). “Blessing rests only on what is hidden from the eye” (Taanit 8b).</p><button class="btn" type="button" id="ringPlay" style="justify-self:start">▶ Count them</button></div>
+  </div>
+  <div class="bcards sect" id="bcards" style="margin-top:20px"></div>
+
+  <!-- 13 -->
+  <div class="sect vhead"><h2>The body blesses</h2><p>Jesus’ last act on earth was blessing: “he lifted up his hands, and blessed them. And … while he blessed them, he was parted from them” (Luke 24:50–51). His hands are still raised. His body is called to bless, “knowing that ye are thereunto called, that ye should inherit a blessing” (1 Pet 3:9).</p></div>
+  <div class="builder">
+    <div class="row2"><label class="label" for="bName" style="flex:none">Speak a blessing over</label><input type="text" id="bName" placeholder="a name, e.g. Sarah" aria-label="Name to bless"><select id="bWhich" aria-label="Choose a blessing"></select><button class="btn" type="button" id="bCopy">Copy</button></div>
+    <div class="bout" id="bOut" aria-live="polite"></div>
+  </div>
+  <div class="sect vhead"><h2>Blessing through the six lenses</h2></div>
+  <div class="lensrow" id="blLens"></div>
 </section>
 
 <!-- REIGN -->
@@ -1747,7 +2002,7 @@ const NAVI = {
  maps:`<circle cx="12" cy="12" r="3"/><circle cx="4" cy="5" r="2"/><circle cx="20" cy="5" r="2"/><circle cx="4" cy="19" r="2"/><circle cx="20" cy="19" r="2"/><path d="M6 6l4 4M18 6l-4 4M6 18l4-4M18 18l-4-4"/>`,
  fulfilled:`<path d="M9 11l3 3 8-8"/><path d="M20 12v7a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h9"/>`, evidence:`<path d="M6 4h11a2 2 0 0 1 0 4H6zM6 4v16h11M6 20a2 2 0 0 1 0-4"/><path d="M10 12h5"/>`,
  objections:`<path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"/><path d="M10 10a2 2 0 1 1 3 1.7c-.6.4-1 .8-1 1.3M12 16h.01"/>`,
- powers:`<path d="M13 2L4 14h7l-1 8 9-12h-7z"/>`, reign:`<path d="M3 18h18l-1.5-9-4.5 4-3-7-3 7-4.5-4z"/>`, lenses:`<circle cx="8" cy="12" r="5"/><circle cx="16" cy="12" r="5"/>`,
+ powers:`<path d="M13 2L4 14h7l-1 8 9-12h-7z"/>`, blessing:`<path d="M8 21c-2-2-3-5-3-8V7a1.5 1.5 0 0 1 3 0v4M8 11V4a1.5 1.5 0 0 1 3 0v7M16 21c2-2 3-5 3-8V7a1.5 1.5 0 0 0-3 0v4M16 11V4a1.5 1.5 0 0 0-3 0v7"/>`, reign:`<path d="M3 18h18l-1.5-9-4.5 4-3-7-3 7-4.5-4z"/>`, lenses:`<circle cx="8" cy="12" r="5"/><circle cx="16" cy="12" r="5"/>`,
  sheet:`<path d="M7 3h7l5 5v13H7z"/><path d="M14 3v5h5M10 13h6M10 17h6"/>`, more:`<circle cx="5" cy="12" r="1.5"/><circle cx="12" cy="12" r="1.5"/><circle cx="19" cy="12" r="1.5"/>`,
  search:`<circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/>`, play:`<path d="M7 4l13 8-13 8z"/>`, sunI:`<circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M5 5l1.5 1.5M17.5 17.5L19 19M5 19l1.5-1.5M17.5 6.5L19 5"/>`,
  moon:`<path d="M20 15A8 8 0 1 1 9 4a6 6 0 0 0 11 11z"/>`, auto:`<circle cx="12" cy="12" r="8"/><path d="M12 4v16" /><path d="M12 4a8 8 0 0 1 0 16z" fill="currentColor"/>`
@@ -1760,6 +2015,7 @@ const NAV = [
  [`evidence`,`Evidence`,`Study`,`var(--ember)`,`The AD 70 scene, 30 time statements, history and witnesses.`],
  [`objections`,`Objections`,`Study`,`var(--violet)`,`24 hard questions answered.`],
  [`powers`,`Powers & mission`,`Live it`,`var(--gold)`,`What the body is given, what it is sent to do, and Ephesians 3:10.`],
+ [`blessing`,`Blessing & curse`,`Live it`,`var(--gold)`,`The Blessing and blessings, Hebrew words, two mountains, the cross and Jewish practice.`],
  [`reign`,`Reigning now`,`Live it`,`var(--river)`,`Now and in the fullness, and death destroyed through the body.`],
  [`lenses`,`Six lenses`,`Live it`,`var(--l-hu)`,`The six perspectives and where others differ.`],
  [`sheet`,`Teaching sheet`,`Live it`,`var(--lapis)`,`A one-page handout and a quiz.`]
@@ -1768,7 +2024,7 @@ const nav = k => `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" str
 let seen = {}; try { seen = JSON.parse(store('st-seen') || '{}'); } catch (e) {}
 function renderShell() {
   let g = '', h = `<a class="brand" href="#home"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M6 15h20l-2-8-4 4-4-6-4 6-4-4z" fill="none" stroke="var(--gold)" stroke-width="2" stroke-linejoin="round"/><path d="M16 17v6c0 3-3 4-6 4M16 23c0 3 3 4 6 4" fill="none" stroke="var(--river)" stroke-width="2" stroke-linecap="round"/></svg>Seated Together</a>`;
-  NAV.forEach(([id, n, grp]) => { if (grp !== g) { g = grp; h += `<div class="grp">${grp}</div>`; } h += `<a class="navlink" href="#${id}" data-v="${id}">${nav(id)}${n}${id === 'powers' ? '<span class="new">NEW</span>' : `<span class="seen" data-s="${id}"></span>`}</a>`; });
+  NAV.forEach(([id, n, grp]) => { if (grp !== g) { g = grp; h += `<div class="grp">${grp}</div>`; } h += `<a class="navlink" href="#${id}" data-v="${id}">${nav(id)}${n}${id === 'blessing' ? '<span class="new">NEW</span>' : `<span class="seen" data-s="${id}"></span>`}</a>`; });
   h += `<div class="rail-foot"><span class="label" id="progLbl"></span><div class="prog"><i id="progBar"></i></div></div>`;
   $('#rail').innerHTML = h;
   $('#tabbar').innerHTML = ['home', 'timeline', 'maps', 'powers'].map(id => `<a href="#${id}" data-v="${id}">${nav(id)}${NAV.find(x => x[0] === id)[1].split(' ')[0]}</a>`).join('') + `<button type="button" id="moreBtn">${nav('more')}More</button>`;
@@ -1826,6 +2082,9 @@ function buildIndex() {
   OBJ.forEach((o, i) => I.push({ g: 'Objections', t: o[1], s: o[4], c: LENS[o[0]].c, go: () => go('objections', () => { $('#objq').value = ''; renderObj(); const d = document.querySelectorAll('.obj')[i]; d.open = true; flash(d); }) }));
   PAIRS.forEach((p, i) => I.push({ g: 'Evidence', t: p[1], s: `${p[0]} · ${p[3]}`, c: 'var(--ember)', go: () => go('evidence', () => flash(document.querySelectorAll('.pair')[i])) }));
   Object.entries(MAPS).forEach(([k, m]) => m.br.forEach(b => b.lv.forEach(l => I.push({ g: 'Mind maps', t: l[1], s: l[2], c: b.c, go: () => go('maps', () => { if (mapKey !== k) { mapKey = k; renderMapChips(); drawMap(k, $('#map'), true); resetZoom(); } mapFocus({ leaf: l[0] }); flash($('#panel')); }) }))));
+  STORY.forEach((st, i) => I.push({ g: 'Blessing & curse', t: st[1], s: st[2], c: st[0] === 'c' ? 'var(--ember)' : st[0] === 'b' ? 'var(--gold)' : 'var(--lapis)', go: () => go('blessing', () => { document.querySelectorAll('.snode')[i].click(); flash($('#storyInfo .blinfo')); }) }));
+  WORDS2.forEach(w => I.push({ g: 'Blessing & curse', t: `${w[2]} (${w[1]})`, s: w[5], c: w[3], go: () => go('blessing', () => flash($('#words'))) }));
+  I.push({ g: 'Blessing & curse', t: 'Priestly blessing (Numbers 6:24–26)', s: 'The LORD bless thee, and keep thee', c: 'var(--gold)', go: () => go('blessing', () => flash($('#pb'))) }, { g: 'Blessing & curse', t: 'Mount Gerizim and Mount Ebal', s: 'Deut 11:29; 27; Josh 8:30–35', c: 'var(--gold)', go: () => go('blessing', () => flash($('#ge').closest('.blgrid'))) }, { g: 'Blessing & curse', t: 'Am I under a curse?', s: 'Gal 3:13; Prov 26:2; Ezek 18:20', c: 'var(--river)', go: () => go('blessing', () => flash($('#flowq'))) });
   DISPLAYS.forEach((d, i) => I.push({ g: 'Powers', t: d[0], s: d[2], c: 'var(--gold)', go: () => go('powers', () => { document.querySelectorAll('#dtabs button')[i].click(); flash($('#dpanel')); }) }));
   return I;
 }
@@ -1860,7 +2119,7 @@ const DECKS = {
 };
 let tDeck = 'timeline', tI = 0, tS = [];
 function openTeach(deck) {
-  tDeck = deck || ({ powers: 'powers', fulfilled: 'fulfilled', objections: 'objections' }[(location.hash || '').slice(1)] || 'timeline');
+  tDeck = deck || ({ powers: 'powers', fulfilled: 'fulfilled', objections: 'objections', blessing: 'blessing' }[(location.hash || '').slice(1)] || 'timeline');
   tS = DECKS[tDeck].slides(); tI = 0;
   $('#overlay').innerHTML = `<div class="teach" id="teach" role="dialog" aria-label="Teach mode"><div class="teach-top">${Object.entries(DECKS).map(([k, d]) => `<button class="chip" type="button" data-d="${k}" aria-pressed="${k === tDeck}" style="--c:var(--gold)"><i></i>${d.n}</button>`).join('')}<button class="btn x" type="button" id="tclose">Close (Esc)</button></div><div id="tslide" style="display:grid;min-height:0"></div><div class="teach-bot"><button class="btn" type="button" id="tprev">←</button><div class="prog"><i id="tprog"></i></div><span class="label" id="tcount"></span><button class="btn" type="button" id="tnext">→</button></div></div>`;
   document.documentElement.requestFullscreen?.().catch(() => {});
@@ -1895,6 +2154,261 @@ function mapTools() {
   svg.addEventListener('wheel', e => { if (!(e.ctrlKey || e.metaKey)) return; e.preventDefault(); zoomBy(e.deltaY < 0 ? 1.15 : 1 / 1.15); }, { passive: false });
 }
 
+/* =================== BLESSING & CURSE =================== */
+const FRUITS = [
+ [`Children`,`Ps 127:3`,190,145],[`Health`,`Exod 23:25`,250,82],[`Provision`,`Deut 28:5`,332,78],[`Peace`,`Num 6:26`,388,140],
+ [`Home`,`Deut 28:8`,215,205],[`Rain`,`Deut 28:12`,298,165],[`Honour`,`Prov 22:4`,362,205],[`Wisdom`,`Jas 1:5`,150,95]
+];
+const VS = [
+ [`Number`,`Singular, with “the”: “there the LORD commanded the blessing” (Ps 133:3; Prov 10:22; Gal 3:14)`,`Plural: “all these blessings shall come on thee” (Deut 28:2)`],
+ [`What it is`,`God’s own presence, favour and life`,`The gifts that flow from it: family, health, provision, peace`],
+ [`Where found`,`In Christ, given once and fully: “all spiritual blessings in heavenly places” (Eph 1:3)`,`Day by day: he “daily loadeth us with benefits” (Ps 68:19)`],
+ [`How it comes`,`By promise and faith, as Abraham’s heirs (Gal 3:9, 14)`,`As fruit, in its season (Ps 1:3)`],
+ [`Can it be lost?`,`“He hath blessed; and I cannot reverse it” (Num 23:20)`,`They can be misused, lost, or chased as idols`],
+ [`What you become`,`A blessing yourself: “thou shalt be a blessing” (Gen 12:2)`,`A receiver of good things`],
+ [`Its goal`,`“Life for evermore” (Ps 133:3) and all families blessed`,`Thanksgiving that points back to the Giver (Deut 8:10–18)`]
+];
+const WORDS2 = [
+ [`ברך`,`bārak · berekh, knee · berekhah, pool`,`To bless`,`var(--gold)`,`pool`,`Jewish teachers link the root to berekh, the knee, and berekhah, a pool. Blessing is a giver bending low to give, and a pool filled until it overflows: “my cup runneth over” (Ps 23:5). Scholars debate whether these senses share one origin, but the pictures are old and well loved.`],
+ [`כבד · קלל`,`kāvēd, heavy · qālal, light`,`Weight and lightness`,`var(--lapis)`,`scale`,`Qalal, to make light, is the curse of contempt: treating someone as worthless. Its opposite is kavod: weight, honour, glory. “Honour (kabbed) thy father” (Exod 20:12) and “Cursed be he that setteth light by (maqleh) his father” (Deut 27:16) are the same pair. Genesis 12:3 uses qalal for whoever curses Abraham.`],
+ [`ארר`,`ārar`,`To bind, to cut off`,`var(--ember)`,`rope`,`The curse that binds and hems in, cutting off from blessing. The first curses fall on the serpent and the ground, not on Adam and Eve (Gen 3:14, 17). The ground is bound, so its fruit comes with thorns and sweat.`],
+ [`אלה`,`ālāh`,`The oath-curse`,`var(--violet)`,`scroll`,`The curse attached to a covenant oath, falling on whoever breaks it: “the curse is poured upon us, and the oath that is written in the law of Moses” (Dan 9:11; Deut 29:12–21).`],
+ [`εὐλογία · κατάρα`,`eulogia · makarios · katara`,`In the Greek New Testament`,`var(--river)`,`speech`,`Eulogia is literally a “good word”. Makarios is the deep, flourishing happiness Jesus pronounces in the Beatitudes. Katara is a word spoken against: the curse Christ became for us (Gal 3:13).`]
+];
+const PB = [
+ [[`יְבָרֶכְךָ`,`יְהוָה`,`וְיִשְׁמְרֶךָ`],`The LORD bless thee, and keep thee`,`Provision and protection`,`Rashi, following the Sifrei, reads it as: may your possessions be blessed, and may he keep them from anyone who would take them. Blessing begins with daily needs.`],
+ [[`יָאֵר`,`יְהוָה`,`פָּנָיו`,`אֵלֶיךָ`,`וִיחֻנֶּךָּ`],`The LORD make his face shine upon thee, and be gracious unto thee`,`Favour and relationship`,`A shining face is a delighted face. Grace (chen) is favour you did not earn. Blessing grows from having things to being seen and loved.`],
+ [[`יִשָּׂא`,`יְהוָה`,`פָּנָיו`,`אֵלֶיךָ`,`וְיָשֵׂם`,`לְךָ`,`שָׁלוֹם`],`The LORD lift up his countenance upon thee, and give thee peace`,`Wholeness`,`To lift the face toward someone is to give full attention and acceptance. The blessing ends on shalom: nothing missing, nothing broken. In synagogues the kohanim still raise their hands to pronounce it.`]
+];
+const FFC = [[`Gen 3:14`,`The serpent cursed`],[`Gen 3:17`,`The ground cursed “for thy sake”`],[`Gen 4:11`,`Cain cursed from the earth`],[`Gen 5:29`,`“The ground which the LORD hath cursed”`],[`Gen 9:25`,`Canaan cursed`]];
+const FFB = [[`Gen 12:2`,`“I will bless thee”`],[`Gen 12:2`,`“Thou shalt be a blessing”`],[`Gen 12:3`,`“I will bless them …”`],[`Gen 12:3`,`“… that bless thee”`],[`Gen 12:3`,`“In thee shall all families of the earth be blessed”`]];
+const STORY = [
+ [`b`,`The first word to humanity is blessing`,`Gen 1:22, 28; 2:3`,`God blesses the living creatures, then humanity (“be fruitful, and multiply, and replenish the earth, and subdue it”), then the seventh day. Blessing is life, people and time.`],
+ [`c`,`The curse falls on the serpent and the ground`,`Gen 3:14–19`,`Not on Adam and Eve themselves. The ground is cursed “for thy sake”, so work becomes toil. The way to the tree of life is guarded.`],
+ [`c`,`The curse spreads`,`Gen 4:11; 5:29; 9:25`,`Cain, the ground, Canaan: five curses in Genesis 1–11, ending in the scattering at Babel.`],
+ [`b`,`Five blessings answer five curses`,`Gen 12:1–3`,`Abraham is blessed to be a blessing, and all the families of the earth will be blessed in him.`],
+ [`b`,`Fathers speak the blessing`,`Gen 27; 48–49; Heb 11:20–21`,`Isaac blesses Jacob, Jacob blesses his sons and Joseph’s sons. Esau sells his birthright and later seeks the blessing with tears (Heb 12:16–17).`],
+ [`x`,`The priests put God’s name on the people`,`Num 6:22–27`,`“And they shall put my name upon the children of Israel; and I will bless them.” Blessing is God’s name placed on his people.`],
+ [`x`,`Balaam cannot curse what God has blessed`,`Num 22–24; 23:8, 20; Deut 23:5`,`“How shall I curse, whom God hath not cursed?” God “turned the curse into a blessing unto thee, because the LORD thy God loved thee.”`],
+ [`x`,`Two mountains: choose life`,`Deut 11:26–29; 27–30`,`“I have set before you life and death, blessing and cursing: therefore choose life” (Deut 30:19). Gerizim and Ebal make the choice visible.`],
+ [`c`,`The Old Testament closes on “curse”`,`Mal 4:6`,`In the Christian order of books, the last word of the Old Testament is “curse”: “lest I come and smite the earth with a curse.”`],
+ [`b`,`Jesus opens with blessing`,`Matt 5:3–12`,`“Blessed are the poor in spirit …” His first public teaching is nine blessings on the unlikely.`],
+ [`x`,`Christ becomes the curse`,`Gal 3:13; Deut 21:23`,`“Cursed is every one that hangeth on a tree.” He takes the curse of the law into himself.`],
+ [`b`,`Abraham’s blessing flows to the nations`,`Gal 3:14; Acts 3:25–26; Eph 1:3`,`The blessing of Abraham comes on the Gentiles, with the promise of the Spirit. God raised up his Son and “sent him to bless you.”`],
+ [`c`,`AD 70: the covenant curses fall on the old order`,`Deut 28:49–57; Luke 21:22; Heb 6:7–8`,`A nation from far as swift as the eagle, the siege, the famine: “these be the days of vengeance, that all things which are written may be fulfilled.”`],
+ [`b`,`The body blesses`,`Luke 24:50–51; Rom 12:14; 1 Pet 3:9`,`Jesus leaves with his hands raised in blessing. His people bless and curse not, “that ye should inherit a blessing.”`],
+ [`b`,`No more curse`,`Rev 22:3; Ezek 47:12`,`“And there shall be no more curse: but the throne of God and of the Lamb shall be in it; and his servants shall serve him.”`]
+];
+const CEREMONY = [
+ [`Deut 27:15`,`Blessed is the man who makes no graven or molten image.`,`Cursed be the man that maketh any graven or molten image.`],
+ [`Deut 27:16`,`Blessed is he who honours his father and his mother.`,`Cursed be he that setteth light by his father or his mother. (“Setteth light” is the qalal word: to treat as worthless.)`],
+ [`Deut 27:18`,`Blessed is he who guides the blind on the way.`,`Cursed be he that maketh the blind to wander out of the way.`],
+ [`Deut 27:19`,`Blessed is he who does justice for the stranger, the fatherless and the widow.`,`Cursed be he that perverteth the judgment of the stranger, fatherless, and widow.`],
+ [`Deut 27:26`,`Blessed is he who keeps all the words of this law.`,`Cursed be he that confirmeth not all the words of this law to do them. (Paul quotes this in Galatians 3:10, then says Christ became the curse.)`]
+];
+const BC = [
+ [`Source`,`God’s presence and word: “The LORD bless thee” (Num 6:24)`,`Separation: “I will hide my face from them” (Deut 31:17)`],
+ [`Nature`,`Life: “the blessing, even life for evermore” (Ps 133:3)`,`Death: “I have set before you life and death” (Deut 30:19)`],
+ [`Movement`,`Flows out and increases, like a spring (Gen 12:2; Ezek 47)`,`Binds and shrinks, like ground that yields thorns (Gen 3:17–18)`],
+ [`Effect`,`Fruitfulness and rest (Gen 1:28; Prov 10:22)`,`Futility: “ye have sown much, and bring in little” (Hag 1:6)`],
+ [`Words`,`Eulogia: a good word spoken`,`Katara: a word spoken against`],
+ [`Weight`,`Kavod: honour, weight, glory`,`Qalal: making light, treating as worthless`],
+ [`Reach`,`Mercy to a thousand generations (Exod 20:6)`,`To the third and fourth (Exod 20:5)`],
+ [`Power`,`No one can reverse it (Num 23:20)`,`“The curse causeless shall not come” (Prov 26:2)`],
+ [`End`,`All families blessed (Gen 12:3)`,`Removed: “there shall be no more curse” (Rev 22:3)`]
+];
+const ANAT = [
+ [`בָּרוּךְ`,`Baruch`,`Blessed`,`The word that opens every berakhah. The medieval rabbi Rashba read it as calling God the source of all blessing, a spring (berekhah) that never runs dry. Saying it is not giving God something he lacks. It acknowledges where everything comes from.`],
+ [`אַתָּה`,`Atah`,`are You`,`Direct and personal: the blessing speaks to God face to face, not about him.`],
+ [`יְהוָה`,`Adonai`,`LORD`,`The divine Name, YHWH, which Jews read aloud as Adonai out of reverence. The God of the covenant.`],
+ [`אֱלֹהֵינוּ`,`Eloheinu`,`our God`,`Personal and shared: “our”. Every blessing is said as part of a people.`],
+ [`מֶלֶךְ`,`Melech`,`King`,`The one who rules. Blessing him over bread or rain confesses that he reigns over ordinary things.`],
+ [`הָעוֹלָם`,`ha-olam`,`of the universe`,`Olam means world and also eternity. The root is linked with “hidden”. The King of everything, seen and unseen.`]
+];
+const BCARDS = [
+ [`Eating bread`,`הַמּוֹצִיא לֶחֶם מִן הָאָרֶץ`,`ha-motzi lechem min ha-aretz`,`who brings forth bread from the earth`],
+ [`Over wine`,`בּוֹרֵא פְּרִי הַגָּפֶן`,`borei pri ha-gafen`,`who creates the fruit of the vine`],
+ [`New things and seasons`,`שֶׁהֶחֱיָנוּ וְקִיְּמָנוּ וְהִגִּיעָנוּ לַזְּמַן הַזֶּה`,`shehecheyanu`,`who has kept us alive, sustained us and brought us to this season`],
+ [`Seeing a rainbow`,`זוֹכֵר הַבְּרִית`,`zocher ha-brit`,`who remembers the covenant (Gen 9:16)`],
+ [`Hearing thunder`,`שֶׁכֹּחוֹ וּגְבוּרָתוֹ מָלֵא עוֹלָם`,`shekocho u-gevurato malei olam`,`whose strength and might fill the world`],
+ [`Good news`,`הַטּוֹב וְהַמֵּטִיב`,`ha-tov ve-ha-meitiv`,`who is good and does good`],
+ [`Hard news`,`דַּיַּן הָאֱמֶת`,`dayan ha-emet`,`the true Judge. Blessing is said even in loss.`],
+ [`On waking`,`מוֹדֶה אֲנִי`,`modeh ani`,`“I thank you, living and enduring King, for returning my soul to me.”`]
+];
+const BUILD = [
+ [`Numbers 6:24–26`,`The LORD bless thee{N} and keep thee:\nThe LORD make his face shine upon thee, and be gracious unto thee:\nThe LORD lift up his countenance upon thee, and give thee peace.`],
+ [`2 Corinthians 13:14`,`The grace of the Lord Jesus Christ, and the love of God, and the communion of the Holy Ghost, be with thee{E}. Amen.`],
+ [`Romans 15:13 (adapted)`,`Now the God of hope fill thee{N} with all joy and peace in believing, that thou mayest abound in hope, through the power of the Holy Ghost.`],
+ [`Ephesians 3:16–19 (adapted)`,`May the Father grant thee{N} according to the riches of his glory, to be strengthened with might by his Spirit in the inner man; that Christ may dwell in thy heart by faith; that thou, being rooted and grounded in love, mayest know the love of Christ, which passeth knowledge, and be filled with all the fulness of God.`],
+ [`3 John 2`,`Beloved{B}, I wish above all things that thou mayest prosper and be in health, even as thy soul prospereth.`],
+ [`Hebrews 13:20–21 (adapted)`,`Now the God of peace, that brought again from the dead our Lord Jesus, make thee{N} perfect in every good work to do his will, working in thee that which is wellpleasing in his sight, through Jesus Christ; to whom be glory for ever and ever. Amen.`],
+ [`Jude 24–25 (adapted)`,`Now unto him that is able to keep thee{N} from falling, and to present thee faultless before the presence of his glory with exceeding joy, to the only wise God our Saviour, be glory and majesty, dominion and power, both now and ever. Amen.`]
+];
+const BLLENS = [
+ [`pm`,`Abraham’s blessing spreads until all families are blessed: “men shall be blessed in him: all nations shall call him blessed” (Ps 72:17).`],
+ [`pp`,`The covenant curses of Deuteronomy 28 fell on the old order in AD 70, “that all things which are written may be fulfilled” (Luke 21:22). In Christ there is no curse left (Rom 8:1).`],
+ [`un`,`In Christ every spiritual blessing is already given (Eph 1:3). Blessing is not earned. We wake up to it.`],
+ [`li`,`The Blessing is life itself, “even life for evermore” (Ps 133:3). The curse is death, and Christ abolished it (2 Tim 1:10).`],
+ [`he`,`Blessing comes down to earth: rain, harvest, families, cities. The final city has “no more curse” (Rev 22:3).`],
+ [`hu`,`“In thy seed shall all the kindreds of the earth be blessed” (Acts 3:25). Even a curse can be turned into blessing (Deut 23:5).`]
+];
+
+function renderBlessing() {
+  /* tree */
+  let t = `<rect x="0" y="300" width="560" height="130" fill="color-mix(in srgb, var(--gold) 12%, var(--surface))"/><path d="M0 300 H560" stroke="var(--line)" stroke-width="2"/>`;
+  t += `<g class="roots" stroke="color-mix(in srgb, var(--ink) 45%, var(--gold))" stroke-width="4" fill="none" stroke-linecap="round"><path d="M280 300 C 270 330, 230 350, 205 392"/><path d="M280 300 C 290 330, 330 352, 356 392"/><path d="M280 300 V 380"/><path d="M276 320 C 250 330, 200 330, 160 352"/><path d="M284 320 C 310 330, 360 330, 400 352"/></g>`;
+  t += `<g class="spring"><ellipse cx="280" cy="398" rx="96" ry="20" fill="color-mix(in srgb, var(--river) 30%, transparent)" stroke="var(--river)" stroke-width="1.5"/><text x="280" y="402" text-anchor="middle" style="font-family:var(--display);font-weight:700" font-size="15" fill="var(--ink)">THE BLESSING</text><text x="280" y="424" text-anchor="middle" style="font-family:var(--mono)" font-size="9.5" fill="var(--muted)">GOD’S PRESENCE · PS 133:3 · GAL 3:14</text></g>`;
+  t += `<g stroke="var(--river)" stroke-width="2.5" fill="none" stroke-linecap="round"><path class="rootflow" d="M215 385 C 235 350, 275 330, 280 300 V 200"/><path class="rootflow" d="M345 385 C 325 350, 285 330, 280 300"/></g>`;
+  t += `<path d="M266 300 L271 192 H289 L294 300 Z" fill="color-mix(in srgb, var(--ink) 40%, var(--gold))"/><text x="280" y="268" text-anchor="middle" transform="rotate(-90 280 268)" style="font-family:var(--mono)" font-size="9" fill="var(--surface)" letter-spacing="2">IN CHRIST</text>`;
+  t += `<g class="canopy" fill="color-mix(in srgb, var(--river) 22%, var(--surface))" stroke="color-mix(in srgb, var(--river) 45%, transparent)"><circle cx="280" cy="125" r="108"/><circle cx="190" cy="150" r="66"/><circle cx="370" cy="150" r="66"/><circle cx="280" cy="62" r="56"/></g>`;
+  t += FRUITS.map(([n, r, x, y], i) => { const dx = ((i * 37) % 60) - 30, dy = 288 - y; return `<g class="fruit" style="--fall: translate(${dx}px, ${dy}px) rotate(${(i % 2 ? 1 : -1) * 70}deg); transition-delay:${i * 70}ms"><circle cx="${x}" cy="${y}" r="15" fill="var(--gold)" stroke="color-mix(in srgb, var(--gold) 60%, var(--ink))" stroke-width="1.5"/><text x="${x}" y="${y + 29}" text-anchor="middle" font-size="11" font-weight="700" fill="var(--ink)">${n}</text></g>`; }).join('');
+  $('#tree').innerHTML = t;
+  const treeInfo = m => { $('#treeInfo').innerHTML = m === 'root'
+    ? `<span class="label" style="color:var(--gold)">Seek the root</span><h3>The Blessing bears blessings</h3><p>“Seek ye first the kingdom of God … and all these things shall be added unto you” (Matt 6:33). “The blessing of the LORD, it maketh rich, and he addeth no sorrow with it” (Prov 10:22).</p><p>When Joseph was in Potiphar’s house, “the blessing of the LORD was upon all that he had” (Gen 39:5). The Blessing rested on a person, and things flourished around him.</p><span class="ref">Matt 6:33 · Prov 10:22 · Gen 39:5 · Eph 1:3</span>`
+    : `<span class="label" style="color:var(--ember)">Chase the fruit</span><h3>Blessings without the Blessing fall</h3><p>Esau sold his birthright for one meal. Later “he sought it carefully with tears” and found no way back (Heb 12:16–17).</p><p>“Ye have sown much, and bring in little … he that earneth wages earneth wages to put it into a bag with holes” (Hag 1:6). “A man’s life consisteth not in the abundance of the things which he possesseth” (Luke 12:15).</p><span class="ref">Heb 12:16–17 · Hag 1:6–9 · Luke 12:15</span>`; };
+  $('#treeCtl').onclick = ev => { const b = ev.target.closest('.chip'); if (!b) return; document.querySelectorAll('#treeCtl .chip').forEach(c => c.setAttribute('aria-pressed', c === b ? 'true' : 'false')); $('#tree').classList.toggle('chase', b.dataset.m === 'chase'); treeInfo(b.dataset.m); };
+  treeInfo('root');
+  $('#vs').innerHTML = VS.map(([k, a, b]) => `<div class="vsrow"><div class="k">${k}</div><div class="a">${esc(a)}</div><div class="b">${esc(b)}</div></div>`).join('');
+
+  /* words */
+  const WG = {
+    pool: `<path d="M40 40 v48 q0 12 12 12 h136 q12 0 12 -12 v-48" fill="none" stroke="var(--ink)" stroke-width="2.5"/><rect class="poolw" x="43" y="42" width="154" height="56" rx="8" fill="color-mix(in srgb, var(--river) 55%, transparent)"/><g class="spill" fill="var(--river)"><path d="M36 40 q-6 14 0 22 q6 -8 0 -22z"/><path d="M204 40 q6 14 0 22 q-6 -8 0 -22z"/></g><path d="M120 6 v26" stroke="var(--gold)" stroke-width="3" stroke-linecap="round" stroke-dasharray="4 5" class="flow"/>`,
+    scale: `<path d="M120 50 L104 104 H136 Z" fill="var(--surface-2)" stroke="var(--ink)" stroke-width="1.5"/><g class="beam"><path d="M50 50 H190" stroke="var(--ink)" stroke-width="3" stroke-linecap="round"/><g class="panL"><path d="M50 50 V70" stroke="var(--ink)"/><path d="M28 70 h44 q-4 12 -22 12 q-18 0 -22 -12z" fill="var(--surface-2)" stroke="var(--ink)"/><rect x="38" y="56" width="24" height="14" rx="2" fill="var(--gold)"/><text x="50" y="98" text-anchor="middle" font-size="10" fill="var(--gold)" font-weight="700">KAVOD</text></g><g class="panR"><path d="M190 50 V70" stroke="var(--ink)"/><path d="M168 70 h44 q-4 12 -22 12 q-18 0 -22 -12z" fill="var(--surface-2)" stroke="var(--ink)"/><path d="M182 68 q8 -16 18 -12 q-6 8 -18 12z" fill="var(--muted)"/><text x="190" y="98" text-anchor="middle" font-size="10" fill="var(--ember)" font-weight="700">QALAL</text></g></g>`,
+    rope: `<path d="M20 102 H220" stroke="var(--line)" stroke-width="2"/><g class="sprout"><path d="M120 102 V30" stroke="var(--river)" stroke-width="4" stroke-linecap="round"/><path d="M120 50 q-26 -10 -30 -26 q24 2 30 26z M120 40 q24 -12 28 -28 q-22 2 -28 28z" fill="var(--river)"/></g><path class="rope" d="M100 96 C 145 92, 145 84, 100 80 C 145 76, 145 68, 100 64 C 145 60, 145 52, 100 48 C 145 44, 145 36, 104 34" fill="none" stroke="var(--ember)" stroke-width="3" stroke-linecap="round"/>`,
+    scroll: `<rect x="62" y="16" width="116" height="80" rx="6" fill="var(--surface-2)" stroke="var(--ink)" stroke-width="1.5"/><g stroke="var(--muted)" stroke-width="2" stroke-linecap="round"><path d="M76 34 H164M76 46 H164M76 58 H140"/></g><circle class="glow" cx="160" cy="80" r="13" fill="var(--violet)"/><path d="M154 80 l4 4 8 -8" stroke="#fff" stroke-width="2.5" fill="none"/>`,
+    speech: `<circle cx="46" cy="58" r="26" fill="var(--surface-2)" stroke="var(--ink)" stroke-width="1.5"/><path d="M66 66 q6 2 10 -2" stroke="var(--ink)" stroke-width="2" fill="none"/><g style="font-family:var(--body);font-weight:700" font-size="14"><text class="wordfly" x="80" y="62" fill="var(--gold)">εὐλογία</text><text class="wordfly" x="80" y="62" fill="var(--river)">μακάριος</text><text class="wordfly" x="80" y="62" fill="var(--ember)">κατάρα</text></g>`
+  };
+  $('#words').innerHTML = WORDS2.map(([h, tr, n, c, g, p]) => `<article class="word" style="--wc:${c}"><svg viewBox="0 0 240 110" aria-hidden="true">${WG[g]}</svg><span class="${/[α-ω]/.test(h) ? '' : 'heb'}" style="font-size:${/[α-ω]/.test(h) ? '1.5rem' : '2rem'};color:${c};font-weight:600">${h}</span><span class="tr">${esc(tr)}</span><b>${esc(n)}</b><p>${esc(p)}</p></article>`).join('');
+
+  /* priestly blessing */
+  const pbInfo = i => { document.querySelectorAll('.pbline').forEach((b, k) => b.setAttribute('aria-pressed', k === i ? 'true' : 'false')); const [, en, h, x] = PB[i]; $('#pbInfo').innerHTML = `<div class="blinfo" style="margin-top:10px"><span class="label">Line ${i + 1} · ${PB[i][0].length} Hebrew words</span><h3>${esc(h)}</h3><p><i>“${esc(en)}.”</i></p><p>${esc(x)}</p></div>`; };
+  $('#pb').innerHTML = PB.map(([w, en], i) => `<button class="pbline" type="button" data-i="${i}"><span class="ct">${w.length} WORDS</span><span class="heb" lang="he">${w.map(x => `<span>${x}</span>`).join('')}</span><span class="en">${esc(en)}</span></button>`).join('');
+  $('#pb').onclick = ev => { const b = ev.target.closest('.pbline'); if (b) pbInfo(+b.dataset.i); };
+  pbInfo(0);
+  $('#pbPlay').onclick = () => { const pb = $('#pb'); const spans = [...pb.querySelectorAll('.heb span')]; spans.forEach(s => s.classList.remove('in')); pb.classList.add('play'); spans.forEach((s, i) => setTimeout(() => { s.classList.add('in'); const line = +s.closest('.pbline').dataset.i; pbInfo(line); if (i === spans.length - 1) setTimeout(() => { pb.classList.remove('play'); spans.forEach(x => x.classList.remove('in')); }, 1800); }, 350 + i * 380)); };
+
+  /* five for five */
+  $('#ff').innerHTML = `<div class="ffcol"><h4 style="color:var(--ember)">Genesis 1–11: five curses</h4>${FFC.map(([r, t]) => `<div class="fft c"><span class="ref" style="color:var(--ember)">${r}</span>${esc(t)}</div>`).join('')}</div><div class="ffmid"><svg viewBox="0 0 60 300" aria-hidden="true">${[0, 1, 2, 3, 4].map(i => `<path class="flow" d="M4 ${50 + i * 52} H52" stroke="var(--gold)" stroke-width="2.5" stroke-dasharray="4 6"/><path d="M46 ${44 + i * 52} l8 6 -8 6" fill="none" stroke="var(--gold)" stroke-width="2.5"/>`).join('')}</svg></div><div class="ffcol"><h4 style="color:var(--gold)">Genesis 12:1–3: five blessings</h4>${FFB.map(([r, t]) => `<div class="fft b lit"><span class="ref">${r}</span>${esc(t)}</div>`).join('')}</div>`;
+  $('#ffPlay').onclick = () => { const ff = $('#ff'); const c = ff.querySelectorAll('.fft.c'), b = ff.querySelectorAll('.fft.b'); c.forEach(x => x.classList.remove('hit')); b.forEach(x => x.classList.remove('lit')); ff.classList.add('play'); [0, 1, 2, 3, 4].forEach(i => setTimeout(() => { c[i].classList.add('hit'); b[i].classList.add('lit'); if (i === 4) setTimeout(() => ff.classList.remove('play'), 1500); }, 500 + i * 800)); };
+
+  /* story */
+  const SC = { b: 'var(--gold)', c: 'var(--ember)', x: 'var(--lapis)' }, SN = { b: 'Blessing', c: 'Curse', x: 'Turning point' };
+  const storyInfo = i => { document.querySelectorAll('.snode').forEach((n, k) => n.setAttribute('aria-pressed', k === i ? 'true' : 'false')); const [ty, t, r, x] = STORY[i]; $('#storyInfo').innerHTML = `<div class="blinfo" style="border-left:4px solid ${SC[ty]}"><span class="label" style="color:${SC[ty]}">Step ${i + 1} of ${STORY.length} · ${SN[ty]}</span><h3>${esc(t)}</h3><p>${esc(x)}</p><span class="ref">${esc(r)}</span></div>`; };
+  $('#story').innerHTML = STORY.map(([ty, t, r], i) => `<button class="snode" type="button" style="--nc:${SC[ty]}" data-i="${i}"><span class="tag">${SN[ty]}</span><b>${esc(t)}</b><small>${esc(r)}</small></button>`).join('');
+  $('#story').onclick = ev => { const b = ev.target.closest('.snode'); if (b) storyInfo(+b.dataset.i); };
+  storyInfo(0);
+  let stT = null;
+  $('#storyPlay').onclick = () => { clearInterval(stT); const st = $('#story'), nodes = st.querySelectorAll('.snode'); nodes.forEach(n => n.classList.remove('lit')); st.classList.add('playing'); let i = 0; const step = () => { if (i >= nodes.length) { clearInterval(stT); setTimeout(() => st.classList.remove('playing'), 1200); return; } nodes[i].classList.add('lit'); storyInfo(i); i++; }; step(); stT = setInterval(step, 1500); };
+
+  /* Gerizim and Ebal */
+  const EB = [`Reuben`, `Gad`, `Asher`, `Zebulun`, `Dan`, `Naphtali`], GR = [`Simeon`, `Levi`, `Judah`, `Issachar`, `Joseph`, `Benjamin`];
+  let g = `<rect width="640" height="380" fill="var(--surface-2)"/>`;
+  g += `<path d="M40 150 Q140 20 260 70 Q330 10 420 60 Q520 20 610 150 Z" fill="color-mix(in srgb, var(--ember) 16%, var(--surface))" stroke="var(--ember)" stroke-width="1.5"/>`;
+  g += `<path d="M40 240 Q150 370 270 320 Q350 372 430 322 Q530 368 610 240 Z" fill="color-mix(in srgb, var(--gold) 20%, var(--surface))" stroke="var(--gold)" stroke-width="1.5"/>`;
+  g += `<text x="325" y="44" text-anchor="middle" style="font-family:var(--mono)" font-size="11" font-weight="700" fill="var(--ember)">MOUNT EBAL · 940 m · THE CURSE</text>`;
+  g += `<text x="325" y="356" text-anchor="middle" style="font-family:var(--mono)" font-size="11" font-weight="700" fill="var(--gold)">MOUNT GERIZIM · 881 m · THE BLESSING</text>`;
+  g += `<text x="22" y="200" style="font-family:var(--mono)" font-size="10" fill="var(--muted)">VALLEY OF SHECHEM</text><text x="618" y="200" text-anchor="end" style="font-family:var(--mono)" font-size="10" fill="var(--muted)">N ↑</text>`;
+  g += EB.map((n, i) => `<circle cx="${110 + i * 86}" cy="104" r="9" fill="var(--ember)"/><text x="${110 + i * 86}" y="126" text-anchor="middle" font-size="10.5" font-weight="600" fill="var(--ink)">${n}</text>`).join('');
+  g += GR.map((n, i) => `<circle cx="${110 + i * 86}" cy="282" r="9" fill="var(--gold)"/><text x="${110 + i * 86}" y="304" text-anchor="middle" font-size="10.5" font-weight="600" fill="var(--ink)">${n}</text>`).join('');
+  g += `<circle id="wvG" class="wave" cx="325" cy="195" r="10" stroke="var(--gold)"/><circle id="wvE" class="wave" cx="325" cy="195" r="10" stroke="var(--ember)"/>`;
+  g += `<g><rect x="307" y="186" width="36" height="18" rx="2" fill="var(--gold)" stroke="color-mix(in srgb, var(--gold) 60%, var(--ink))"/><path d="M300 190 H350 M300 200 H350" stroke="color-mix(in srgb, var(--gold) 60%, var(--ink))" stroke-width="2"/></g>`;
+  g += [0, 1, 2, 3, 4, 5, 6, 7].map(i => `<circle class="lev" cx="${262 + (i % 4) * 14 + (i > 3 ? 92 : 0)}" cy="${188 + (i % 2) * 14}" r="4" fill="var(--river)" style="animation-delay:${i * .25}s"/>`).join('');
+  g += `<text x="325" y="226" text-anchor="middle" style="font-family:var(--mono)" font-size="9" fill="var(--muted)">THE ARK AND THE LEVITES</text>`;
+  g += `<text id="amE" class="amen" x="325" y="152" text-anchor="middle" fill="var(--ember)">AMEN!</text><text id="amG" class="amen" x="325" y="256" text-anchor="middle" fill="var(--gold)">AMEN!</text>`;
+  $('#ge').innerHTML = g;
+  const geBase = `<div class="vbars"><span class="label">Deuteronomy 28 in verses</span><div class="vbar"><span>Blessings</span><div class="t"><i style="--v:${14 / 54 * 100}%;--bc:var(--gold)"></i></div><b>14</b></div><div class="vbar"><span>Curses</span><div class="t"><i style="--v:100%;--bc:var(--ember)"></i></div><b>54</b></div></div><p style="font-size:.92rem">The curses of Deuteronomy 28:49–57 describe a siege by “a nation from far … as swift as the eagle” and famine inside the walls. Jesus called the fall of Jerusalem “the days of vengeance, that all things which are written may be fulfilled” (Luke 21:22).</p>`;
+  $('#geInfo').innerHTML = `<span class="label">The covenant on two mountains</span><h3>Blessing and curse, made visible</h3><div id="geNow"><p>Press Play to hear the Levites call each blessing toward Gerizim and each curse toward Ebal.</p></div>${geBase}`;
+  let geT = [];
+  $('#gePlay').onclick = () => {
+    geT.forEach(clearTimeout); geT = [];
+    CEREMONY.forEach(([r, bl, cu], i) => {
+      geT.push(setTimeout(() => { pulse('#wvG', '#amG'); $('#geStep').textContent = `${r} · toward Gerizim`; $('#geNow').innerHTML = `<p class="ref">${r}</p><p style="color:var(--gold);font-weight:700">${esc(bl)}</p><p class="muted">All the people: “Amen.”</p>`; }, i * 3400));
+      geT.push(setTimeout(() => { pulse('#wvE', '#amE'); $('#geStep').textContent = `${r} · toward Ebal`; $('#geNow').innerHTML = `<p class="ref">${r}</p><p style="color:var(--ember);font-weight:700">${esc(cu)}</p><p class="muted">All the people: “Amen.”</p>`; }, i * 3400 + 1700));
+    });
+    geT.push(setTimeout(() => { $('#geStep').textContent = 'Josh 8:33–35'; }, CEREMONY.length * 3400));
+  };
+  function pulse(w, a) { const W = $(w), A = $(a); W.classList.remove('go'); void W.getBoundingClientRect(); W.classList.add('go'); A.classList.add('go'); setTimeout(() => A.classList.remove('go'), 1200); }
+
+  /* Jeremiah 17 */
+  let j = `<rect width="520" height="320" fill="var(--surface)"/><circle id="jsun" cx="450" cy="54" r="30" fill="var(--gold)"/>`;
+  j += `<rect x="0" y="250" width="520" height="70" fill="color-mix(in srgb, var(--gold) 20%, var(--surface))"/>`;
+  j += `<g class="crack" stroke="color-mix(in srgb, var(--gold) 50%, var(--ink))" stroke-width="1.5" fill="none"><path d="M40 270 l20 10 -8 14 22 8"/><path d="M380 266 l-14 12 18 10 -6 16"/><path d="M200 290 l16 -8 12 14"/></g>`;
+  j += `<path class="river" d="M0 284 C 80 272, 160 298, 260 284 S 440 272, 520 286" stroke="var(--river)" stroke-width="16" fill="none" stroke-linecap="round"/><path class="river flow" d="M0 284 C 80 272, 160 298, 260 284 S 440 272, 520 286" stroke="var(--surface)" stroke-width="2" fill="none"/>`;
+  j += `<g class="dry" stroke="color-mix(in srgb, var(--gold) 45%, var(--ink))" stroke-width="3" stroke-linecap="round" fill="none"><path d="M260 252 V206 M260 226 l-22 -18 M260 216 l18 -16 M248 216 l-10 -20 M272 208 l8 -14"/></g>`;
+  j += `<g class="lush"><path d="M252 252 L256 150 H264 L268 252 Z" fill="color-mix(in srgb, var(--ink) 40%, var(--gold))"/><g fill="color-mix(in srgb, var(--river) 70%, var(--surface))"><circle cx="260" cy="110" r="64"/><circle cx="210" cy="136" r="40"/><circle cx="310" cy="136" r="40"/></g><g class="jfruit" fill="var(--gold)"><circle cx="232" cy="104" r="7"/><circle cx="282" cy="92" r="7"/><circle cx="300" cy="134" r="7"/><circle cx="220" cy="142" r="7"/><circle cx="262" cy="130" r="7"/></g></g>`;
+  j += `<text x="16" y="28" style="font-family:var(--mono)" font-size="11" fill="var(--muted)" id="jlab"></text>`;
+  $('#jer').innerHTML = j;
+  const jer = v => {
+    const t = v / 100, op = (s, o) => document.querySelectorAll('#jer ' + s).forEach(e => e.setAttribute('opacity', o.toFixed(2)));
+    op('.dry', Math.max(0, 1 - t * 1.8)); op('.crack', Math.max(0, 1 - t * 1.8)); op('.river', t); op('.jfruit', Math.min(1, Math.max(0, (t - .6) / .25)));
+    const L = $('#jer .lush'); L.setAttribute('opacity', Math.min(1, t * 1.4).toFixed(2)); L.style.transform = `scale(${(.25 + .75 * t).toFixed(3)})`;
+    $('#jsun').setAttribute('opacity', (.25 + .75 * (1 - t)).toFixed(2));
+    $('#jlab').textContent = t < .4 ? 'JEREMIAH 17:5–6 · THE CURSE' : t > .6 ? 'JEREMIAH 17:7–8 · THE BLESSING' : 'TURNING · JEREMIAH 17:9–14';
+    $('#jerInfo').innerHTML = t < .4
+      ? `<span class="label" style="color:var(--ember)">Trust in man</span><h3>Like the heath in the desert</h3><p>“Cursed be the man that trusteth in man, and maketh flesh his arm, and whose heart departeth from the LORD. For he shall be like the heath in the desert, and shall not see when good cometh; but shall inhabit the parched places in the wilderness.”</p><p class="muted" style="font-size:.92rem">The curse is not lightning from heaven. It is life cut off from its source.</p><span class="ref">Jer 17:5–6</span>`
+      : t > .6
+      ? `<span class="label" style="color:var(--river)">Trust in the LORD</span><h3>A tree planted by the waters</h3><p>“Blessed is the man that trusteth in the LORD, and whose hope the LORD is. For he shall be as a tree planted by the waters, and that spreadeth out her roots by the river, and shall not see when heat cometh, but her leaf shall be green; and shall not be careful in the year of drought, neither shall cease from yielding fruit.”</p><span class="ref">Jer 17:7–8 · Ps 1:1–3</span>`
+      : `<span class="label" style="color:var(--gold)">Turning</span><h3>Heal me, and I shall be healed</h3><p>The roots move toward the river. “Heal me, O LORD, and I shall be healed; save me, and I shall be saved: for thou art my praise” (Jer 17:14). Jesus: “If any man thirst, let him come unto me, and drink” (John 7:37–38).</p><span class="ref">Jer 17:14 · John 7:37–38</span>`;
+  };
+  $('#jerRange').oninput = e => jer(+e.target.value); jer(15);
+
+  /* mercy dots */
+  $('#dots').innerHTML = '<i class="on"></i>'.repeat(1000);
+  $('#mercyPlay').onclick = () => { const d = [...document.querySelectorAll('#dots i')]; d.forEach(x => x.classList.remove('on')); let k = 0; const f = () => { for (let s = 0; s < 25 && k < d.length; s++, k++) d[k].classList.add('on'); $('#mercyN').textContent = k; if (k < d.length) requestAnimationFrame(f); }; $('#mercyN').textContent = 0; requestAnimationFrame(f); };
+
+  /* compare */
+  $('#bc').innerHTML = `<div class="vshead label"><span></span><span style="color:var(--gold)">Blessing</span><span style="color:var(--ember)">Curse</span></div>` + BC.map(([k, a, b]) => `<div class="bcrow"><div class="k">${k}</div><div class="b">${esc(a)}</div><div class="c">${esc(b)}</div></div>`).join('');
+
+  /* cross */
+  let c = `<rect width="760" height="300" fill="var(--surface)"/>`;
+  c += `<g><rect x="30" y="92" width="44" height="64" rx="18" fill="var(--surface-2)" stroke="var(--ink)" stroke-width="1.5"/><rect x="78" y="92" width="44" height="64" rx="18" fill="var(--surface-2)" stroke="var(--ink)" stroke-width="1.5"/><g stroke="var(--muted)" stroke-width="1.5"><path d="M40 112 h24 M40 122 h24 M40 132 h24 M88 112 h24 M88 122 h24 M88 132 h24"/></g><text x="76" y="180" text-anchor="middle" style="font-family:var(--mono)" font-size="10" fill="var(--ember)">THE CURSE OF THE LAW</text><text x="76" y="194" text-anchor="middle" style="font-family:var(--mono)" font-size="9" fill="var(--muted)">DEUT 27:26 · 28:15–68</text></g>`;
+  c += [[60, 120], [100, 140], [140, 150], [200, 160]].map(([y0, y1], i) => `<path class="arrowc" d="M130 ${y0 + 40} C 220 ${y0}, 300 ${y1}, 362 ${150}" fill="none" stroke="var(--ember)" stroke-width="3" opacity=".8"/>`).join('');
+  c += `<circle class="glow" cx="380" cy="150" r="70" fill="color-mix(in srgb, var(--gold) 18%, transparent)"/><rect x="370" y="40" width="20" height="230" rx="3" fill="color-mix(in srgb, var(--ink) 55%, var(--gold))"/><rect x="330" y="86" width="100" height="18" rx="3" fill="color-mix(in srgb, var(--ink) 55%, var(--gold))"/>`;
+  c += `<text x="380" y="290" text-anchor="middle" style="font-family:var(--mono)" font-size="10" fill="var(--ink)">“MADE A CURSE FOR US” · GAL 3:13</text>`;
+  c += [[70, `THE BLESSING OF ABRAHAM`, `Gal 3:14`], [150, `ALL FAMILIES OF THE EARTH`, `Gen 12:3 · Acts 3:25`], [230, `THE PROMISE OF THE SPIRIT`, `Gal 3:14`]].map(([y, t, r]) => `<path class="streamb" d="M398 150 C 470 150, 500 ${y}, 560 ${y}" fill="none" stroke="var(--gold)" stroke-width="4" stroke-linecap="round"/><rect x="560" y="${y - 22}" width="186" height="44" rx="10" fill="color-mix(in srgb, var(--gold) 12%, var(--surface))" stroke="var(--gold)"/><text x="653" y="${y - 2}" text-anchor="middle" font-size="11" font-weight="700" fill="var(--ink)">${t}</text><text x="653" y="${y + 13}" text-anchor="middle" style="font-family:var(--mono)" font-size="9" fill="var(--gold)">${r}</text>`).join('');
+  $('#cx').innerHTML = c;
+  $('#cxPause').onclick = () => { const p = $('#cx').classList.toggle('paused'); $('#cxPause').textContent = p ? 'Play' : 'Pause'; };
+
+  /* decision flow */
+  const FLOW = {
+    start: { q: `Have you put your trust in Christ?`, o: [[`Yes`, `yes`], [`Not yet, or not sure`, `notyet`]] },
+    notyet: { a: `The blessing of Abraham is offered to every family on earth (Gen 12:3). God raised up his Son and “sent him to bless you, in turning away every one of you from his iniquities” (Acts 3:25–26). It is received by faith, not earned (Gal 3:14).` },
+    yes: { q: `Then this is settled: Christ redeemed you from the curse (Gal 3:13), there is no condemnation (Rom 8:1), and you are blessed with every spiritual blessing (Eph 1:3). What troubles you?`, o: [[`I am reaping my own choices`, `reap`], [`Someone has spoken against me`, `spoken`], [`A pattern runs in my family`, `family`], [`I am suffering and do not know why`, `suffer`], [`Nothing. I want to bless others`, `bless`]] },
+    reap: { a: `That is sowing and reaping (Gal 6:7), not a curse. God answers it with mercy: “Whoso confesseth and forsaketh them shall have mercy” (Prov 28:13; 1 John 1:9). Then begin to sow differently.` },
+    spoken: { a: `“The curse causeless shall not come” (Prov 26:2). “Surely there is no enchantment against Jacob” (Num 23:23). God turned Balaam’s curse into a blessing (Deut 23:5). Answer with blessing: “Bless them that curse you” (Luke 6:28; Rom 12:14).` },
+    family: { a: `Each person answers for their own life: “the son shall not bear the iniquity of the father” (Ezek 18:20; Jer 31:29–30). Mercy reaches a thousand generations (Exod 20:6), and in Christ you are a new creation (2 Cor 5:17). Old habits may still need wisdom, support and time to change.` },
+    suffer: { a: `Suffering is not proof of a curse. Of the man born blind Jesus said, “Neither hath this man sinned, nor his parents” (John 9:3). Job was blameless. “Blessed are they that mourn” (Matt 5:4). God works all things together for good (Rom 8:28). Get the care and help you need, too.` },
+    bless: { a: `You are called to it: “not rendering evil for evil … but contrariwise blessing; knowing that ye are thereunto called, that ye should inherit a blessing” (1 Pet 3:9). Use the blessing builder below.` }
+  };
+  const path = ['start'];
+  const drawFlow = () => {
+    $('#flowq').innerHTML = path.map((k, i) => { const n = FLOW[k]; const chosen = path[i + 1]; if (n.a) return `<div class="fstep ans"><span class="label" style="color:var(--river)">Answer</span><p>${esc(n.a)}</p><button class="btn" type="button" data-restart="1" style="justify-self:start">Start again</button></div>`; return `<div class="fstep"><span class="label">Question ${i + 1}</span><h3>${esc(n.q)}</h3><div class="fopts">${n.o.map(([t, to]) => `<button type="button" data-step="${i}" data-to="${to}" aria-pressed="${chosen === to}">${esc(t)}</button>`).join('')}</div></div>`; }).join('');
+  };
+  $('#flowq').onclick = ev => { const b = ev.target.closest('button'); if (!b) return; if (b.dataset.restart) { path.length = 1; drawFlow(); return; } const i = +b.dataset.step; path.length = i + 1; path.push(b.dataset.to); drawFlow(); };
+  drawFlow();
+
+  /* berakhah anatomy */
+  const anat = i => { document.querySelectorAll('#anat button').forEach((b, k) => b.setAttribute('aria-pressed', k === i ? 'true' : 'false')); const [h, tr, en, x] = ANAT[i]; $('#anatInfo').innerHTML = `<div class="blinfo"><span class="label">${esc(tr)} · ${esc(en)}</span><p>${esc(x)}</p></div>`; };
+  $('#anat').innerHTML = ANAT.map(([h, tr, en], i) => `<button type="button" data-i="${i}"><span class="heb" lang="he">${h}</span><small>${tr} · ${en}</small></button>`).join('');
+  $('#anat').onclick = ev => { const b = ev.target.closest('button'); if (b) anat(+b.dataset.i); };
+  anat(0);
+  let r = `<circle cx="90" cy="90" r="80" fill="none" stroke="var(--line)" stroke-width="1"/>`;
+  for (let i = 0; i < 100; i++) { const a = i / 100 * Math.PI * 2 - Math.PI / 2; r += `<line class="tk" x1="${(90 + 70 * Math.cos(a)).toFixed(1)}" y1="${(90 + 70 * Math.sin(a)).toFixed(1)}" x2="${(90 + 82 * Math.cos(a)).toFixed(1)}" y2="${(90 + 82 * Math.sin(a)).toFixed(1)}" stroke="var(--gold)" stroke-width="2.5" stroke-linecap="round"/>`; }
+  r += `<text id="ringN" x="90" y="98" text-anchor="middle" style="font-family:var(--display);font-weight:700" font-size="34" fill="var(--gold)">100</text><text x="90" y="118" text-anchor="middle" style="font-family:var(--mono)" font-size="9" fill="var(--muted)">EACH DAY</text>`;
+  $('#ring').innerHTML = r;
+  $('#ringPlay').onclick = () => { const tk = [...document.querySelectorAll('#ring .tk')]; tk.forEach(t => t.setAttribute('stroke', 'var(--line)')); let k = 0; const f = () => { if (k < tk.length) { tk[k].setAttribute('stroke', 'var(--gold)'); k++; $('#ringN').textContent = k; setTimeout(f, 22); } }; $('#ringN').textContent = 0; f(); };
+  $('#bcards').innerHTML = BCARDS.map(([w, h, tr, en]) => `<div class="bcard"><span class="when">${esc(w)}</span><span class="heb" lang="he">${h}</span><span class="tr" style="font-family:var(--mono);font-size:.72rem;color:var(--muted)">${esc(tr)}</span><span class="tl">${esc(en)}</span></div>`).join('');
+
+  /* builder */
+  $('#bWhich').innerHTML = BUILD.map((b, i) => `<option value="${i}">${esc(b[0])}</option>`).join('');
+  const build = () => { const n = $('#bName').value.trim(); const tpl = BUILD[+$('#bWhich').value][1]; $('#bOut').textContent = tpl.replace('{N}', n ? `, ${n},` : '').replace('{E}', n ? `, ${n}` : '').replace('{B}', n ? ` ${n}` : '') + `\n— ${BUILD[+$('#bWhich').value][0]}`; };
+  $('#bName').oninput = build; $('#bWhich').onchange = build; build();
+  $('#bCopy').onclick = () => { const t = $('#bOut').textContent; const done = () => { $('#bCopy').textContent = 'Copied'; setTimeout(() => $('#bCopy').textContent = 'Copy', 1500); }; try { navigator.clipboard.writeText(t).then(done, () => { const s = getSelection(), rg = document.createRange(); rg.selectNodeContents($('#bOut')); s.removeAllRanges(); s.addRange(rg); $('#bCopy').textContent = 'Selected, press Ctrl C'; }); } catch (e) {} };
+  $('#blLens').innerHTML = BLLENS.map(([k, x]) => `<div style="--c:${LENS[k].c}"><b>${LENS[k].n}</b><span>${esc(x)}</span></div>`).join('');
+}
+
+DECKS.blessing = { n: 'Blessing', slides: () => STORY.map((st, i) => ({ c: st[0] === 'c' ? 'var(--ember)' : st[0] === 'b' ? 'var(--gold)' : 'var(--lapis)', k: `Blessing and curse · step ${i + 1} of ${STORY.length}`, h: st[1], r: st[2], p: st[3], b: '' })) };
+
 /* ---------- routing ---------- */
 const VIEWS = NAV.map(n => n[0]);
 let lastV = null;
@@ -1926,7 +2440,7 @@ drawMap(mapKey === 'web' ? 'gospels' : 'web', m2, false);
 window.addEventListener('beforeprint', () => { closeOverlay(); setWall(1); resetZoom(); document.querySelectorAll('.obj').forEach(d => d.open = true); document.querySelectorAll('.reveal.pre').forEach(e => e.classList.remove('pre')); setStage(4); $('#map2print').hidden = false; mapFocus(null); drawMap(mapKey === 'web' ? 'gospels' : 'web', m2, false); });
 window.addEventListener('afterprint', () => { $('#map2print').hidden = true; });
 renderEvidence(); renderObj(); motes();
-renderShell(); renderPowers(); renderQuiz(); mapTools();
+renderShell(); renderPowers(); renderQuiz(); mapTools(); renderBlessing();
 document.querySelectorAll('.stops').forEach(st => st.style.setProperty('--w', st.scrollWidth + 'px'));
 route();
 </script>
